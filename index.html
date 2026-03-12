@@ -397,6 +397,38 @@
     .form-group select option { background:var(--navy); }
     .form-submit { width:100%; padding:1rem; font-size:0.85rem; letter-spacing:0.12em; margin-top:0.5rem; }
     .form-note { font-size:0.78rem; color:rgba(245,240,255,0.45); text-align:center; margin-top:1rem; line-height:1.6; }
+
+    /* ── RADIO CARDS (vacation type selector) ── */
+    .radio-card {
+      display:flex; align-items:center; gap:0.6rem;
+      padding:0.65rem 1rem;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(107,45,139,0.25);
+      border-radius:8px;
+      cursor:pointer;
+      font-size:0.88rem;
+      color:var(--white);
+      transition:all 0.2s;
+    }
+    .radio-card:hover { background:rgba(107,45,139,0.18); border-color:rgba(107,45,139,0.5); }
+    .radio-card input[type=radio]:checked + span,
+    .radio-card:has(input:checked) {
+      background:rgba(107,45,139,0.28);
+      border-color:var(--purple-light);
+      color:var(--purple-light);
+    }
+    .radio-card input[type=radio] { accent-color:var(--purple-light); flex-shrink:0; }
+
+    /* ── QUOTE SECTIONS ── */
+    .quote-section {
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(107,45,139,0.2);
+      border-radius:12px;
+      padding:1.5rem;
+      margin-bottom:1.5rem;
+      animation:fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
     .form-success {
       display:none; text-align:center; padding:2rem;
       background:rgba(45,106,79,0.15); border:1px solid rgba(45,106,79,0.4);
@@ -414,6 +446,23 @@
     .footer-links { display:flex; justify-content:center; gap:1.25rem; margin:1rem 0; flex-wrap:wrap; }
     .footer-links a { color:rgba(245,240,255,0.5); text-decoration:none; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
     .footer-links a:hover { color:var(--purple-light); }
+
+    /* ── PLATFORM BADGES ── */
+    .platform-badge {
+      display:inline-flex; align-items:center; gap:0.55rem;
+      padding:0.6rem 1.2rem;
+      border-radius:50px;
+      font-size:0.85rem; font-weight:600; letter-spacing:0.03em;
+      text-decoration:none;
+      transition:all 0.2s; white-space:nowrap;
+    }
+    .spotify-badge  { background:rgba(30,215,96,0.12); color:#1ED760; border:1px solid rgba(30,215,96,0.3); }
+    .spotify-badge:hover  { background:rgba(30,215,96,0.22); border-color:#1ED760; transform:translateY(-2px); }
+    .apple-badge    { background:rgba(252,60,147,0.12); color:#FC3C93; border:1px solid rgba(252,60,147,0.3); }
+    .apple-badge:hover    { background:rgba(252,60,147,0.22); border-color:#FC3C93; transform:translateY(-2px); }
+    .youtube-badge  { background:rgba(255,0,0,0.12); color:#FF4444; border:1px solid rgba(255,0,0,0.3); }
+    .youtube-badge:hover  { background:rgba(255,0,0,0.22); border-color:#FF4444; transform:translateY(-2px); }
+    .hero-platform-btn { display:inline-flex; align-items:center; gap:0.5rem; }
 
     /* Stars */
     .stars { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
@@ -436,18 +485,28 @@
     <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
     <li><a href="#" onclick="showPage('about');return false;">About</a></li>
     <li class="dropdown">
-      <button>Podcast ▾</button>
+      <button>Listen Now ▾</button>
       <div class="dropdown-menu">
         <div class="dropdown-menu-inner">
-          <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener">🎵&nbsp; Spotify</a>
-          <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener">🎙️&nbsp; Apple Podcasts</a>
+          <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.5rem;">
+            <svg viewBox="0 0 24 24" fill="#1ED760" width="16" height="16"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.33c-.214.354-.676.465-1.028.249-2.815-1.72-6.358-2.11-10.532-1.156-.402.093-.803-.155-.897-.558-.094-.402.155-.803.558-.897 4.566-1.043 8.487-.594 11.65 1.334.352.215.463.677.249 1.028zm1.47-3.27c-.27.44-.845.578-1.283.309-3.222-1.98-8.133-2.554-11.944-1.397-.494.15-1.017-.13-1.166-.624-.149-.494.13-1.017.624-1.166 4.354-1.32 9.765-.68 13.46 1.594.44.27.578.845.309 1.284zm.127-3.403C15.53 8.37 9.44 8.158 5.857 9.266c-.594.18-1.223-.154-1.403-.748-.18-.594.154-1.223.748-1.403 4.13-1.253 10.998-1.011 15.33 1.617.537.32.714 1.013.394 1.55-.319.537-1.012.715-1.55.395z"/></svg>
+            Spotify
+          </a>
+          <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.5rem;">
+            <svg viewBox="0 0 24 24" fill="#FC3C93" width="16" height="16"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+            Apple Podcasts
+          </a>
+          <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.5rem;">
+            <svg viewBox="0 0 24 24" fill="#FF4444" width="16" height="16"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            YouTube
+          </a>
         </div>
       </div>
     </li>
-    <li><a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener">YouTube</a></li>
     <li><a href="#" onclick="showPage('guests');return false;">Guest Hosts</a></li>
     <li><a href="#" onclick="showPage('social');return false;">Social Media</a></li>
-    <li><a href="#" onclick="showPage('sponsors');return false;">Sponsors</a></li>
+    <li><a href="#" onclick="showPage('sponsors');return false;">Affiliates</a></li>
+    <li><a href="#" onclick="showPage('quote');return false;">Free Quote</a></li>
     <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -459,15 +518,25 @@
 <div class="mobile-menu" id="mobile-menu">
   <a href="#" onclick="showPage('home');closeMenu();return false;">Home</a>
   <a href="#" onclick="showPage('about');closeMenu();return false;">About</a>
-  <button onclick="toggleMobileSub('sub-podcast')">Podcast ▾</button>
+  <button onclick="toggleMobileSub('sub-podcast')">Listen Now ▾</button>
   <div class="mobile-sub" id="sub-podcast" style="display:none;">
-    <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" onclick="closeMenu()">🎵 Spotify</a>
-    <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" onclick="closeMenu()">🎙️ Apple Podcasts</a>
+    <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" onclick="closeMenu()" style="display:flex;align-items:center;gap:0.5rem;">
+      <svg viewBox="0 0 24 24" fill="#1ED760" width="16" height="16"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.33c-.214.354-.676.465-1.028.249-2.815-1.72-6.358-2.11-10.532-1.156-.402.093-.803-.155-.897-.558-.094-.402.155-.803.558-.897 4.566-1.043 8.487-.594 11.65 1.334.352.215.463.677.249 1.028zm1.47-3.27c-.27.44-.845.578-1.283.309-3.222-1.98-8.133-2.554-11.944-1.397-.494.15-1.017-.13-1.166-.624-.149-.494.13-1.017.624-1.166 4.354-1.32 9.765-.68 13.46 1.594.44.27.578.845.309 1.284zm.127-3.403C15.53 8.37 9.44 8.158 5.857 9.266c-.594.18-1.223-.154-1.403-.748-.18-.594.154-1.223.748-1.403 4.13-1.253 10.998-1.011 15.33 1.617.537.32.714 1.013.394 1.55-.319.537-1.012.715-1.55.395z"/></svg>
+      Spotify
+    </a>
+    <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" onclick="closeMenu()" style="display:flex;align-items:center;gap:0.5rem;">
+      <svg viewBox="0 0 24 24" fill="#FC3C93" width="16" height="16"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+      Apple Podcasts
+    </a>
+    <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" onclick="closeMenu()" style="display:flex;align-items:center;gap:0.5rem;">
+      <svg viewBox="0 0 24 24" fill="#FF4444" width="16" height="16"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      YouTube
+    </a>
   </div>
-  <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" onclick="closeMenu()">YouTube</a>
   <a href="#" onclick="showPage('guests');closeMenu();return false;">Guest Hosts</a>
   <a href="#" onclick="showPage('social');closeMenu();return false;">Social Media</a>
-  <a href="#" onclick="showPage('sponsors');closeMenu();return false;">Sponsors</a>
+  <a href="#" onclick="showPage('sponsors');closeMenu();return false;">Affiliates</a>
+  <a href="#" onclick="showPage('quote');closeMenu();return false;">Free Quote</a>
   <a href="#" onclick="showPage('contact');closeMenu();return false;">Contact</a>
 </div>
 
@@ -481,8 +550,14 @@
     <div class="hero-divider"></div>
     <p class="hero-desc">Join us as we spin through Disney's most beloved stories, hidden secrets, park magic, and everything in between. Pull up a seat — the carousel is always turning.</p>
     <div class="hero-cta">
-      <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" class="btn btn-primary">🎵 Listen on Spotify</a>
-      <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" class="btn btn-secondary">▶ Watch on YouTube</a>
+      <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" class="btn btn-primary hero-platform-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.33c-.214.354-.676.465-1.028.249-2.815-1.72-6.358-2.11-10.532-1.156-.402.093-.803-.155-.897-.558-.094-.402.155-.803.558-.897 4.566-1.043 8.487-.594 11.65 1.334.352.215.463.677.249 1.028zm1.47-3.27c-.27.44-.845.578-1.283.309-3.222-1.98-8.133-2.554-11.944-1.397-.494.15-1.017-.13-1.166-.624-.149-.494.13-1.017.624-1.166 4.354-1.32 9.765-.68 13.46 1.594.44.27.578.845.309 1.284zm.127-3.403C15.53 8.37 9.44 8.158 5.857 9.266c-.594.18-1.223-.154-1.403-.748-.18-.594.154-1.223.748-1.403 4.13-1.253 10.998-1.011 15.33 1.617.537.32.714 1.013.394 1.55-.319.537-1.012.715-1.55.395z"/></svg>
+        Listen on Spotify
+      </a>
+      <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" class="btn btn-youtube hero-platform-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Watch on YouTube
+      </a>
       <a href="#" onclick="showPage('about');return false;" class="btn btn-outline">Meet the Hosts</a>
     </div>
   </section>
@@ -490,9 +565,18 @@
   <div class="listen-strip">
     <p>Available on</p>
     <div class="listen-links">
-      <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener">🎵 Spotify</a>
-      <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener">🎙️ Apple Podcasts</a>
-      <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener">▶ YouTube</a>
+      <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" class="platform-badge spotify-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.33c-.214.354-.676.465-1.028.249-2.815-1.72-6.358-2.11-10.532-1.156-.402.093-.803-.155-.897-.558-.094-.402.155-.803.558-.897 4.566-1.043 8.487-.594 11.65 1.334.352.215.463.677.249 1.028zm1.47-3.27c-.27.44-.845.578-1.283.309-3.222-1.98-8.133-2.554-11.944-1.397-.494.15-1.017-.13-1.166-.624-.149-.494.13-1.017.624-1.166 4.354-1.32 9.765-.68 13.46 1.594.44.27.578.845.309 1.284zm.127-3.403C15.53 8.37 9.44 8.158 5.857 9.266c-.594.18-1.223-.154-1.403-.748-.18-.594.154-1.223.748-1.403 4.13-1.253 10.998-1.011 15.33 1.617.537.32.714 1.013.394 1.55-.319.537-1.012.715-1.55.395z"/></svg>
+        Spotify
+      </a>
+      <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" class="platform-badge apple-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+        Apple Podcasts
+      </a>
+      <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" class="platform-badge youtube-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        YouTube
+      </a>
     </div>
   </div>
 
@@ -514,10 +598,11 @@
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
   </footer>
 </div>
 
@@ -582,9 +667,18 @@
       <p class="section-label" style="margin-bottom:1.5rem;">Our Mission</p>
       <blockquote>"Where the magic of Disney revolves around you — because the best stories are the ones we tell together."</blockquote>
       <div style="margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-        <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" class="btn btn-primary">🎵 Listen on Spotify</a>
-        <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" class="btn btn-secondary">🎙️ Apple Podcasts</a>
-        <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" class="btn btn-youtube">▶ YouTube</a>
+        <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" class="btn btn-primary hero-platform-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.33c-.214.354-.676.465-1.028.249-2.815-1.72-6.358-2.11-10.532-1.156-.402.093-.803-.155-.897-.558-.094-.402.155-.803.558-.897 4.566-1.043 8.487-.594 11.65 1.334.352.215.463.677.249 1.028zm1.47-3.27c-.27.44-.845.578-1.283.309-3.222-1.98-8.133-2.554-11.944-1.397-.494.15-1.017-.13-1.166-.624-.149-.494.13-1.017.624-1.166 4.354-1.32 9.765-.68 13.46 1.594.44.27.578.845.309 1.284zm.127-3.403C15.53 8.37 9.44 8.158 5.857 9.266c-.594.18-1.223-.154-1.403-.748-.18-.594.154-1.223.748-1.403 4.13-1.253 10.998-1.011 15.33 1.617.537.32.714 1.013.394 1.55-.319.537-1.012.715-1.55.395z"/></svg>
+          Listen on Spotify
+        </a>
+        <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" class="btn btn-secondary hero-platform-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+          Apple Podcasts
+        </a>
+        <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" class="btn btn-youtube hero-platform-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
       </div>
     </div>
   </div>
@@ -596,10 +690,11 @@
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
   </footer>
 </div>
 
@@ -691,10 +786,11 @@
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
   </footer>
 </div>
 
@@ -741,9 +837,18 @@
     <div style="margin-top:3rem;background:rgba(27,42,74,0.6);border:1px solid rgba(107,45,139,0.25);border-radius:16px;padding:2.5rem;text-align:center;">
       <p class="section-label" style="margin-bottom:0.75rem;">Also Listen & Watch</p>
       <div class="listen-links" style="justify-content:center;">
-        <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener">🎵 Spotify</a>
-        <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener">🎙️ Apple Podcasts</a>
-        <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener">▶ YouTube</a>
+        <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" class="platform-badge spotify-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.33c-.214.354-.676.465-1.028.249-2.815-1.72-6.358-2.11-10.532-1.156-.402.093-.803-.155-.897-.558-.094-.402.155-.803.558-.897 4.566-1.043 8.487-.594 11.65 1.334.352.215.463.677.249 1.028zm1.47-3.27c-.27.44-.845.578-1.283.309-3.222-1.98-8.133-2.554-11.944-1.397-.494.15-1.017-.13-1.166-.624-.149-.494.13-1.017.624-1.166 4.354-1.32 9.765-.68 13.46 1.594.44.27.578.845.309 1.284zm.127-3.403C15.53 8.37 9.44 8.158 5.857 9.266c-.594.18-1.223-.154-1.403-.748-.18-.594.154-1.223.748-1.403 4.13-1.253 10.998-1.011 15.33 1.617.537.32.714 1.013.394 1.55-.319.537-1.012.715-1.55.395z"/></svg>
+          Spotify
+        </a>
+        <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" class="platform-badge apple-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+          Apple Podcasts
+        </a>
+        <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" class="platform-badge youtube-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
       </div>
     </div>
   </div>
@@ -755,10 +860,11 @@
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
   </footer>
 </div>
 
@@ -766,7 +872,7 @@
 <div id="page-sponsors" class="page">
   <div class="sponsor-hero">
     <p class="section-label">Our Partners</p>
-    <h2 class="section-title">Sponsors & Affiliates</h2>
+    <h2 class="section-title">Our Affiliates</h2>
     <p class="section-sub" style="margin:1rem auto 0;text-align:center;">We only partner with brands we genuinely love and believe in. Thank you for supporting the companies that make Carousel of Conversations possible!</p>
   </div>
 
@@ -789,7 +895,7 @@
     </div>
 
     <div style="text-align:center;margin-top:3rem;padding:2rem;background:rgba(27,42,74,0.5);border:1px dashed rgba(107,45,139,0.3);border-radius:16px;">
-      <p style="font-size:0.8rem;color:rgba(245,240,255,0.45);letter-spacing:0.08em;line-height:1.8;">Interested in sponsoring Carousel of Conversations?<br/>
+      <p style="font-size:0.8rem;color:rgba(245,240,255,0.45);letter-spacing:0.08em;line-height:1.8;">Interested in partnering with Carousel of Conversations?<br/>
       <a href="#" onclick="showPage('contact');return false;" style="color:var(--purple-light);text-decoration:none;font-weight:600;">Get in touch with us →</a></p>
     </div>
   </div>
@@ -801,10 +907,11 @@
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
   </footer>
 </div>
 
@@ -813,39 +920,46 @@
   <div class="page-header">
     <p class="section-label">Get In Touch</p>
     <h2 class="section-title">Contact Us</h2>
-    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Have a question, want to be a guest, or interested in sponsoring the show? We'd love to hear from you! Fill out the form below and we'll get back to you soon.</p>
+    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Have a question, want to be a guest, or interested in partnering with the show? We'd love to hear from you! Fill out the form below and we'll get back to you soon.</p>
   </div>
 
   <div class="contact-wrap">
     <div class="contact-form">
-      <div class="form-group">
-        <label for="contact-name">Your Name</label>
-        <input type="text" id="contact-name" placeholder="Mickey Mouse" />
+      <form id="contact-form-el" action="https://formspree.io/f/mdawzwdq" method="POST">
+        <input type="hidden" name="_replyto" id="contact-replyto"/>
+        <input type="hidden" name="_subject" value="New message from Carousel of Conversations website"/>
+        <div class="form-group">
+          <label for="contact-name">Your Name</label>
+          <input type="text" id="contact-name" name="name" placeholder="Mickey Mouse" required/>
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email Address</label>
+          <input type="email" id="contact-email" name="email" placeholder="you@example.com" required/>
+        </div>
+        <div class="form-group">
+          <label for="contact-subject">Subject</label>
+          <select id="contact-subject" name="subject" required>
+            <option value="" disabled selected>Select a topic...</option>
+            <option>General Question</option>
+            <option>I'd Like to Be a Guest</option>
+            <option>Partnership Inquiry</option>
+            <option>Episode Feedback</option>
+            <option>Something Else</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">✉️ Send Message</button>
+        <p class="form-note">We'll reply within a few days. For quicker responses, DM us on social media!</p>
+      </form>
+      <div class="form-success" id="contact-success" style="display:none;">
+        <p>✨ <strong>Thank you for reaching out!</strong><br/>Your message has been sent. We'll get back to you soon — in the meantime, keep the magic alive!</p>
       </div>
-      <div class="form-group">
-        <label for="contact-email">Email Address</label>
-        <input type="email" id="contact-email" placeholder="you@example.com" />
-      </div>
-      <div class="form-group">
-        <label for="contact-subject">Subject</label>
-        <select id="contact-subject">
-          <option value="" disabled selected>Select a topic...</option>
-          <option value="general">General Question</option>
-          <option value="guest">I'd Like to Be a Guest</option>
-          <option value="sponsor">Sponsorship Inquiry</option>
-          <option value="feedback">Episode Feedback</option>
-          <option value="other">Something Else</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="contact-message">Message</label>
-        <textarea id="contact-message" placeholder="Tell us what's on your mind..."></textarea>
-      </div>
-      <button class="btn btn-primary form-submit" onclick="submitForm()">✉️ Send Message</button>
-      <p class="form-note">We'll reply to your email within a few days. For quicker responses, DM us on social media!</p>
     </div>
-    <div class="form-success" id="form-success">
-      <p>✨ <strong>Thank you for reaching out!</strong><br/>Your message has been sent to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e38082918c9690868f938c87a3848e828a8fcd808c8e">[email&#160;protected]</a>. We'll get back to you soon — in the meantime, keep the magic alive!</p>
+    <div style="margin-top:1.5rem;text-align:center;">
+      <p style="font-size:0.78rem;color:rgba(245,240,255,0.4);line-height:1.7;">You can also reach us on <a href="#" onclick="showPage('social');return false;" style="color:var(--purple-light);">social media</a> for a quicker response!</p>
     </div>
   </div>
 
@@ -856,13 +970,760 @@
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
   </footer>
 </div>
 
+<!-- ═══════════ FREE QUOTE ═══════════ -->
+<div id="page-quote" class="page">
+  <div class="page-header">
+    <p class="section-label">Plan Your Magic</p>
+    <h2 class="section-title">Request a Free Quote</h2>
+    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Ready to start planning your dream Disney vacation? Our concierge-level planning service is completely <strong>free of charge</strong>. Fill out the form below and we'll get back to you with a personalized quote!</p>
+  </div>
+
+  <div class="contact-wrap" style="max-width:820px;">
+    <div class="contact-form">
+
+      <form id="quote-form-el" action="https://formspree.io/f/mjgaraeq" method="POST">
+        <input type="hidden" name="_subject" value="New Free Quote Request — Carousel of Conversations"/>
+
+        <!-- ── CONTACT INFO ── -->
+        <div style="margin-bottom:2rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Your Contact Information</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" name="first_name" required placeholder="Mickey"/>
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" name="last_name" required placeholder="Mouse"/>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" name="email" required placeholder="you@example.com"/>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="(555) 555-5555"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── VACATION TYPE ── -->
+        <div style="margin-bottom:2rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Type of Vacation *</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:0.6rem;">
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Walt Disney World® Florida" onchange="showQuoteSection(this.value)"/> Walt Disney World® Florida</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Disney Cruise Line®" onchange="showQuoteSection(this.value)"/> Disney Cruise Line®</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Disneyland Resort® California" onchange="showQuoteSection(this.value)"/> Disneyland Resort® California</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Adventures by Disney" onchange="showQuoteSection(this.value)"/> Adventures by Disney</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Universal Orlando Resort" onchange="showQuoteSection(this.value)"/> Universal Orlando Resort</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Aulani, a Disney Resort & Spa" onchange="showQuoteSection(this.value)"/> Aulani, a Disney Resort &amp; Spa</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Disney's Hilton Head Island Resort" onchange="showQuoteSection(this.value)"/> Disney's Hilton Head Island Resort</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Disney's Vero Beach Resort" onchange="showQuoteSection(this.value)"/> Disney's Vero Beach Resort</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="WDW Tickets Only" onchange="showQuoteSection(this.value)"/> WDW Tickets Only</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Other Cruise Line" onchange="showQuoteSection(this.value)"/> Other Cruise Line (non-Disney)</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Other Destination" onchange="showQuoteSection(this.value)"/> Other Destination</label>
+          </div>
+        </div>
+
+        <!-- ══ WALT DISNEY WORLD SECTION ══ -->
+        <div id="qs-wdw" class="quote-section" style="display:none;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Walt Disney World Details</h3>
+
+          <div class="form-group">
+            <label>Package Type</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_package_type" value="Package"/> Package</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_package_type" value="Room Only"/> Room Only</label>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Check-in Date *</label>
+              <input type="date" name="wdw_checkin"/>
+            </div>
+            <div class="form-group">
+              <label>Check-out Date *</label>
+              <input type="date" name="wdw_checkout"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Are dates flexible?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_flexible" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_flexible" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Preferred Resort</label>
+            <select name="wdw_resort">
+              <option value="">-- Please Select a Resort --</option>
+              <optgroup label="Value Resorts">
+                <option>Disney's Art of Animation Resort</option>
+                <option>Disney's Pop Century Resort</option>
+                <option>Disney's All-Star Movies Resort</option>
+                <option>Disney's All-Star Music Resort</option>
+                <option>Disney's All-Star Sports Resort</option>
+              </optgroup>
+              <optgroup label="Moderate Resorts">
+                <option>Disney's Caribbean Beach Resort</option>
+                <option>Disney's Coronado Springs Resort</option>
+                <option>Disney's Port Orleans Resort – French Quarter</option>
+                <option>Disney's Port Orleans Resort – Riverside</option>
+                <option>The Cabins at Disney's Fort Wilderness Resort</option>
+              </optgroup>
+              <optgroup label="Deluxe Resorts">
+                <option>Disney's Animal Kingdom Lodge</option>
+                <option>Disney's Beach Club Resort</option>
+                <option>Disney's BoardWalk Inn</option>
+                <option>Disney's Contemporary Resort</option>
+                <option>Disney's Grand Floridian Resort &amp; Spa</option>
+                <option>Disney's Polynesian Village Resort</option>
+                <option>Disney's Wilderness Lodge</option>
+                <option>Disney's Yacht Club Resort</option>
+              </optgroup>
+              <optgroup label="Deluxe Villa Resorts (DVC)">
+                <option>Bay Lake Tower at Disney's Contemporary Resort</option>
+                <option>Boulder Ridge Villas at Disney's Wilderness Lodge</option>
+                <option>Copper Creek Villas &amp; Cabins at Disney's Wilderness Lodge</option>
+                <option>Disney's Animal Kingdom Villas – Jambo House</option>
+                <option>Disney's Animal Kingdom Villas – Kidani Village</option>
+                <option>Disney's Beach Club Villas</option>
+                <option>Disney's BoardWalk Villas</option>
+                <option>Disney's Old Key West Resort</option>
+                <option>Disney's Polynesian Villas &amp; Bungalows</option>
+                <option>Disney's Riviera Resort</option>
+                <option>Disney's Saratoga Springs Resort &amp; Spa</option>
+                <option>The Villas at Disney's Grand Floridian Resort &amp; Spa</option>
+              </optgroup>
+              <option>The Campsites at Disney's Fort Wilderness Resort</option>
+              <option>I need assistance choosing a resort</option>
+            </select>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Number of Adults</label>
+              <select name="wdw_adults">
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Number of Children</label>
+              <select name="wdw_children">
+                <option>0</option><option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Children's Ages (if applicable)</label>
+            <input type="text" name="wdw_childrens_ages" placeholder="e.g. 4, 7, 10"/>
+          </div>
+
+          <div class="form-group">
+            <label>Include Park Tickets?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_tickets" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_tickets" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Include Dining Plan?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_dining" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_dining" value="No"/> No</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_dining" value="Not Sure"/> Not Sure</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Include Airfare?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_airfare" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_airfare" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Departure City (if including airfare)</label>
+            <input type="text" name="wdw_departure_city" placeholder="e.g. Charlotte, NC"/>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Annual Passholder?</label>
+              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_ap" value="Yes"/> Yes</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_ap" value="No"/> No</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>DVC Member?</label>
+              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_dvc" value="Yes"/> Yes</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_dvc" value="No"/> No</label>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Florida Resident?</label>
+              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_fl_resident" value="Yes"/> Yes</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_fl_resident" value="No"/> No</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Disney VISA Cardholder?</label>
+              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_visa" value="Yes"/> Yes</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_visa" value="No"/> No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Active Duty or Retired Military?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_military" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_military" value="No"/> No</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ DISNEY CRUISE LINE SECTION ══ -->
+        <div id="qs-dcl" class="quote-section" style="display:none;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Disney Cruise Line Details</h3>
+
+          <div class="form-group">
+            <label>Cruise Destination</label>
+            <select name="dcl_destination">
+              <option value="">-- Select a Destination --</option>
+              <option>Alaska from Vancouver</option>
+              <option>Bahamas – 3-Night from Port Canaveral</option>
+              <option>Bahamas – 4-Night from Port Canaveral</option>
+              <option>Bahamas – 5-Night from Port Canaveral</option>
+              <option>Bahamas – 3-Night from Fort Lauderdale</option>
+              <option>Bahamas – 4-Night from Fort Lauderdale</option>
+              <option>Bahamas – 5-Night from Fort Lauderdale</option>
+              <option>Bahamas – 7-Night from Fort Lauderdale</option>
+              <option>Bahamas – 7-Night from Galveston, TX</option>
+              <option>Caribbean – 5-Night Western from Port Canaveral</option>
+              <option>Caribbean – 7-Night Eastern from Port Canaveral</option>
+              <option>Caribbean – 7-Night Western from Port Canaveral</option>
+              <option>Caribbean – 10-Night Southern from Port Canaveral</option>
+              <option>Caribbean – 4-Night Western from Fort Lauderdale</option>
+              <option>Caribbean – 5-Night Western from Fort Lauderdale</option>
+              <option>Caribbean – 7-Night Eastern from Fort Lauderdale</option>
+              <option>Caribbean – 7-Night Western from Fort Lauderdale</option>
+              <option>Caribbean – 4-Night Western from Galveston, TX</option>
+              <option>Caribbean – 5-Night Western from Galveston, TX</option>
+              <option>Caribbean – 7-Night Western from Galveston, TX</option>
+              <option>Caribbean – Eastern from San Juan</option>
+              <option>Caribbean – Southern from San Juan</option>
+              <option>European Cruises – Barcelona, Spain</option>
+              <option>European Cruises – Civitavecchia, Italy</option>
+              <option>European Cruises – Southampton, England</option>
+              <option>Hawaiian Cruises</option>
+              <option>Mexico / Pacific Coast from San Diego</option>
+              <option>Pacific Coast Cruises</option>
+              <option>Panama Canal Cruises</option>
+              <option>Singapore – 3-Night Cruises</option>
+              <option>Singapore – 4-Night Cruises</option>
+              <option>South Pacific Cruises</option>
+              <option>Transatlantic Cruises</option>
+              <option>I need assistance finding the right cruise</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Approximate Sail Date / Preferred Timeframe</label>
+            <input type="text" name="dcl_sail_date" placeholder="e.g. July 2026, or specific date"/>
+          </div>
+
+          <div class="form-group">
+            <label>Preferred Stateroom Category</label>
+            <select name="dcl_stateroom">
+              <option value="">-- Please Select --</option>
+              <option>Inside Stateroom</option>
+              <option>Oceanview Stateroom</option>
+              <option>Stateroom with Verandah</option>
+              <option>Concierge</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Number of Staterooms Needed</label>
+            <select name="dcl_staterooms">
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option><option>8</option>
+            </select>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Number of Adults</label>
+              <select name="dcl_adults">
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Number of Children</label>
+              <select name="dcl_children">
+                <option>0</option><option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Children's Ages (if applicable)</label>
+            <input type="text" name="dcl_childrens_ages" placeholder="e.g. 4, 7, 10"/>
+          </div>
+
+          <div class="form-group">
+            <label>Dining Preference</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_dining" value="Early Dining"/> Early Dining</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_dining" value="Late Dining"/> Late Dining</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Include Airfare?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_airfare" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_airfare" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Departure City (if including airfare)</label>
+            <input type="text" name="dcl_departure_city" placeholder="e.g. Charlotte, NC"/>
+          </div>
+
+          <div class="form-group">
+            <label>Need ground transportation from airport to ship?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_transfer" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_transfer" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Castaway Club Member Number (if applicable)</label>
+            <input type="text" name="dcl_castaway" placeholder="Leave blank if not a member"/>
+          </div>
+
+          <div class="form-group">
+            <label>Number of Past Disney Cruises</label>
+            <select name="dcl_past_sailings">
+              <option>0</option><option>1–5</option><option>6–10</option><option>11+</option>
+            </select>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Florida Resident?</label>
+              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_fl_resident" value="Yes"/> Yes</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_fl_resident" value="No"/> No</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Disney VISA Cardholder?</label>
+              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_visa" value="Yes"/> Yes</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_visa" value="No"/> No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Active Duty or Retired Military?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_military" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_military" value="No"/> No</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ DISNEYLAND SECTION ══ -->
+        <div id="qs-dl" class="quote-section" style="display:none;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Disneyland Resort Details</h3>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Check-in Date</label>
+              <input type="date" name="dl_checkin"/>
+            </div>
+            <div class="form-group">
+              <label>Check-out Date</label>
+              <input type="date" name="dl_checkout"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Are dates flexible?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_flexible" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_flexible" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Preferred Hotel</label>
+            <select name="dl_hotel">
+              <option value="">-- Please Select --</option>
+              <option>Disneyland Hotel</option>
+              <option>Disney's Grand Californian Hotel &amp; Spa</option>
+              <option>Disney's Paradise Pier Hotel</option>
+              <option>I need assistance choosing a hotel</option>
+            </select>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Number of Adults</label>
+              <select name="dl_adults">
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Number of Children</label>
+              <select name="dl_children">
+                <option>0</option><option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Children's Ages (if applicable)</label>
+            <input type="text" name="dl_childrens_ages" placeholder="e.g. 4, 7, 10"/>
+          </div>
+
+          <div class="form-group">
+            <label>Include Park Tickets?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_tickets" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_tickets" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Include Airfare?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_airfare" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_airfare" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Departure City (if including airfare)</label>
+            <input type="text" name="dl_departure_city" placeholder="e.g. Charlotte, NC"/>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Disney VISA Cardholder?</label>
+              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_visa" value="Yes"/> Yes</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_visa" value="No"/> No</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Active Duty or Retired Military?</label>
+              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_military" value="Yes"/> Yes</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_military" value="No"/> No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ ADVENTURES BY DISNEY SECTION ══ -->
+        <div id="qs-abd" class="quote-section" style="display:none;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Adventures by Disney Details</h3>
+
+          <div class="form-group">
+            <label>Select a Destination</label>
+            <select name="abd_destination">
+              <option value="">-- Please Select --</option>
+              <option>Alaska</option><option>Arizona &amp; Utah</option><option>Australia</option>
+              <option>Barcelona Escape</option><option>British Isles</option><option>Canadian Rockies</option>
+              <option>Central Europe</option><option>China</option><option>Colombia</option>
+              <option>Costa Rica</option><option>Danube River Cruise</option>
+              <option>Disneyland Resort &amp; Southern California – Backstage Magic</option>
+              <option>Disneyland Resort &amp; Southern California Escape</option>
+              <option>Egypt</option><option>England &amp; France</option><option>Germany</option>
+              <option>Greece – Legends of Athens</option><option>Greece – Mythology of Athens</option>
+              <option>Holland &amp; Belgium River Cruise</option><option>Iceland</option>
+              <option>Ireland</option><option>Italy – 8 Days / 7 Nights</option>
+              <option>Italy – Amalfi Coast &amp; Tuscany</option><option>Italy &amp; Switzerland</option>
+              <option>Italy – Rome Short Escape</option><option>Japan</option>
+              <option>London Escape</option><option>Morocco</option><option>Munich Escape</option>
+              <option>New Zealand</option><option>Norway</option>
+              <option>Nova Scotia &amp; Prince Edward Island</option><option>Paris Short Escape</option>
+              <option>Peru</option><option>Portugal</option><option>Rhine River Cruise</option>
+              <option>Rhône River Cruise</option><option>Scotland – A BRAVE Adventure</option>
+              <option>Sicily</option><option>South Africa</option>
+              <option>Vietnam, Laos &amp; Cambodia</option><option>Wyoming &amp; Yellowstone</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Preferred Adventure Date / Timeframe</label>
+            <input type="text" name="abd_date" placeholder="e.g. June 2026, or specific date range"/>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Number of Adults</label>
+              <select name="abd_adults">
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Number of Children</label>
+              <select name="abd_children">
+                <option>0</option><option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Children's Ages (if applicable)</label>
+            <input type="text" name="abd_childrens_ages" placeholder="e.g. 4, 7, 10"/>
+          </div>
+
+          <div class="form-group">
+            <label>Include Airfare?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_airfare" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_airfare" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Departure City (if including airfare)</label>
+            <input type="text" name="abd_departure_city" placeholder="e.g. Charlotte, NC"/>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Traveled with ABD Before?</label>
+              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_past" value="Yes"/> Yes</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_past" value="No"/> No</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>DVC Member?</label>
+              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_dvc" value="Yes"/> Yes</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_dvc" value="No"/> No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ UNIVERSAL ORLANDO SECTION ══ -->
+        <div id="qs-uni" class="quote-section" style="display:none;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Universal Orlando Details</h3>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Check-in Date</label>
+              <input type="date" name="uni_checkin"/>
+            </div>
+            <div class="form-group">
+              <label>Check-out Date</label>
+              <input type="date" name="uni_checkout"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Are dates flexible?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_flexible" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_flexible" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Preferred Hotel</label>
+            <select name="uni_hotel">
+              <option value="">-- Please Select --</option>
+              <option>Universal's Cabana Bay Beach Resort</option>
+              <option>Universal's Endless Summer Resort – Surfside Inn</option>
+              <option>Universal's Endless Summer Resort – Dockside Inn</option>
+              <option>Loews Sapphire Falls Resort</option>
+              <option>Loews Royal Pacific Resort</option>
+              <option>Hard Rock Hotel at Universal Orlando</option>
+              <option>Loews Portofino Bay Hotel</option>
+              <option>Universal's Epic Universe Hotel</option>
+              <option>I need assistance choosing a hotel</option>
+            </select>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Number of Adults</label>
+              <select name="uni_adults">
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Number of Children</label>
+              <select name="uni_children">
+                <option>0</option><option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Children's Ages (if applicable)</label>
+            <input type="text" name="uni_childrens_ages" placeholder="e.g. 4, 7, 10"/>
+          </div>
+
+          <div class="form-group">
+            <label>Include Park Tickets?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_tickets" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_tickets" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Include Airfare?</label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_airfare" value="Yes"/> Yes</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_airfare" value="No"/> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Departure City (if including airfare)</label>
+            <input type="text" name="uni_departure_city" placeholder="e.g. Charlotte, NC"/>
+          </div>
+        </div>
+
+        <!-- ══ OTHER / GENERIC SECTIONS ══ -->
+        <div id="qs-other" class="quote-section" style="display:none;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Vacation Details</h3>
+
+          <div class="form-group">
+            <label>Destination / Property</label>
+            <input type="text" name="other_destination" placeholder="Please describe your destination"/>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Travel Date / Timeframe</label>
+              <input type="text" name="other_date" placeholder="e.g. Summer 2026"/>
+            </div>
+            <div class="form-group">
+              <label>Number of Travelers</label>
+              <input type="text" name="other_travelers" placeholder="e.g. 2 adults, 2 children"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── ALWAYS-VISIBLE BOTTOM FIELDS ── -->
+        <div id="qs-bottom" style="display:none;margin-top:2rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Additional Information</h3>
+
+          <div class="form-group">
+            <label>How did you hear about us?</label>
+            <select name="referral_source">
+              <option value="">-- Please Select --</option>
+              <option>Carousel of Conversations Podcast</option>
+              <option>Instagram</option>
+              <option>TikTok</option>
+              <option>Facebook</option>
+              <option>YouTube</option>
+              <option>Friend or Family Referral</option>
+              <option>Google Search</option>
+              <option>www.famvia.com</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Budget Range (optional)</label>
+            <select name="budget">
+              <option value="">-- Prefer not to say --</option>
+              <option>Under $2,000</option>
+              <option>$2,000 – $5,000</option>
+              <option>$5,000 – $10,000</option>
+              <option>$10,000 – $15,000</option>
+              <option>$15,000+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Any special occasions or celebrations?</label>
+            <input type="text" name="special_occasion" placeholder="e.g. anniversary, birthday, honeymoon"/>
+          </div>
+
+          <div class="form-group">
+            <label>Additional Comments or Questions</label>
+            <textarea name="additional_comments" placeholder="Anything else you'd like us to know about your dream vacation..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary form-submit" style="margin-top:0.5rem;">✨ Request My Free Quote</button>
+          <p class="form-note">Our services are completely free of charge. We'll be in touch within 1–2 business days!</p>
+        </div>
+
+      </form>
+
+      <div class="form-success" id="quote-success" style="display:none;">
+        <p>🌟 <strong>Your quote request has been received!</strong><br/>Thank you for trusting us with your magical vacation planning. We'll review your details and be in touch within 1–2 business days with your personalized quote!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home');return false;">Home</a>
+      <a href="#" onclick="showPage('about');return false;">About</a>
+      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('social');return false;">Social</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+    </div>
+    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
+  </footer>
+</div>
 
 <script>
   // Stars
@@ -898,27 +1759,83 @@
     sub.style.display = sub.style.display === 'none' ? 'block' : 'none';
   };
 
-  window.submitForm = function() {
-    var name    = document.getElementById('contact-name').value.trim();
-    var email   = document.getElementById('contact-email').value.trim();
-    var subject = document.getElementById('contact-subject').value;
-    var message = document.getElementById('contact-message').value.trim();
-
-    if (!name || !email || !subject || !message) {
-      alert('Please fill out all fields before sending!');
-      return;
+  // Quote form — show correct section based on vacation type
+  window.showQuoteSection = function(val) {
+    var sectionMap = {
+      'Walt Disney World® Florida': 'qs-wdw',
+      'Disney Cruise Line®': 'qs-dcl',
+      'Disneyland Resort® California': 'qs-dl',
+      'Adventures by Disney': 'qs-abd',
+      'Universal Orlando Resort': 'qs-uni',
+      'Aulani, a Disney Resort & Spa': 'qs-other',
+      "Disney's Hilton Head Island Resort": 'qs-other',
+      "Disney's Vero Beach Resort": 'qs-other',
+      'WDW Tickets Only': 'qs-other',
+      'Other Cruise Line': 'qs-other',
+      'Other Destination': 'qs-other'
+    };
+    // Hide all sections
+    document.querySelectorAll('.quote-section').forEach(function(s) { s.style.display = 'none'; });
+    // Show matching section
+    var targetId = sectionMap[val];
+    if (targetId) {
+      document.getElementById(targetId).style.display = 'block';
     }
-
-    var subjectLine = encodeURIComponent('Carousel of Conversations \u2013 ' + subject);
-    var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message);
-    window.location.href = 'mailto:carouselpod@gmail.com?subject=' + subjectLine + '&body=' + body;
-
-    document.getElementById('form-success').style.display = 'block';
-    document.getElementById('contact-name').value = '';
-    document.getElementById('contact-email').value = '';
-    document.getElementById('contact-subject').value = '';
-    document.getElementById('contact-message').value = '';
+    // Always show bottom fields once a type is selected
+    document.getElementById('qs-bottom').style.display = 'block';
+    // Scroll to the section
+    var el = targetId ? document.getElementById(targetId) : null;
+    if (el) { setTimeout(function(){ el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }
   };
+
+  // Quote form submission
+  var quoteForm = document.getElementById('quote-form-el');
+  if (quoteForm) {
+    quoteForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var data = new FormData(quoteForm);
+      fetch(quoteForm.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(resp) {
+        if (resp.ok) {
+          quoteForm.style.display = 'none';
+          document.getElementById('quote-success').style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          alert('Something went wrong. Please email us directly at rj@famvia.com');
+        }
+      }).catch(function() {
+        alert('Something went wrong. Please email us directly at rj@famvia.com');
+      });
+    });
+  }
+
+  // Contact form
+  var contactForm = document.getElementById('contact-form-el');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var emailField = document.getElementById('contact-email');
+      document.getElementById('contact-replyto').value = emailField ? emailField.value : '';
+      var data = new FormData(contactForm);
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(resp) {
+        if (resp.ok) {
+          contactForm.style.display = 'none';
+          document.getElementById('contact-success').style.display = 'block';
+        } else {
+          alert('Something went wrong. Please email us directly at carouselpod@gmail.com');
+        }
+      }).catch(function() {
+        alert('Something went wrong. Please email us directly at carouselpod@gmail.com');
+      });
+    });
+  }
 </script>
 </body>
 </html>
