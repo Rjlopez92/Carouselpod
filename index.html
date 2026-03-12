@@ -55,93 +55,64 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(107,45,139,0.4);
     }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
+    .nav-logo { display:flex; align-items:center; gap:0.75rem; cursor:pointer; flex-shrink:0; }
     .nav-logo img { height: 48px; width: auto; object-fit: contain; }
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      list-style: none;
-      flex-wrap: wrap;
-    }
-
+    .nav-links { display:flex; align-items:center; gap:0; list-style:none; }
     .nav-links > li { position: relative; }
-
     .nav-links a, .nav-links > li > button {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--cream);
-      text-decoration: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem 0.75rem;
-      border-radius: 4px;
-      transition: color 0.2s, background 0.2s;
-      display: block;
-      white-space: nowrap;
+      font-family:'Montserrat',sans-serif; font-size:0.72rem; font-weight:600;
+      letter-spacing:0.1em; text-transform:uppercase; color:var(--cream);
+      text-decoration:none; background:none; border:none; cursor:pointer;
+      padding:0.5rem 0.75rem; border-radius:4px;
+      transition:color 0.2s, background 0.2s; display:block; white-space:nowrap;
     }
+    .nav-links a:hover, .nav-links > li > button:hover { color:var(--purple-light); background:rgba(107,45,139,0.12); }
 
-    .nav-links a:hover, .nav-links > li > button:hover {
-      color: var(--purple-light);
-      background: rgba(107,45,139,0.12);
-    }
-
-    /* ── DROPDOWN FIX: bridge gap so mouse can travel down ── */
     .dropdown > button { padding-bottom: 0.5rem; }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      padding-top: 8px; /* invisible bridge over the gap */
-      z-index: 300;
-    }
-
-    .dropdown-menu-inner {
-      background: rgba(20,30,60,0.98);
-      border: 1px solid rgba(107,45,139,0.55);
-      border-radius: 8px;
-      overflow: hidden;
-      min-width: 210px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    }
-
-    /* Show on hover of the whole li (includes the bridge) */
+    .dropdown-menu { display:none; position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:8px; z-index:300; }
+    .dropdown-menu-inner { background:rgba(20,30,60,0.98); border:1px solid rgba(107,45,139,0.55); border-radius:8px; overflow:hidden; min-width:210px; box-shadow:0 20px 40px rgba(0,0,0,0.6); }
     .dropdown:hover .dropdown-menu { display: block; }
-
-    .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.9rem 1.25rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--cream);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(107,45,139,0.2);
-      transition: background 0.2s, color 0.2s;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-    }
-
+    .dropdown-menu a { display:flex; align-items:center; gap:0.75rem; padding:0.9rem 1.25rem; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--cream); text-decoration:none; border-bottom:1px solid rgba(107,45,139,0.2); transition:background 0.2s,color 0.2s; font-family:'Montserrat',sans-serif; font-weight:600; }
     .dropdown-menu a:last-child { border-bottom: none; }
-    .dropdown-menu a:hover { background: rgba(107,45,139,0.25); color: var(--white); }
+    .dropdown-menu a:hover { background:rgba(107,45,139,0.25); color:var(--white); }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none; flex-direction:column; justify-content:center; gap:5px;
+      width:36px; height:36px; background:none; border:none; cursor:pointer;
+      padding:4px; border-radius:6px; transition:background 0.2s; flex-shrink:0;
+    }
+    .hamburger:hover { background: rgba(107,45,139,0.2); }
+    .hamburger span { display:block; width:100%; height:2px; background:var(--cream); border-radius:2px; transition:transform 0.3s, opacity 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE MENU PANEL ── */
+    .mobile-menu {
+      display: none; position:fixed; top:70px; left:0; right:0;
+      background:rgba(20,30,58,0.99); border-bottom:1px solid rgba(107,45,139,0.4);
+      z-index:190; backdrop-filter:blur(16px);
+      max-height:calc(100vh - 70px); overflow-y:auto;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a, .mobile-menu button {
+      display:block; width:100%; text-align:left; padding:1rem 2rem;
+      font-family:'Montserrat',sans-serif; font-size:0.85rem; font-weight:600;
+      letter-spacing:0.12em; text-transform:uppercase; color:var(--cream);
+      text-decoration:none; background:none; border:none;
+      border-bottom:1px solid rgba(107,45,139,0.15); cursor:pointer;
+      transition:background 0.2s, color 0.2s;
+    }
+    .mobile-menu a:hover, .mobile-menu button:hover { background:rgba(107,45,139,0.15); color:var(--white); }
+    .mobile-menu .mobile-sub a { padding-left:3rem; font-size:0.78rem; color:rgba(245,240,255,0.7); background:rgba(0,0,0,0.2); }
+    .mobile-menu .mobile-sub a:hover { color:var(--white); background:rgba(107,45,139,0.2); }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
 
     /* ─── PAGES ─── */
     .page { display: none; min-height: 100vh; padding-top: 70px; position: relative; z-index: 1; }
@@ -283,9 +254,9 @@
     .about-mission { margin-top:3rem; background:linear-gradient(135deg,rgba(107,45,139,0.14),rgba(45,106,79,0.14)); border:1px solid rgba(107,45,139,0.3); border-radius:16px; padding:3rem; text-align:center; }
     .about-mission blockquote { font-family:'Cormorant Garamond',serif; font-size:clamp(1.3rem,2.5vw,1.8rem); font-style:italic; line-height:1.65; color:var(--white); }
 
-    /* Host cards */
     .hosts-section { padding: 3rem 2rem 5rem; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-    .hosts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+    .hosts-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 320px)); gap: 2rem; margin-top: 2.5rem; justify-content: center; }
+    @media(max-width: 900px) { .hosts-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); } }
     .host-card {
       background: rgba(27,42,74,0.7);
       border: 1px solid rgba(107,45,139,0.3);
@@ -362,7 +333,7 @@
     .social-card.instagram:hover { box-shadow:0 20px 40px rgba(193,53,132,0.45); }
     .social-card.tiktok { background:linear-gradient(135deg,#010101,#1a1a2e,#16213e); border:1px solid rgba(255,255,255,0.1); box-shadow:0 8px 24px rgba(0,0,0,0.4); }
     .social-card.tiktok:hover { box-shadow:0 20px 40px rgba(0,242,234,0.2); }
-    .social-icon { font-size:3.5rem; margin-bottom:1rem; display:block; }
+    .social-icon { display:flex; justify-content:center; align-items:center; margin-bottom:1rem; height:60px; }
     .social-card h3 { font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:0.5rem; }
     .social-card p { font-size:0.85rem; opacity:0.75; line-height:1.6; margin-bottom:1.5rem; }
     .social-follow-btn {
@@ -449,11 +420,7 @@
     .star { position:absolute; border-radius:50%; background:white; animation:twinkle var(--dur,4s) ease-in-out infinite; opacity:0; }
     @keyframes twinkle { 0%,100%{opacity:0} 50%{opacity:var(--opacity,0.5)} }
 
-    @media(max-width:750px) {
-      nav { padding:0 0.75rem; }
-      .nav-links a, .nav-links > li > button { padding:0.4rem 0.5rem; font-size:0.65rem; letter-spacing:0.06em; }
-      .contact-form { padding:2rem 1.5rem; }
-    }
+    @media(max-width:600px) { .contact-form { padding:2rem 1.5rem; } }
   </style>
 </head>
 <body>
@@ -483,7 +450,26 @@
     <li><a href="#" onclick="showPage('sponsors');return false;">Sponsors</a></li>
     <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="showPage('home');closeMenu();return false;">Home</a>
+  <a href="#" onclick="showPage('about');closeMenu();return false;">About</a>
+  <button onclick="toggleMobileSub('sub-podcast')">Podcast ▾</button>
+  <div class="mobile-sub" id="sub-podcast" style="display:none;">
+    <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" onclick="closeMenu()">🎵 Spotify</a>
+    <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" onclick="closeMenu()">🎙️ Apple Podcasts</a>
+  </div>
+  <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" onclick="closeMenu()">YouTube</a>
+  <a href="#" onclick="showPage('guests');closeMenu();return false;">Guest Hosts</a>
+  <a href="#" onclick="showPage('social');closeMenu();return false;">Social Media</a>
+  <a href="#" onclick="showPage('sponsors');closeMenu();return false;">Sponsors</a>
+  <a href="#" onclick="showPage('contact');closeMenu();return false;">Contact</a>
+</div>
 
 <!-- ═══════════ HOME ═══════════ -->
 <div id="page-home" class="page active">
@@ -628,46 +614,7 @@
   <div style="max-width:1100px;margin:0 auto;padding:0 2rem 5rem;position:relative;z-index:1;">
     <div class="guest-grid">
 
-      <div class="guest-card">
-        <div class="guest-avatar">🌟</div>
-        <h3>Juliette Montagu</h3>
-        <p>Guest host bio and links coming soon. Stay tuned for more about Juliette!</p>
-        <div class="guest-links">
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
-        </div>
-      </div>
-
-      <div class="guest-card">
-        <div class="guest-avatar">✈️</div>
-        <h3>Karisa Crews</h3>
-        <p>Guest host bio and links coming soon. Stay tuned for more about Karisa!</p>
-        <div class="guest-links">
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
-        </div>
-      </div>
-
-      <div class="guest-card">
-        <div class="guest-avatar">🎙️</div>
-        <h3>Brian Smith</h3>
-        <p>Guest host bio and links coming soon. Stay tuned for more about Brian!</p>
-        <div class="guest-links">
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
-        </div>
-      </div>
-
-      <div class="guest-card">
-        <div class="guest-avatar">🏰</div>
-        <h3>Cyndi Smith</h3>
-        <p>Guest host bio and links coming soon. Stay tuned for more about Cyndi!</p>
-        <div class="guest-links">
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
-        </div>
-      </div>
-
+      <!-- Blankenship, Jared -->
       <div class="guest-card">
         <div class="guest-avatar">🎡</div>
         <h3>Jared Blankenship</h3>
@@ -678,10 +625,55 @@
         </div>
       </div>
 
+      <!-- Crews, Karisa -->
+      <div class="guest-card">
+        <div class="guest-avatar">✈️</div>
+        <h3>Karisa Crews</h3>
+        <p>Guest host bio and links coming soon. Stay tuned for more about Karisa!</p>
+        <div class="guest-links">
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+        </div>
+      </div>
+
+      <!-- Hernandez, Carlos & Sonya -->
       <div class="guest-card">
         <div class="guest-avatar">💫</div>
         <h3>Carlos & Sonya Hernandez</h3>
         <p>Guest host bios and links coming soon. Stay tuned for more about Carlos & Sonya!</p>
+        <div class="guest-links">
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+        </div>
+      </div>
+
+      <!-- Montagu, Juliette -->
+      <div class="guest-card">
+        <div class="guest-avatar">🌟</div>
+        <h3>Juliette Montagu</h3>
+        <p>Guest host bio and links coming soon. Stay tuned for more about Juliette!</p>
+        <div class="guest-links">
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+        </div>
+      </div>
+
+      <!-- Smith, Brian -->
+      <div class="guest-card">
+        <div class="guest-avatar">🎙️</div>
+        <h3>Brian Smith</h3>
+        <p>Guest host bio and links coming soon. Stay tuned for more about Brian!</p>
+        <div class="guest-links">
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+        </div>
+      </div>
+
+      <!-- Smith, Cyndi -->
+      <div class="guest-card">
+        <div class="guest-avatar">🏰</div>
+        <h3>Cyndi Smith</h3>
+        <p>Guest host bio and links coming soon. Stay tuned for more about Cyndi!</p>
         <div class="guest-links">
           <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
           <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
@@ -718,21 +710,27 @@
     <div class="social-grid">
 
       <a href="https://www.facebook.com/profile.php?id=61560963204597" target="_blank" rel="noopener" class="social-card facebook">
-        <span class="social-icon">📘</span>
+        <span class="social-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="#fff"><path d="M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.9V12h2.538V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+        </span>
         <h3>Facebook</h3>
         <p>Like our page for episode announcements, Disney discussions, and community conversations.</p>
         <span class="social-follow-btn">Follow on Facebook</span>
       </a>
 
       <a href="https://www.instagram.com/carouselofconversations/" target="_blank" rel="noopener" class="social-card instagram">
-        <span class="social-icon">📸</span>
+        <span class="social-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.31.975.975 1.247 2.242 1.31 3.608.058 1.265.069 1.645.069 4.849s-.011 3.584-.069 4.849c-.063 1.366-.335 2.633-1.31 3.608-.975.975-2.242 1.247-3.608 1.31-1.266.058-1.646.069-4.85.069s-3.584-.011-4.849-.069c-1.366-.063-2.633-.335-3.608-1.31-.975-.975-1.247-2.242-1.31-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.849c.062-1.366.334-2.633 1.31-3.608.975-.975 2.242-1.248 3.608-1.31C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.333.014 7.053.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.053.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.856.601 3.698 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.856-.085 3.698-.601 5.038-1.942 1.341-1.34 1.857-3.182 1.942-5.038.058-1.28.072-1.689.072-4.948 0-3.259-.014-3.667-.072-4.947-.085-1.856-.601-3.698-1.942-5.038C20.645.673 18.803.157 16.947.072 15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </span>
         <h3>Instagram</h3>
         <p>Follow us for magical visuals, episode clips, reels, and Disney inspiration every week.</p>
         <span class="social-follow-btn">Follow on Instagram</span>
       </a>
 
       <a href="https://www.tiktok.com/@carouselofconversations" target="_blank" rel="noopener" class="social-card tiktok">
-        <span class="social-icon">🎵</span>
+        <span class="social-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.2 8.2 0 004.79 1.53V6.75a4.85 4.85 0 01-1.02-.06z"/></svg>
+        </span>
         <h3>TikTok</h3>
         <p>Catch our short-form Disney content, fun clips, and trending magic on TikTok.</p>
         <span class="social-follow-btn">Follow on TikTok</span>
@@ -847,7 +845,7 @@
       <p class="form-note">We'll reply to your email within a few days. For quicker responses, DM us on social media!</p>
     </div>
     <div class="form-success" id="form-success">
-      <p>✨ <strong>Thank you for reaching out!</strong><br/>Your message has been sent to carouselpod@gmail.com. We'll get back to you soon — in the meantime, keep the magic alive!</p>
+      <p>✨ <strong>Thank you for reaching out!</strong><br/>Your message has been sent to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e38082918c9690868f938c87a3848e828a8fcd808c8e">[email&#160;protected]</a>. We'll get back to you soon — in the meantime, keep the magic alive!</p>
     </div>
   </div>
 
@@ -865,40 +863,54 @@
   </footer>
 </div>
 
+
 <script>
   // Stars
-  const starsEl = document.getElementById('stars');
-  for (let i = 0; i < 90; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    const size = Math.random() * 2 + 0.5;
-    s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${(Math.random()*5+3).toFixed(1)}s;--opacity:${(Math.random()*0.5+0.15).toFixed(2)};animation-delay:${(Math.random()*7).toFixed(1)}s;`;
-    starsEl.appendChild(s);
-  }
+  (function() {
+    var starsEl = document.getElementById('stars');
+    for (var i = 0; i < 90; i++) {
+      var s = document.createElement('div');
+      s.className = 'star';
+      var size = Math.random() * 2 + 0.5;
+      s.style.cssText = 'width:'+size+'px;height:'+size+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--dur:'+(Math.random()*5+3).toFixed(1)+'s;--opacity:'+(Math.random()*0.5+0.15).toFixed(2)+';animation-delay:'+(Math.random()*7).toFixed(1)+'s;';
+      starsEl.appendChild(s);
+    }
+  })();
 
-  // Page nav
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  window.showPage = function(id) {
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
     document.getElementById('page-' + id).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  };
 
-  // Contact form → mailto
-  function submitForm() {
-    const name    = document.getElementById('contact-name').value.trim();
-    const email   = document.getElementById('contact-email').value.trim();
-    const subject = document.getElementById('contact-subject').value;
-    const message = document.getElementById('contact-message').value.trim();
+  window.toggleMenu = function() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobile-menu').classList.toggle('open');
+  };
+
+  window.closeMenu = function() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobile-menu').classList.remove('open');
+  };
+
+  window.toggleMobileSub = function(id) {
+    var sub = document.getElementById(id);
+    sub.style.display = sub.style.display === 'none' ? 'block' : 'none';
+  };
+
+  window.submitForm = function() {
+    var name    = document.getElementById('contact-name').value.trim();
+    var email   = document.getElementById('contact-email').value.trim();
+    var subject = document.getElementById('contact-subject').value;
+    var message = document.getElementById('contact-message').value.trim();
 
     if (!name || !email || !subject || !message) {
       alert('Please fill out all fields before sending!');
       return;
     }
 
-    const subjectLine = encodeURIComponent('Carousel of Conversations – ' + subject);
-    const body = encodeURIComponent(
-      'Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message
-    );
+    var subjectLine = encodeURIComponent('Carousel of Conversations \u2013 ' + subject);
+    var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message);
     window.location.href = 'mailto:carouselpod@gmail.com?subject=' + subjectLine + '&body=' + body;
 
     document.getElementById('form-success').style.display = 'block';
@@ -906,7 +918,7 @@
     document.getElementById('contact-email').value = '';
     document.getElementById('contact-subject').value = '';
     document.getElementById('contact-message').value = '';
-  }
+  };
 </script>
 </body>
 </html>
