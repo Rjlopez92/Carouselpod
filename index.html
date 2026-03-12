@@ -16,6 +16,7 @@
       --navy-light: #2E4070;
       --white: #F5F0FF;
       --cream: #EDE8F5;
+      --gold: #C9A84C;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,13 +45,13 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 3rem;
+      padding: 0 2rem;
       height: 70px;
-      background: rgba(27,42,74,0.95);
+      background: rgba(27,42,74,0.97);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(107,45,139,0.4);
     }
@@ -59,60 +60,68 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      text-decoration: none;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
-    .nav-logo img {
-      height: 48px;
-      width: auto;
-      object-fit: contain;
-    }
+    .nav-logo img { height: 48px; width: auto; object-fit: contain; }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 0.25rem;
+      gap: 0;
       list-style: none;
+      flex-wrap: wrap;
     }
 
-    .nav-links a, .nav-links button {
+    .nav-links > li { position: relative; }
+
+    .nav-links a, .nav-links > li > button {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--cream);
       text-decoration: none;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.75rem;
       border-radius: 4px;
       transition: color 0.2s, background 0.2s;
+      display: block;
+      white-space: nowrap;
     }
 
-    .nav-links a:hover, .nav-links button:hover {
+    .nav-links a:hover, .nav-links > li > button:hover {
       color: var(--purple-light);
       background: rgba(107,45,139,0.12);
     }
 
-    .dropdown { position: relative; }
+    /* ── DROPDOWN FIX: bridge gap so mouse can travel down ── */
+    .dropdown > button { padding-bottom: 0.5rem; }
 
     .dropdown-menu {
       display: none;
       position: absolute;
-      top: calc(100% + 8px);
+      top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      background: var(--navy);
-      border: 1px solid rgba(107,45,139,0.5);
+      padding-top: 8px; /* invisible bridge over the gap */
+      z-index: 300;
+    }
+
+    .dropdown-menu-inner {
+      background: rgba(20,30,60,0.98);
+      border: 1px solid rgba(107,45,139,0.55);
       border-radius: 8px;
       overflow: hidden;
       min-width: 210px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     }
 
+    /* Show on hover of the whole li (includes the bridge) */
     .dropdown:hover .dropdown-menu { display: block; }
 
     .dropdown-menu a {
@@ -132,194 +141,13 @@
     }
 
     .dropdown-menu a:last-child { border-bottom: none; }
-    .dropdown-menu a:hover { background: rgba(107,45,139,0.2); color: var(--white); }
+    .dropdown-menu a:hover { background: rgba(107,45,139,0.25); color: var(--white); }
 
     /* ─── PAGES ─── */
     .page { display: none; min-height: 100vh; padding-top: 70px; position: relative; z-index: 1; }
     .page.active { display: block; }
 
-    /* ─── HOME ─── */
-    .hero {
-      min-height: calc(100vh - 70px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 4rem 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 700px; height: 700px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(107,45,139,0.22) 0%, transparent 70%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      animation: pulse 6s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
-    }
-
-    .hero-logo {
-      width: min(360px, 78vw);
-      margin-bottom: 2rem;
-      animation: floatIn 1s ease-out both;
-      filter: drop-shadow(0 0 40px rgba(107,45,139,0.55));
-      position: relative;
-      z-index: 1;
-    }
-
-    @keyframes floatIn {
-      from { opacity: 0; transform: translateY(28px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      font-weight: 900;
-      line-height: 1.1;
-      animation: floatIn 1s 0.2s ease-out both;
-      background: linear-gradient(135deg, var(--white) 0%, var(--purple-light) 50%, var(--green-light) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      position: relative; z-index: 1;
-    }
-
-    .hero-tagline {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-      color: rgba(245,240,255,0.75);
-      margin-top: 1rem;
-      letter-spacing: 0.05em;
-      animation: floatIn 1s 0.35s ease-out both;
-      position: relative; z-index: 1;
-    }
-
-    .hero-divider {
-      width: 80px; height: 2px;
-      background: linear-gradient(90deg, var(--purple), var(--green));
-      margin: 2rem auto;
-      animation: floatIn 1s 0.45s ease-out both;
-      position: relative; z-index: 1;
-    }
-
-    .hero-desc {
-      max-width: 560px;
-      font-size: 0.95rem;
-      line-height: 1.85;
-      color: rgba(245,240,255,0.68);
-      animation: floatIn 1s 0.55s ease-out both;
-      position: relative; z-index: 1;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      animation: floatIn 1s 0.7s ease-out both;
-      position: relative; z-index: 1;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 2rem;
-      border-radius: 50px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .btn:hover { transform: translateY(-3px); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--purple), var(--purple-deep));
-      color: var(--white);
-      box-shadow: 0 8px 24px rgba(107,45,139,0.4);
-    }
-    .btn-primary:hover { box-shadow: 0 14px 32px rgba(107,45,139,0.6); }
-
-    .btn-secondary {
-      background: linear-gradient(135deg, var(--green), var(--green-light));
-      color: var(--white);
-      box-shadow: 0 8px 24px rgba(45,106,79,0.4);
-    }
-    .btn-secondary:hover { box-shadow: 0 14px 32px rgba(45,106,79,0.6); }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      border: 1.5px solid rgba(245,240,255,0.35);
-    }
-    .btn-outline:hover { background: rgba(245,240,255,0.07); }
-
-    .btn-youtube {
-      background: #FF0000;
-      color: white;
-      box-shadow: 0 8px 28px rgba(255,0,0,0.35);
-    }
-    .btn-youtube:hover { box-shadow: 0 14px 36px rgba(255,0,0,0.55); }
-
-    /* Listen strip */
-    .listen-strip {
-      background: rgba(45,106,79,0.1);
-      border-top: 1px solid rgba(45,106,79,0.3);
-      border-bottom: 1px solid rgba(45,106,79,0.3);
-      padding: 1.5rem 2rem;
-      text-align: center;
-      position: relative; z-index: 1;
-    }
-
-    .listen-strip p {
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(245,240,255,0.45);
-      margin-bottom: 0.9rem;
-    }
-
-    .listen-links {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-    }
-
-    .listen-links a {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--cream);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      transition: color 0.2s, transform 0.2s;
-    }
-
-    .listen-links a:hover { color: var(--purple-light); transform: translateY(-2px); }
-
-    /* Cards section */
+    /* ─── SHARED ─── */
     .section {
       padding: 5rem 2rem;
       max-width: 1100px;
@@ -345,11 +173,48 @@
 
     .section-sub {
       font-size: 0.95rem;
-      color: rgba(245,240,255,0.62);
+      color: rgba(245,240,255,0.65);
       line-height: 1.85;
-      max-width: 600px;
+      max-width: 620px;
     }
 
+    .page-header {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: linear-gradient(135deg, var(--purple), var(--purple-deep)); color: var(--white); box-shadow: 0 8px 24px rgba(107,45,139,0.4); }
+    .btn-primary:hover { box-shadow: 0 14px 32px rgba(107,45,139,0.6); }
+    .btn-secondary { background: linear-gradient(135deg, var(--green), var(--green-light)); color: var(--white); box-shadow: 0 8px 24px rgba(45,106,79,0.4); }
+    .btn-secondary:hover { box-shadow: 0 14px 32px rgba(45,106,79,0.6); }
+    .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(245,240,255,0.35); }
+    .btn-outline:hover { background: rgba(245,240,255,0.07); }
+    .btn-youtube { background: #FF0000; color: white; box-shadow: 0 8px 28px rgba(255,0,0,0.35); }
+    .btn-youtube:hover { box-shadow: 0 14px 36px rgba(255,0,0,0.55); }
+    .btn-gold { background: linear-gradient(135deg, #b8860b, var(--gold)); color: #1a0a00; box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+    .btn-gold:hover { box-shadow: 0 14px 32px rgba(201,168,76,0.6); }
+
+    /* Cards */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -366,228 +231,228 @@
       position: relative;
       overflow: hidden;
     }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--purple), var(--green));
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(107,45,139,0.5);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-
+    .card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--purple),var(--green)); }
+    .card:hover { transform: translateY(-6px); border-color: rgba(107,45,139,0.5); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
     .card-icon { font-size: 2rem; margin-bottom: 1rem; }
     .card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .card p { font-size: 0.88rem; color: rgba(245,240,255,0.62); line-height: 1.75; }
+    .card p { font-size: 0.88rem; color: rgba(245,240,255,0.65); line-height: 1.75; }
+
+    /* ─── HOME ─── */
+    .hero {
+      min-height: calc(100vh - 70px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 4rem 2rem; position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position:absolute; width:700px; height:700px; border-radius:50%;
+      background:radial-gradient(circle,rgba(107,45,139,0.22) 0%,transparent 70%);
+      top:50%; left:50%; transform:translate(-50%,-50%);
+      pointer-events:none; animation:pulse 6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:0.6; transform:translate(-50%,-50%) scale(1); }
+      50% { opacity:1; transform:translate(-50%,-50%) scale(1.08); }
+    }
+    .hero-logo { width:min(360px,78vw); margin-bottom:2rem; animation:floatIn 1s ease-out both; filter:drop-shadow(0 0 40px rgba(107,45,139,0.55)); position:relative; z-index:1; }
+    @keyframes floatIn { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    .hero h1 {
+      font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,4rem); font-weight:900; line-height:1.1;
+      animation:floatIn 1s 0.2s ease-out both;
+      background:linear-gradient(135deg,var(--white) 0%,var(--purple-light) 50%,var(--green-light) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      position:relative; z-index:1;
+    }
+    .hero-tagline { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.1rem,2.5vw,1.5rem); color:rgba(245,240,255,0.75); margin-top:1rem; letter-spacing:0.05em; animation:floatIn 1s 0.35s ease-out both; position:relative; z-index:1; }
+    .hero-divider { width:80px; height:2px; background:linear-gradient(90deg,var(--purple),var(--green)); margin:2rem auto; animation:floatIn 1s 0.45s ease-out both; position:relative; z-index:1; }
+    .hero-desc { max-width:560px; font-size:0.95rem; line-height:1.85; color:rgba(245,240,255,0.68); animation:floatIn 1s 0.55s ease-out both; position:relative; z-index:1; }
+    .hero-cta { display:flex; gap:1rem; margin-top:2.5rem; flex-wrap:wrap; justify-content:center; animation:floatIn 1s 0.7s ease-out both; position:relative; z-index:1; }
+
+    .listen-strip { background:rgba(45,106,79,0.1); border-top:1px solid rgba(45,106,79,0.3); border-bottom:1px solid rgba(45,106,79,0.3); padding:1.5rem 2rem; text-align:center; position:relative; z-index:1; }
+    .listen-strip p { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(245,240,255,0.45); margin-bottom:0.9rem; }
+    .listen-links { display:flex; justify-content:center; align-items:center; gap:2.5rem; flex-wrap:wrap; }
+    .listen-links a { display:flex; align-items:center; gap:0.5rem; color:var(--cream); text-decoration:none; font-size:0.85rem; font-weight:600; letter-spacing:0.05em; transition:color 0.2s,transform 0.2s; }
+    .listen-links a:hover { color:var(--purple-light); transform:translateY(-2px); }
 
     /* ─── ABOUT ─── */
-    .about-hero {
-      padding: 5rem 2rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative; z-index: 1;
-    }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:3rem; }
+    @media(max-width:640px) { .about-grid { grid-template-columns:1fr; } }
+    .about-block { background:rgba(27,42,74,0.65); border:1px solid rgba(107,45,139,0.25); border-radius:16px; padding:2.5rem; transition:border-color 0.3s,transform 0.3s; }
+    .about-block:hover { border-color:rgba(107,45,139,0.45); transform:translateY(-4px); }
+    .about-block h3 { font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:1rem; }
+    .about-block p { font-size:0.9rem; line-height:1.85; color:rgba(245,240,255,0.68); }
+    .about-mission { margin-top:3rem; background:linear-gradient(135deg,rgba(107,45,139,0.14),rgba(45,106,79,0.14)); border:1px solid rgba(107,45,139,0.3); border-radius:16px; padding:3rem; text-align:center; }
+    .about-mission blockquote { font-family:'Cormorant Garamond',serif; font-size:clamp(1.3rem,2.5vw,1.8rem); font-style:italic; line-height:1.65; color:var(--white); }
 
-    .about-body {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 2rem 5rem;
-      position: relative; z-index: 1;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
-
-    .about-block {
-      background: rgba(27,42,74,0.65);
-      border: 1px solid rgba(107,45,139,0.25);
-      border-radius: 16px;
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .about-block:hover {
-      border-color: rgba(107,45,139,0.45);
-      transform: translateY(-4px);
-    }
-
-    .about-block h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-    }
-
-    .about-block p {
-      font-size: 0.9rem;
-      line-height: 1.85;
-      color: rgba(245,240,255,0.68);
-    }
-
-    .about-mission {
-      margin-top: 3rem;
-      background: linear-gradient(135deg, rgba(107,45,139,0.14), rgba(45,106,79,0.14));
-      border: 1px solid rgba(107,45,139,0.3);
-      border-radius: 16px;
-      padding: 3rem;
-      text-align: center;
-    }
-
-    .about-mission blockquote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-      font-style: italic;
-      line-height: 1.65;
-      color: var(--white);
-    }
-
-    /* ─── YOUTUBE ─── */
-    .yt-hero {
-      min-height: calc(100vh - 70px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 4rem 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .yt-glow {
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,30,30,0.08) 0%, transparent 70%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      animation: pulse 5s ease-in-out infinite;
-    }
-
-    .yt-logo-wrap {
-      width: min(280px, 70vw);
-      margin-bottom: 2rem;
-      animation: floatIn 0.9s ease-out both;
-      filter: drop-shadow(0 0 30px rgba(107,45,139,0.5));
-      position: relative; z-index: 1;
-    }
-
-    .yt-logo-wrap img { width: 100%; }
-
-    .yt-icon {
-      font-size: 4.5rem;
-      margin-bottom: 1rem;
-      display: block;
-      animation: floatIn 0.9s 0.1s ease-out both;
-      position: relative; z-index: 1;
-    }
-
-    .yt-hero h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      margin-bottom: 1rem;
-      animation: floatIn 0.9s 0.15s ease-out both;
-      position: relative; z-index: 1;
-    }
-
-    .yt-hero p {
-      font-size: 1rem;
-      color: rgba(245,240,255,0.68);
-      max-width: 520px;
-      line-height: 1.85;
-      margin-bottom: 2.5rem;
-      animation: floatIn 0.9s 0.25s ease-out both;
-      position: relative; z-index: 1;
-    }
-
-    .yt-perks {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-      animation: floatIn 0.9s 0.35s ease-out both;
-      position: relative; z-index: 1;
-    }
-
-    .yt-perk {
+    /* Host cards */
+    .hosts-section { padding: 3rem 2rem 5rem; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .hosts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+    .host-card {
       background: rgba(27,42,74,0.7);
       border: 1px solid rgba(107,45,139,0.3);
-      border-radius: 12px;
-      padding: 1.2rem 1.5rem;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
       text-align: center;
-      min-width: 150px;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
     }
+    .host-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--purple),var(--green)); }
+    .host-card:hover { transform:translateY(-6px); border-color:rgba(107,45,139,0.55); box-shadow:0 20px 40px rgba(0,0,0,0.35); }
+    .host-avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(107,45,139,0.4), rgba(45,106,79,0.4));
+      border: 3px solid rgba(107,45,139,0.5);
+      margin: 0 auto 1.25rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      color: rgba(245,240,255,0.4);
+    }
+    .host-card h3 { font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:0.25rem; }
+    .host-role { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--purple-light); margin-bottom:1rem; }
+    .host-bio { font-size:0.88rem; color:rgba(245,240,255,0.6); line-height:1.8; font-style:italic; }
 
-    .yt-perk .perk-icon { font-size: 1.8rem; display: block; margin-bottom: 0.4rem; }
-    .yt-perk p { font-size: 0.78rem; color: rgba(245,240,255,0.65); line-height: 1.5; margin: 0; }
+    /* ─── GUEST HOSTS ─── */
+    .guest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.75rem; margin-top: 2.5rem; }
+    .guest-card {
+      background: rgba(27,42,74,0.65);
+      border: 1px solid rgba(107,45,139,0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .guest-card::after { content:''; position:absolute; bottom:0;right:0; width:100px;height:100px; background:radial-gradient(circle,rgba(107,45,139,0.12),transparent 70%); border-radius:50%; }
+    .guest-card:hover { transform:translateY(-5px); border-color:rgba(107,45,139,0.45); box-shadow:0 16px 36px rgba(0,0,0,0.3); }
+    .guest-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(107,45,139,0.3), rgba(45,106,79,0.3));
+      border: 2px solid rgba(107,45,139,0.4);
+      margin: 0 auto 1rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+    }
+    .guest-card h3 { font-family:'Playfair Display',serif; font-size:1.1rem; margin-bottom:0.5rem; }
+    .guest-card p { font-size:0.82rem; color:rgba(245,240,255,0.55); line-height:1.7; font-style:italic; margin-bottom:1.25rem; }
+    .guest-links { display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; }
+    .guest-link-btn {
+      display:inline-flex; align-items:center; gap:0.35rem;
+      padding:0.4rem 0.9rem;
+      border-radius:50px;
+      font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+      text-decoration:none; cursor:pointer; border:none;
+      background:rgba(107,45,139,0.25); color:var(--cream); border:1px solid rgba(107,45,139,0.4);
+      transition:background 0.2s, transform 0.2s;
+    }
+    .guest-link-btn:hover { background:rgba(107,45,139,0.45); transform:translateY(-2px); }
+
+    /* ─── SOCIAL MEDIA ─── */
+    .social-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem; margin-top:3rem; }
+    .social-card {
+      border-radius:20px; padding:3rem 2rem;
+      text-align:center; text-decoration:none; color:var(--white);
+      transition:transform 0.3s, box-shadow 0.3s;
+      position:relative; overflow:hidden;
+    }
+    .social-card:hover { transform:translateY(-8px); }
+    .social-card.facebook { background:linear-gradient(135deg,#1a3a6b,#2d5eab); border:1px solid rgba(45,94,171,0.5); box-shadow:0 8px 24px rgba(29,79,176,0.25); }
+    .social-card.facebook:hover { box-shadow:0 20px 40px rgba(29,79,176,0.45); }
+    .social-card.instagram { background:linear-gradient(135deg,#6B2D8B,#c13584,#e1306c); border:1px solid rgba(193,53,132,0.4); box-shadow:0 8px 24px rgba(193,53,132,0.25); }
+    .social-card.instagram:hover { box-shadow:0 20px 40px rgba(193,53,132,0.45); }
+    .social-card.tiktok { background:linear-gradient(135deg,#010101,#1a1a2e,#16213e); border:1px solid rgba(255,255,255,0.1); box-shadow:0 8px 24px rgba(0,0,0,0.4); }
+    .social-card.tiktok:hover { box-shadow:0 20px 40px rgba(0,242,234,0.2); }
+    .social-icon { font-size:3.5rem; margin-bottom:1rem; display:block; }
+    .social-card h3 { font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:0.5rem; }
+    .social-card p { font-size:0.85rem; opacity:0.75; line-height:1.6; margin-bottom:1.5rem; }
+    .social-follow-btn {
+      display:inline-block; padding:0.65rem 1.75rem; border-radius:50px;
+      font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+      background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:white;
+      transition:background 0.2s;
+    }
+    .social-card:hover .social-follow-btn { background:rgba(255,255,255,0.25); }
+
+    /* ─── SPONSORS ─── */
+    .sponsor-hero { padding:4rem 2rem 2rem; max-width:800px; margin:0 auto; text-align:center; position:relative; z-index:1; }
+    .sponsor-card-big {
+      max-width:700px; margin:3rem auto;
+      background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(107,45,139,0.12));
+      border:1px solid rgba(201,168,76,0.4);
+      border-radius:24px; padding:3rem 2.5rem; text-align:center;
+      position:relative; overflow:hidden;
+    }
+    .sponsor-card-big::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--gold),var(--purple),var(--gold)); }
+    .sponsor-logo-placeholder {
+      width:200px; height:80px;
+      background:rgba(201,168,76,0.12); border:1px dashed rgba(201,168,76,0.3);
+      border-radius:12px; margin:0 auto 1.5rem;
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.8rem; color:rgba(201,168,76,0.6); letter-spacing:0.1em; text-transform:uppercase;
+    }
+    .sponsor-card-big h3 { font-family:'Playfair Display',serif; font-size:1.8rem; margin-bottom:0.75rem; color:var(--gold); }
+    .sponsor-card-big p { font-size:0.95rem; color:rgba(245,240,255,0.72); line-height:1.85; margin-bottom:1.5rem; max-width:500px; margin-left:auto; margin-right:auto; }
+    .coupon-box {
+      display:inline-block; padding:1rem 2rem; margin:1rem auto;
+      background:rgba(201,168,76,0.1); border:2px dashed rgba(201,168,76,0.5);
+      border-radius:12px; text-align:center;
+    }
+    .coupon-box p { font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(245,240,255,0.55); margin:0 0 0.4rem; }
+    .coupon-code { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--gold); letter-spacing:0.1em; }
+    .coupon-discount { font-size:0.8rem; color:rgba(245,240,255,0.65); margin-top:0.4rem; }
+
+    /* ─── CONTACT ─── */
+    .contact-wrap { max-width:640px; margin:0 auto; padding:0 2rem 5rem; position:relative; z-index:1; }
+    .contact-form {
+      background:rgba(27,42,74,0.7); border:1px solid rgba(107,45,139,0.3);
+      border-radius:20px; padding:3rem;
+      position:relative; overflow:hidden;
+    }
+    .contact-form::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--purple),var(--green)); }
+    .form-group { margin-bottom:1.5rem; }
+    .form-group label { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:rgba(245,240,255,0.65); margin-bottom:0.5rem; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width:100%; padding:0.85rem 1rem;
+      background:rgba(255,255,255,0.05); border:1px solid rgba(107,45,139,0.35);
+      border-radius:8px; color:var(--white); font-family:'Montserrat',sans-serif; font-size:0.9rem;
+      outline:none; transition:border-color 0.2s, background 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color:var(--purple-light); background:rgba(107,45,139,0.08); }
+    .form-group textarea { resize:vertical; min-height:130px; }
+    .form-group select option { background:var(--navy); }
+    .form-submit { width:100%; padding:1rem; font-size:0.85rem; letter-spacing:0.12em; margin-top:0.5rem; }
+    .form-note { font-size:0.78rem; color:rgba(245,240,255,0.45); text-align:center; margin-top:1rem; line-height:1.6; }
+    .form-success {
+      display:none; text-align:center; padding:2rem;
+      background:rgba(45,106,79,0.15); border:1px solid rgba(45,106,79,0.4);
+      border-radius:12px; margin-top:1.5rem;
+    }
+    .form-success p { color:var(--white); font-size:0.95rem; line-height:1.7; }
 
     /* ─── FOOTER ─── */
     footer {
-      background: rgba(20,32,58,0.98);
-      border-top: 1px solid rgba(107,45,139,0.3);
-      text-align: center;
-      padding: 2.5rem 2rem;
-      position: relative;
-      z-index: 1;
+      background:rgba(20,32,58,0.98); border-top:1px solid rgba(107,45,139,0.3);
+      text-align:center; padding:2.5rem 2rem; position:relative; z-index:1;
     }
-
-    footer img { height: 48px; margin-bottom: 1rem; opacity: 0.8; }
-
-    footer p { font-size: 0.75rem; color: rgba(245,240,255,0.38); letter-spacing: 0.06em; }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 1rem 0;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: rgba(245,240,255,0.5);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--purple-light); }
+    footer img { height:48px; margin-bottom:1rem; opacity:0.8; }
+    footer p { font-size:0.75rem; color:rgba(245,240,255,0.38); letter-spacing:0.06em; }
+    .footer-links { display:flex; justify-content:center; gap:1.25rem; margin:1rem 0; flex-wrap:wrap; }
+    .footer-links a { color:rgba(245,240,255,0.5); text-decoration:none; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
+    .footer-links a:hover { color:var(--purple-light); }
 
     /* Stars */
-    .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-    .star {
-      position: absolute;
-      border-radius: 50%;
-      background: white;
-      animation: twinkle var(--dur, 4s) ease-in-out infinite;
-      opacity: 0;
-    }
+    .stars { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+    .star { position:absolute; border-radius:50%; background:white; animation:twinkle var(--dur,4s) ease-in-out infinite; opacity:0; }
+    @keyframes twinkle { 0%,100%{opacity:0} 50%{opacity:var(--opacity,0.5)} }
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0; }
-      50% { opacity: var(--opacity, 0.5); }
-    }
-
-    @media (max-width: 700px) {
-      nav { padding: 0 1rem; }
-      .nav-links a, .nav-links button { padding: 0.4rem 0.6rem; font-size: 0.7rem; }
+    @media(max-width:750px) {
+      nav { padding:0 0.75rem; }
+      .nav-links a, .nav-links > li > button { padding:0.4rem 0.5rem; font-size:0.65rem; letter-spacing:0.06em; }
+      .contact-form { padding:2rem 1.5rem; }
     }
   </style>
 </head>
@@ -601,20 +466,22 @@
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Carousel of Conversations"/>
   </div>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home'); return false;">Home</a></li>
-    <li><a href="#" onclick="showPage('about'); return false;">About</a></li>
+    <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
+    <li><a href="#" onclick="showPage('about');return false;">About</a></li>
     <li class="dropdown">
       <button>Podcast ▾</button>
       <div class="dropdown-menu">
-        <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener">
-          🎵&nbsp; Spotify
-        </a>
-        <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener">
-          🎙️&nbsp; Apple Podcasts
-        </a>
+        <div class="dropdown-menu-inner">
+          <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener">🎵&nbsp; Spotify</a>
+          <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener">🎙️&nbsp; Apple Podcasts</a>
+        </div>
       </div>
     </li>
     <li><a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener">YouTube</a></li>
+    <li><a href="#" onclick="showPage('guests');return false;">Guest Hosts</a></li>
+    <li><a href="#" onclick="showPage('social');return false;">Social Media</a></li>
+    <li><a href="#" onclick="showPage('sponsors');return false;">Sponsors</a></li>
+    <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
   </ul>
 </nav>
 
@@ -630,7 +497,7 @@
     <div class="hero-cta">
       <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" class="btn btn-primary">🎵 Listen on Spotify</a>
       <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" class="btn btn-secondary">▶ Watch on YouTube</a>
-      <a href="#" onclick="showPage('about'); return false;" class="btn btn-outline">Meet the Hosts</a>
+      <a href="#" onclick="showPage('about');return false;" class="btn btn-outline">Meet the Hosts</a>
     </div>
   </section>
 
@@ -648,32 +515,21 @@
     <h2 class="section-title">Everything Disney,<br/>All in One Place</h2>
     <p class="section-sub">From classic animated films to the latest park updates, we cover the full spectrum of the Disney universe — with passion, humor, and a whole lot of heart.</p>
     <div class="cards">
-      <div class="card">
-        <div class="card-icon">🎡</div>
-        <h3>Park Magic</h3>
-        <p>Deep dives into Disney parks, hidden secrets, Imagineering history, and tips to make the most of every visit.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🎬</div>
-        <h3>Film & Stories</h3>
-        <p>From Snow White to the MCU — we explore the stories, the lore, and what makes Disney's films so timeless.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">✨</div>
-        <h3>Fan Conversations</h3>
-        <p>Real talk from real Disney fans. We bring the community together for honest, joyful conversations about the magic.</p>
-      </div>
+      <div class="card"><div class="card-icon">🎡</div><h3>Park Magic</h3><p>Deep dives into Disney parks, hidden secrets, Imagineering history, and tips to make the most of every visit.</p></div>
+      <div class="card"><div class="card-icon">🎬</div><h3>Film & Stories</h3><p>From Snow White to the MCU — we explore the stories, the lore, and what makes Disney's films so timeless.</p></div>
+      <div class="card"><div class="card-icon">✨</div><h3>Fan Conversations</h3><p>Real talk from real Disney fans. We bring the community together for honest, joyful conversations about the magic.</p></div>
     </div>
   </section>
 
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home'); return false;">Home</a>
-      <a href="#" onclick="showPage('about'); return false;">About</a>
-      <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT" target="_blank">Spotify</a>
-      <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank">Apple Podcasts</a>
-      <a href="https://www.youtube.com/@CarouselofConversations" target="_blank">YouTube</a>
+      <a href="#" onclick="showPage('home');return false;">Home</a>
+      <a href="#" onclick="showPage('about');return false;">About</a>
+      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('social');return false;">Social</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
   </footer>
@@ -681,13 +537,42 @@
 
 <!-- ═══════════ ABOUT ═══════════ -->
 <div id="page-about" class="page">
-  <div class="about-hero">
-    <p class="section-label">Our Story</p>
-    <h2 class="section-title">About the Podcast</h2>
-    <p class="section-sub" style="margin: 1rem auto 0; text-align:center; max-width:620px;">Carousel of Conversations was born from a shared love of Disney magic and a desire to create a space where fans could come together, share their stories, and celebrate everything that makes the Disney universe so extraordinary.</p>
+
+  <!-- HOSTS SECTION (first) -->
+  <div class="hosts-section">
+    <p class="section-label">The Team</p>
+    <h2 class="section-title">Meet Your Hosts</h2>
+    <p class="section-sub">The passionate Disney fans behind every episode — bringing you the magic, the memories, and the conversations every Monday.</p>
+    <div class="hosts-grid">
+      <div class="host-card">
+        <div class="host-avatar">🎙️</div>
+        <h3>RJ Lopez</h3>
+        <p class="host-role">Co-Host</p>
+        <p class="host-bio">Host bio coming soon — check back for RJ's full story and what Disney magic means to him!</p>
+      </div>
+      <div class="host-card">
+        <div class="host-avatar">✨</div>
+        <h3>Jessalyn Lopez</h3>
+        <p class="host-role">Co-Host</p>
+        <p class="host-bio">Host bio coming soon — check back to learn more about Jessalyn and her love of all things Disney!</p>
+      </div>
+      <div class="host-card">
+        <div class="host-avatar">🎡</div>
+        <h3>Noah Smith</h3>
+        <p class="host-role">Co-Host</p>
+        <p class="host-bio">Host bio coming soon — check back to discover Noah's favorite Disney memories and more!</p>
+      </div>
+    </div>
   </div>
 
-  <div class="about-body">
+  <!-- ABOUT THE PODCAST (second) -->
+  <div class="page-header" style="padding-top:1rem;">
+    <p class="section-label">Our Story</p>
+    <h2 class="section-title">About the Podcast</h2>
+    <p class="section-sub" style="margin:1rem auto 0; text-align:center;">Carousel of Conversations was born from a shared love of Disney magic and a desire to create a space where fans could come together, share their stories, and celebrate everything that makes the Disney universe so extraordinary.</p>
+  </div>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 2rem; position:relative;z-index:1;">
     <div class="about-grid">
       <div class="about-block">
         <h3>🎡 How It Started</h3>
@@ -702,15 +587,15 @@
         <p>We believe Disney magic is best when shared. Our listeners aren't just an audience — they're part of the conversation. We love hearing your stories, your memories, and what makes Disney special to you.</p>
       </div>
       <div class="about-block">
-        <h3>🗓️ New Episodes</h3>
-        <p>New episodes drop regularly wherever you listen to podcasts. Subscribe on Spotify or Apple Podcasts so you never miss a ride, and catch the full video versions on our YouTube channel.</p>
+        <h3>🗓️ New Episodes Every Monday</h3>
+        <p>New episodes drop every <strong>Monday morning</strong> wherever you listen to podcasts. Subscribe on Spotify or Apple Podcasts so you never miss a ride, and catch the full video versions on our YouTube channel.</p>
       </div>
     </div>
 
-    <div class="about-mission">
+    <div class="about-mission" style="margin-bottom:1rem;">
       <p class="section-label" style="margin-bottom:1.5rem;">Our Mission</p>
       <blockquote>"Where the magic of Disney revolves around you — because the best stories are the ones we tell together."</blockquote>
-      <div style="margin-top: 2.5rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <div style="margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
         <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" class="btn btn-primary">🎵 Listen on Spotify</a>
         <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" class="btn btn-secondary">🎙️ Apple Podcasts</a>
         <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener" class="btn btn-youtube">▶ YouTube</a>
@@ -721,39 +606,306 @@
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home'); return false;">Home</a>
-      <a href="#" onclick="showPage('about'); return false;">About</a>
-      <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT" target="_blank">Spotify</a>
-      <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank">Apple Podcasts</a>
-      <a href="https://www.youtube.com/@CarouselofConversations" target="_blank">YouTube</a>
+      <a href="#" onclick="showPage('home');return false;">Home</a>
+      <a href="#" onclick="showPage('about');return false;">About</a>
+      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('social');return false;">Social</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+    </div>
+    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+  </footer>
+</div>
+
+<!-- ═══════════ GUEST HOSTS ═══════════ -->
+<div id="page-guests" class="page">
+  <div class="page-header">
+    <p class="section-label">Special Guests</p>
+    <h2 class="section-title">Guest Hosts</h2>
+    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">We love welcoming amazing guests to the carousel! Here are some of the incredible people who've joined us for a spin. More details for each guest coming soon!</p>
+  </div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:0 2rem 5rem;position:relative;z-index:1;">
+    <div class="guest-grid">
+
+      <div class="guest-card">
+        <div class="guest-avatar">🌟</div>
+        <h3>Juliette Montagu</h3>
+        <p>Guest host bio and links coming soon. Stay tuned for more about Juliette!</p>
+        <div class="guest-links">
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+        </div>
+      </div>
+
+      <div class="guest-card">
+        <div class="guest-avatar">✈️</div>
+        <h3>Karisa Crews</h3>
+        <p>Guest host bio and links coming soon. Stay tuned for more about Karisa!</p>
+        <div class="guest-links">
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+        </div>
+      </div>
+
+      <div class="guest-card">
+        <div class="guest-avatar">🎙️</div>
+        <h3>Brian Smith</h3>
+        <p>Guest host bio and links coming soon. Stay tuned for more about Brian!</p>
+        <div class="guest-links">
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+        </div>
+      </div>
+
+      <div class="guest-card">
+        <div class="guest-avatar">🏰</div>
+        <h3>Cyndi Smith</h3>
+        <p>Guest host bio and links coming soon. Stay tuned for more about Cyndi!</p>
+        <div class="guest-links">
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+        </div>
+      </div>
+
+      <div class="guest-card">
+        <div class="guest-avatar">🎡</div>
+        <h3>Jared Blankenship</h3>
+        <p>Guest host bio and links coming soon. Stay tuned for more about Jared!</p>
+        <div class="guest-links">
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+        </div>
+      </div>
+
+      <div class="guest-card">
+        <div class="guest-avatar">💫</div>
+        <h3>Carlos & Sonya Hernandez</h3>
+        <p>Guest host bios and links coming soon. Stay tuned for more about Carlos & Sonya!</p>
+        <div class="guest-links">
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
+          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+        </div>
+      </div>
+
+    </div>
+    <p style="text-align:center;font-size:0.8rem;color:rgba(245,240,255,0.4);margin-top:2.5rem;letter-spacing:0.08em;">More guest host profiles and links will be added soon. Check back every Monday!</p>
+  </div>
+
+  <footer>
+    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home');return false;">Home</a>
+      <a href="#" onclick="showPage('about');return false;">About</a>
+      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('social');return false;">Social</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+    </div>
+    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+  </footer>
+</div>
+
+<!-- ═══════════ SOCIAL MEDIA ═══════════ -->
+<div id="page-social" class="page">
+  <div class="page-header">
+    <p class="section-label">Stay Connected</p>
+    <h2 class="section-title">Find Us on Social Media</h2>
+    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Follow along for behind-the-scenes magic, episode updates, Disney news, and more. Join our community wherever you like to scroll!</p>
+  </div>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 2rem 5rem;position:relative;z-index:1;">
+    <div class="social-grid">
+
+      <a href="https://www.facebook.com/profile.php?id=61560963204597" target="_blank" rel="noopener" class="social-card facebook">
+        <span class="social-icon">📘</span>
+        <h3>Facebook</h3>
+        <p>Like our page for episode announcements, Disney discussions, and community conversations.</p>
+        <span class="social-follow-btn">Follow on Facebook</span>
+      </a>
+
+      <a href="https://www.instagram.com/carouselofconversations/" target="_blank" rel="noopener" class="social-card instagram">
+        <span class="social-icon">📸</span>
+        <h3>Instagram</h3>
+        <p>Follow us for magical visuals, episode clips, reels, and Disney inspiration every week.</p>
+        <span class="social-follow-btn">Follow on Instagram</span>
+      </a>
+
+      <a href="https://www.tiktok.com/@carouselofconversations" target="_blank" rel="noopener" class="social-card tiktok">
+        <span class="social-icon">🎵</span>
+        <h3>TikTok</h3>
+        <p>Catch our short-form Disney content, fun clips, and trending magic on TikTok.</p>
+        <span class="social-follow-btn">Follow on TikTok</span>
+      </a>
+
+    </div>
+
+    <div style="margin-top:3rem;background:rgba(27,42,74,0.6);border:1px solid rgba(107,45,139,0.25);border-radius:16px;padding:2.5rem;text-align:center;">
+      <p class="section-label" style="margin-bottom:0.75rem;">Also Listen & Watch</p>
+      <div class="listen-links" style="justify-content:center;">
+        <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener">🎵 Spotify</a>
+        <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener">🎙️ Apple Podcasts</a>
+        <a href="https://www.youtube.com/@CarouselofConversations" target="_blank" rel="noopener">▶ YouTube</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home');return false;">Home</a>
+      <a href="#" onclick="showPage('about');return false;">About</a>
+      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('social');return false;">Social</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+    </div>
+    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+  </footer>
+</div>
+
+<!-- ═══════════ SPONSORS ═══════════ -->
+<div id="page-sponsors" class="page">
+  <div class="sponsor-hero">
+    <p class="section-label">Our Partners</p>
+    <h2 class="section-title">Sponsors & Affiliates</h2>
+    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">We only partner with brands we genuinely love and believe in. Thank you for supporting the companies that make Carousel of Conversations possible!</p>
+  </div>
+
+  <div style="max-width:800px;margin:0 auto;padding:0 2rem 5rem;position:relative;z-index:1;">
+    <div class="sponsor-card-big">
+      <div class="sponsor-logo-placeholder">Magic Candle Co.</div>
+      <h3>Magic Candle Company</h3>
+      <p>Bring the scents of Disney Parks right into your home! Magic Candle Company crafts premium, hand-poured candles and fragrances inspired by your favorite Disney destinations and attractions. Whether you want to smell the fresh popcorn of Main Street or the tropical breeze of the Tiki Room, they've got you covered.</p>
+
+      <div class="coupon-box">
+        <p>Use code at checkout</p>
+        <div class="coupon-code">CAROUSELPOD</div>
+        <div class="coupon-discount">✨ Save 15% on your entire purchase!</div>
+      </div>
+
+      <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="https://magiccandlecompany.com?sca_ref=7749343.qfxaInwHPW" target="_blank" rel="noopener" class="btn btn-gold">🕯️ Shop Now & Save 15%</a>
+      </div>
+      <p style="font-size:0.75rem;color:rgba(245,240,255,0.4);margin-top:1.25rem;">Use code <strong style="color:var(--gold);">CAROUSELPOD</strong> at checkout for 15% off. Affiliate link — we may earn a small commission at no extra cost to you.</p>
+    </div>
+
+    <div style="text-align:center;margin-top:3rem;padding:2rem;background:rgba(27,42,74,0.5);border:1px dashed rgba(107,45,139,0.3);border-radius:16px;">
+      <p style="font-size:0.8rem;color:rgba(245,240,255,0.45);letter-spacing:0.08em;line-height:1.8;">Interested in sponsoring Carousel of Conversations?<br/>
+      <a href="#" onclick="showPage('contact');return false;" style="color:var(--purple-light);text-decoration:none;font-weight:600;">Get in touch with us →</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home');return false;">Home</a>
+      <a href="#" onclick="showPage('about');return false;">About</a>
+      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('social');return false;">Social</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+    </div>
+    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+  </footer>
+</div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<div id="page-contact" class="page">
+  <div class="page-header">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Contact Us</h2>
+    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Have a question, want to be a guest, or interested in sponsoring the show? We'd love to hear from you! Fill out the form below and we'll get back to you soon.</p>
+  </div>
+
+  <div class="contact-wrap">
+    <div class="contact-form">
+      <div class="form-group">
+        <label for="contact-name">Your Name</label>
+        <input type="text" id="contact-name" placeholder="Mickey Mouse" />
+      </div>
+      <div class="form-group">
+        <label for="contact-email">Email Address</label>
+        <input type="email" id="contact-email" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label for="contact-subject">Subject</label>
+        <select id="contact-subject">
+          <option value="" disabled selected>Select a topic...</option>
+          <option value="general">General Question</option>
+          <option value="guest">I'd Like to Be a Guest</option>
+          <option value="sponsor">Sponsorship Inquiry</option>
+          <option value="feedback">Episode Feedback</option>
+          <option value="other">Something Else</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" placeholder="Tell us what's on your mind..."></textarea>
+      </div>
+      <button class="btn btn-primary form-submit" onclick="submitForm()">✉️ Send Message</button>
+      <p class="form-note">We'll reply to your email within a few days. For quicker responses, DM us on social media!</p>
+    </div>
+    <div class="form-success" id="form-success">
+      <p>✨ <strong>Thank you for reaching out!</strong><br/>Your message has been sent to carouselpod@gmail.com. We'll get back to you soon — in the meantime, keep the magic alive!</p>
+    </div>
+  </div>
+
+  <footer>
+    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home');return false;">Home</a>
+      <a href="#" onclick="showPage('about');return false;">About</a>
+      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('social');return false;">Social</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Sponsors</a>
+      <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
   </footer>
 </div>
 
 <script>
-  // Generate stars
+  // Stars
   const starsEl = document.getElementById('stars');
   for (let i = 0; i < 90; i++) {
     const s = document.createElement('div');
     s.className = 'star';
     const size = Math.random() * 2 + 0.5;
-    s.style.cssText = `
-      width:${size}px; height:${size}px;
-      top:${Math.random()*100}%;
-      left:${Math.random()*100}%;
-      --dur:${(Math.random()*5+3).toFixed(1)}s;
-      --opacity:${(Math.random()*0.5+0.15).toFixed(2)};
-      animation-delay:${(Math.random()*7).toFixed(1)}s;
-    `;
+    s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${(Math.random()*5+3).toFixed(1)}s;--opacity:${(Math.random()*0.5+0.15).toFixed(2)};animation-delay:${(Math.random()*7).toFixed(1)}s;`;
     starsEl.appendChild(s);
   }
 
-  // Page navigation
+  // Page nav
   function showPage(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Contact form → mailto
+  function submitForm() {
+    const name    = document.getElementById('contact-name').value.trim();
+    const email   = document.getElementById('contact-email').value.trim();
+    const subject = document.getElementById('contact-subject').value;
+    const message = document.getElementById('contact-message').value.trim();
+
+    if (!name || !email || !subject || !message) {
+      alert('Please fill out all fields before sending!');
+      return;
+    }
+
+    const subjectLine = encodeURIComponent('Carousel of Conversations – ' + subject);
+    const body = encodeURIComponent(
+      'Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message
+    );
+    window.location.href = 'mailto:carouselpod@gmail.com?subject=' + subjectLine + '&body=' + body;
+
+    document.getElementById('form-success').style.display = 'block';
+    document.getElementById('contact-name').value = '';
+    document.getElementById('contact-email').value = '';
+    document.getElementById('contact-subject').value = '';
+    document.getElementById('contact-message').value = '';
   }
 </script>
 </body>
