@@ -3,7 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Carousel of Conversations</title>
+
+  <!-- ═══ PRIMARY SEO META TAGS ═══ -->
+  <title>Carousel of Conversations | Disney Fan Podcast</title>
+  <meta name="description" content="Carousel of Conversations is a Disney fan podcast covering Walt Disney World, Disney Cruise Line, Disney films, park secrets, and everything in between. New episodes every Monday."/>
+  <meta name="keywords" content="Disney podcast, Walt Disney World podcast, Disney fan podcast, Disney Cruise Line, Disneyland podcast, Disney parks, Disney magic, carousel of conversations"/>
+  <meta name="author" content="Carousel of Conversations"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://carouselpod.com/"/>
+
+  <!-- ═══ OPEN GRAPH (Facebook, iMessage, LinkedIn) ═══ -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Carousel of Conversations"/>
+  <meta property="og:title" content="Carousel of Conversations | Disney Fan Podcast"/>
+  <meta property="og:description" content="A Disney fan podcast covering Walt Disney World, Disney Cruise Line, parks, films, and fan conversations. New episodes every Monday. Where the magic of Disney revolves around you."/>
+  <meta property="og:url" content="https://carouselpod.com/"/>
+  <meta property="og:image" content="https://carouselpod.com/Carousel_Pod_Logo__Presentation_.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:locale" content="en_US"/>
+
+  <!-- ═══ TWITTER / X CARD ═══ -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Carousel of Conversations | Disney Fan Podcast"/>
+  <meta name="twitter:description" content="A Disney fan podcast covering Walt Disney World, Disney Cruise Line, parks, films, and fan conversations. New episodes every Monday."/>
+  <meta name="twitter:image" content="https://carouselpod.com/Carousel_Pod_Logo__Presentation_.png"/>
+
+  <!-- ═══ PODCAST SCHEMA MARKUP ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PodcastSeries",
+    "name": "Carousel of Conversations",
+    "description": "A Disney fan podcast covering Walt Disney World, Disney Cruise Line, Disneyland, Disney films, park secrets, and fan conversations. New episodes every Monday.",
+    "url": "https://carouselpod.com",
+    "image": "https://carouselpod.com/Carousel_Pod_Logo__Presentation_.png",
+    "author": {
+      "@type": "Person",
+      "name": "RJ Lopez"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Carousel of Conversations",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://carouselpod.com/Carousel_Pod_Logo__Presentation_.png"
+      }
+    },
+    "webFeed": "https://feed.podbean.com/Carouselofconversations/feed.xml",
+    "potentialAction": {
+      "@type": "ListenAction",
+      "target": [
+        "https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT",
+        "https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932",
+        "https://www.youtube.com/@CarouselofConversations"
+      ]
+    }
+  }
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -446,6 +504,7 @@
     .footer-links { display:flex; justify-content:center; gap:1.25rem; margin:1rem 0; flex-wrap:wrap; }
     .footer-links a { color:rgba(245,240,255,0.5); text-decoration:none; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
     .footer-links a:hover { color:var(--purple-light); }
+    .nav-cta { background:linear-gradient(135deg,var(--purple),var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:700 !important; }
 
     /* ── PLATFORM BADGES ── */
     .platform-badge {
@@ -483,7 +542,17 @@
   </div>
   <ul class="nav-links">
     <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
-    <li><a href="#" onclick="showPage('about');return false;">About</a></li>
+
+    <li class="dropdown">
+      <button>About ▾</button>
+      <div class="dropdown-menu">
+        <div class="dropdown-menu-inner">
+          <a href="#" onclick="showPage('about');return false;">Our Story</a>
+          <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+        </div>
+      </div>
+    </li>
+
     <li class="dropdown">
       <button>Listen Now ▾</button>
       <div class="dropdown-menu">
@@ -500,14 +569,24 @@
             <svg viewBox="0 0 24 24" fill="#FF4444" width="16" height="16"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             YouTube
           </a>
+          <a href="#" onclick="showPage('episodes');return false;">🎙 Episodes</a>
         </div>
       </div>
     </li>
-    <li><a href="#" onclick="showPage('guests');return false;">Guest Hosts</a></li>
-    <li><a href="#" onclick="showPage('social');return false;">Social Media</a></li>
-    <li><a href="#" onclick="showPage('sponsors');return false;">Affiliates</a></li>
-    <li><a href="#" onclick="showPage('quote');return false;">Free Quote</a></li>
-    <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
+
+    <li class="dropdown">
+      <button>Connect ▾</button>
+      <div class="dropdown-menu">
+        <div class="dropdown-menu-inner">
+          <a href="#" onclick="showPage('blog');return false;">✍️ Blog</a>
+          <a href="#" onclick="showPage('social');return false;">📱 Social Media</a>
+          <a href="#" onclick="showPage('sponsors');return false;">🤝 Affiliates</a>
+          <a href="#" onclick="showPage('contact');return false;">✉️ Contact Us</a>
+        </div>
+      </div>
+    </li>
+
+    <li><a href="#" onclick="showPage('quote');return false;" class="nav-cta">Free Quote</a></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -517,7 +596,13 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobile-menu">
   <a href="#" onclick="showPage('home');closeMenu();return false;">Home</a>
-  <a href="#" onclick="showPage('about');closeMenu();return false;">About</a>
+
+  <button onclick="toggleMobileSub('sub-about')">About ▾</button>
+  <div class="mobile-sub" id="sub-about" style="display:none;">
+    <a href="#" onclick="showPage('about');closeMenu();return false;">Our Story</a>
+    <a href="#" onclick="showPage('guests');closeMenu();return false;">Guest Hosts</a>
+  </div>
+
   <button onclick="toggleMobileSub('sub-podcast')">Listen Now ▾</button>
   <div class="mobile-sub" id="sub-podcast" style="display:none;">
     <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" onclick="closeMenu()" style="display:flex;align-items:center;gap:0.5rem;">
@@ -532,12 +617,18 @@
       <svg viewBox="0 0 24 24" fill="#FF4444" width="16" height="16"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
       YouTube
     </a>
+    <a href="#" onclick="showPage('episodes');closeMenu();return false;">🎙 Episodes</a>
   </div>
-  <a href="#" onclick="showPage('guests');closeMenu();return false;">Guest Hosts</a>
-  <a href="#" onclick="showPage('social');closeMenu();return false;">Social Media</a>
-  <a href="#" onclick="showPage('sponsors');closeMenu();return false;">Affiliates</a>
-  <a href="#" onclick="showPage('quote');closeMenu();return false;">Free Quote</a>
-  <a href="#" onclick="showPage('contact');closeMenu();return false;">Contact</a>
+
+  <button onclick="toggleMobileSub('sub-connect')">Connect ▾</button>
+  <div class="mobile-sub" id="sub-connect" style="display:none;">
+    <a href="#" onclick="showPage('blog');closeMenu();return false;">✍️ Blog</a>
+    <a href="#" onclick="showPage('social');closeMenu();return false;">📱 Social Media</a>
+    <a href="#" onclick="showPage('sponsors');closeMenu();return false;">🤝 Affiliates</a>
+    <a href="#" onclick="showPage('contact');closeMenu();return false;">✉️ Contact Us</a>
+  </div>
+
+  <a href="#" onclick="showPage('quote');closeMenu();return false;" style="color:var(--gold);font-weight:700;">✨ Free Quote</a>
 </div>
 
 <!-- ═══════════ HOME ═══════════ -->
@@ -597,8 +688,11 @@
       <a href="#" onclick="showPage('home');return false;">Home</a>
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#" onclick="showPage('blog');return false;">Blog</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
       <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
@@ -689,8 +783,11 @@
       <a href="#" onclick="showPage('home');return false;">Home</a>
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#" onclick="showPage('blog');return false;">Blog</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
       <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
@@ -785,8 +882,11 @@
       <a href="#" onclick="showPage('home');return false;">Home</a>
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#" onclick="showPage('blog');return false;">Blog</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
       <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
@@ -859,8 +959,11 @@
       <a href="#" onclick="showPage('home');return false;">Home</a>
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#" onclick="showPage('blog');return false;">Blog</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
       <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
@@ -906,8 +1009,11 @@
       <a href="#" onclick="showPage('home');return false;">Home</a>
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#" onclick="showPage('blog');return false;">Blog</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
       <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
@@ -969,6 +1075,8 @@
       <a href="#" onclick="showPage('home');return false;">Home</a>
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#" onclick="showPage('blog');return false;">Blog</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
       <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
       <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
@@ -1715,6 +1823,95 @@
       <a href="#" onclick="showPage('home');return false;">Home</a>
       <a href="#" onclick="showPage('about');return false;">About</a>
       <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#" onclick="showPage('social');return false;">Social</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+    </div>
+    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
+  </footer>
+</div>
+
+<!-- ═══════════ EPISODES ═══════════ -->
+<div id="page-episodes" class="page">
+  <div class="page-header">
+    <p class="section-label">All Episodes</p>
+    <h2 class="section-title">The Carousel is Always Turning</h2>
+    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Every episode, every story — browse our full library and find your next favorite listen.</p>
+  </div>
+
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem 4rem;position:relative;z-index:1;">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;">
+      <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT?utm_medium=share&utm_source=linktree" target="_blank" rel="noopener" class="platform-badge spotify-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.33c-.214.354-.676.465-1.028.249-2.815-1.72-6.358-2.11-10.532-1.156-.402.093-.803-.155-.897-.558-.094-.402.155-.803.558-.897 4.566-1.043 8.487-.594 11.65 1.334.352.215.463.677.249 1.028zm1.47-3.27c-.27.44-.845.578-1.283.309-3.222-1.98-8.133-2.554-11.944-1.397-.494.15-1.017-.13-1.166-.624-.149-.494.13-1.017.624-1.166 4.354-1.32 9.765-.68 13.46 1.594.44.27.578.845.309 1.284zm.127-3.403C15.53 8.37 9.44 8.158 5.857 9.266c-.594.18-1.223-.154-1.403-.748-.18-.594.154-1.223.748-1.403 4.13-1.253 10.998-1.011 15.33 1.617.537.32.714 1.013.394 1.55-.319.537-1.012.715-1.55.395z"/></svg>
+        Follow on Spotify
+      </a>
+      <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" class="platform-badge apple-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+        Subscribe on Apple
+      </a>
+    </div>
+
+    <div id="episodes-feed">
+      <div style="text-align:center;padding:3rem;color:rgba(245,240,255,0.5);">
+        <div style="font-size:2rem;margin-bottom:1rem;">🎙️</div>
+        <p>Loading episodes...</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home');return false;">Home</a>
+      <a href="#" onclick="showPage('about');return false;">About</a>
+      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#" onclick="showPage('social');return false;">Social</a>
+      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+    </div>
+    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
+  </footer>
+</div>
+
+<!-- ═══════════ BLOG ═══════════ -->
+<div id="page-blog" class="page">
+  <div class="page-header">
+    <p class="section-label">Articles & Updates</p>
+    <h2 class="section-title">From the Carousel</h2>
+    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Disney tips, episode recaps, travel guides, and more — straight from the hosts to you.</p>
+  </div>
+
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem 4rem;position:relative;z-index:1;">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <a href="https://carousepod.substack.com" target="_blank" rel="noopener" class="btn btn-outline" style="display:inline-flex;align-items:center;gap:0.5rem;">
+        ✍️ Subscribe on Substack — Get Posts by Email
+      </a>
+    </div>
+
+    <div id="blog-feed">
+      <div style="text-align:center;padding:3rem;color:rgba(245,240,255,0.5);">
+        <div style="font-size:2rem;margin-bottom:1rem;">✍️</div>
+        <p>Loading posts...</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home');return false;">Home</a>
+      <a href="#" onclick="showPage('about');return false;">About</a>
+      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#" onclick="showPage('blog');return false;">Blog</a>
       <a href="#" onclick="showPage('social');return false;">Social</a>
       <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
       <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
@@ -1811,6 +2008,88 @@
       });
     });
   }
+
+  // ── EPISODES RSS FEED (Podbean) ──
+  function loadEpisodes() {
+    var feedUrl = 'https://feed.podbean.com/Carouselofconversations/feed.xml';
+    var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feedUrl) + '&api_key=public&count=50';
+    var container = document.getElementById('episodes-feed');
+    if (!container) return;
+
+    fetch(apiUrl)
+      .then(function(r){ return r.json(); })
+      .then(function(data) {
+        if (!data.items || !data.items.length) {
+          container.innerHTML = '<p style="text-align:center;color:rgba(245,240,255,0.5);">No episodes found. Check back soon!</p>';
+          return;
+        }
+        var html = '<div style="display:flex;flex-direction:column;gap:1.2rem;">';
+        data.items.forEach(function(ep, i) {
+          var date = ep.pubDate ? new Date(ep.pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
+          var desc = ep.description ? ep.description.replace(/<[^>]*>/g,'').substring(0,200) + '…' : '';
+          var img = ep.thumbnail || (data.feed && data.feed.image) || 'Carousel_Pod_Logo__Presentation_.png';
+          var link = ep.link || ep.guid || '#';
+          html += '<div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background=\'rgba(107,45,139,0.1)\'" onmouseout="this.style.background=\'rgba(255,255,255,0.03)\'">'
+            + '<img src="'+img+'" alt="Episode artwork" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src=\'Carousel_Pod_Logo__Presentation_.png\'">'
+            + '<div style="flex:1;min-width:0;">'
+            + '<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">'+date+'</p>'
+            + '<h3 style="font-family:\'Playfair Display\',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">'+ep.title+'</h3>'
+            + '<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">'+desc+'</p>'
+            + '<a href="'+link+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">▶ Listen Now</a>'
+            + '</div></div>';
+        });
+        html += '</div>';
+        container.innerHTML = html;
+      })
+      .catch(function() {
+        container.innerHTML = '<p style="text-align:center;color:rgba(245,240,255,0.5);">Couldn\'t load episodes right now. <a href="https://feed.podbean.com/Carouselofconversations/feed.xml" target="_blank" style="color:var(--purple-light);">Visit our Podbean page</a> to listen.</p>';
+      });
+  }
+
+  // ── BLOG RSS FEED (Substack) ──
+  function loadBlog() {
+    var feedUrl = 'https://carousepod.substack.com/feed';
+    var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feedUrl) + '&api_key=public&count=20';
+    var container = document.getElementById('blog-feed');
+    if (!container) return;
+
+    fetch(apiUrl)
+      .then(function(r){ return r.json(); })
+      .then(function(data) {
+        if (!data.items || !data.items.length) {
+          container.innerHTML = '<div style="text-align:center;padding:2rem;color:rgba(245,240,255,0.5);"><p>No posts yet — check back soon or <a href="https://carousepod.substack.com" target="_blank" style="color:var(--purple-light);">subscribe on Substack</a> to be the first to know!</p></div>';
+          return;
+        }
+        var html = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">';
+        data.items.forEach(function(post) {
+          var date = post.pubDate ? new Date(post.pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
+          var desc = post.description ? post.description.replace(/<[^>]*>/g,'').substring(0,160) + '…' : '';
+          var img = post.thumbnail || post.enclosure && post.enclosure.link || '';
+          var link = post.link || '#';
+          html += '<a href="'+link+'" target="_blank" rel="noopener" style="text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;overflow:hidden;transition:all 0.2s;" onmouseover="this.style.transform=\'translateY(-4px)\';this.style.borderColor=\'rgba(107,45,139,0.5)\'" onmouseout="this.style.transform=\'none\';this.style.borderColor=\'rgba(107,45,139,0.2)\'">';
+          if (img) html += '<img src="'+img+'" alt="'+post.title+'" style="width:100%;height:160px;object-fit:cover;" onerror="this.style.display=\'none\'">';
+          html += '<div style="padding:1.2rem;flex:1;display:flex;flex-direction:column;">'
+            + '<p style="font-size:0.68rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">'+date+'</p>'
+            + '<h3 style="font-family:\'Playfair Display\',serif;font-size:1rem;color:var(--white);line-height:1.4;margin-bottom:0.6rem;flex:1;">'+post.title+'</h3>'
+            + '<p style="font-size:0.8rem;color:rgba(245,240,255,0.55);line-height:1.6;margin-bottom:0.8rem;">'+desc+'</p>'
+            + '<span style="font-size:0.78rem;color:var(--purple-light);font-weight:600;">Read More →</span>'
+            + '</div></a>';
+        });
+        html += '</div>';
+        container.innerHTML = html;
+      })
+      .catch(function() {
+        container.innerHTML = '<div style="text-align:center;padding:2rem;color:rgba(245,240,255,0.5);"><p>Couldn\'t load posts right now. <a href="https://carousepod.substack.com" target="_blank" style="color:var(--purple-light);">Visit our Substack</a> to read all articles.</p></div>';
+      });
+  }
+
+  // Load feeds when those pages are visited
+  var _origShowPage = window.showPage;
+  window.showPage = function(id) {
+    _origShowPage(id);
+    if (id === 'episodes') loadEpisodes();
+    if (id === 'blog') loadBlog();
+  };
 
   // Contact form
   var contactForm = document.getElementById('contact-form-el');
