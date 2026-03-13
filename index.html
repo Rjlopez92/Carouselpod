@@ -505,6 +505,8 @@
     .footer-links a { color:rgba(245,240,255,0.5); text-decoration:none; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
     .footer-links a:hover { color:var(--purple-light); }
     .nav-cta { background:linear-gradient(135deg,var(--purple),var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:700 !important; }
+    .nav-cta-btn { display:inline-block !important; padding:0.45rem 1.1rem !important; background:linear-gradient(135deg,var(--purple),var(--green)) !important; color:white !important; border-radius:25px !important; font-weight:700 !important; font-size:0.82rem !important; letter-spacing:0.03em; box-shadow:0 0 18px rgba(107,45,139,0.4); transition:all 0.2s !important; -webkit-text-fill-color:white !important; }
+    .nav-cta-btn:hover { box-shadow:0 0 28px rgba(107,45,139,0.7); transform:translateY(-1px); }
 
     /* ── PLATFORM BADGES ── */
     .platform-badge {
@@ -541,14 +543,14 @@
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Carousel of Conversations"/>
   </div>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
+    <li><a href="#home" onclick="showPage('home');return false;">Home</a></li>
 
     <li class="dropdown">
       <button>About ▾</button>
       <div class="dropdown-menu">
         <div class="dropdown-menu-inner">
-          <a href="#" onclick="showPage('about');return false;">Our Story</a>
-          <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
+          <a href="#about" onclick="showPage('about');return false;">Our Story</a>
+          <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
         </div>
       </div>
     </li>
@@ -569,7 +571,7 @@
             <svg viewBox="0 0 24 24" fill="#FF4444" width="16" height="16"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             YouTube
           </a>
-          <a href="#" onclick="showPage('episodes');return false;">🎙 Episodes</a>
+          <a href="#episodes" onclick="showPage('episodes');return false;">🎙 Episodes</a>
         </div>
       </div>
     </li>
@@ -578,15 +580,15 @@
       <button>Connect ▾</button>
       <div class="dropdown-menu">
         <div class="dropdown-menu-inner">
-          <a href="#" onclick="showPage('blog');return false;">✍️ Blog</a>
-          <a href="#" onclick="showPage('social');return false;">📱 Social Media</a>
-          <a href="#" onclick="showPage('sponsors');return false;">🤝 Affiliates</a>
-          <a href="#" onclick="showPage('contact');return false;">✉️ Contact Us</a>
+          <a href="#blog" onclick="showPage('blog');return false;">✍️ Blog</a>
+          <a href="#social" onclick="showPage('social');return false;">📱 Social Media</a>
+          <a href="#sponsors" onclick="showPage('sponsors');return false;">🤝 Affiliates</a>
+          <a href="#contact" onclick="showPage('contact');return false;">✉️ Contact Us</a>
         </div>
       </div>
     </li>
 
-    <li><a href="#" onclick="showPage('quote');return false;" class="nav-cta">Free Quote</a></li>
+    <li><a href="#quote" onclick="showPage('quote');return false;" class="nav-cta-btn">✨ Free Quote</a></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -595,12 +597,12 @@
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#" onclick="showPage('home');closeMenu();return false;">Home</a>
+  <a href="#home" onclick="showPage('home');closeMenu();return false;">Home</a>
 
   <button onclick="toggleMobileSub('sub-about')">About ▾</button>
   <div class="mobile-sub" id="sub-about" style="display:none;">
-    <a href="#" onclick="showPage('about');closeMenu();return false;">Our Story</a>
-    <a href="#" onclick="showPage('guests');closeMenu();return false;">Guest Hosts</a>
+    <a href="#about" onclick="showPage('about');closeMenu();return false;">Our Story</a>
+    <a href="#guests" onclick="showPage('guests');closeMenu();return false;">Guest Hosts</a>
   </div>
 
   <button onclick="toggleMobileSub('sub-podcast')">Listen Now ▾</button>
@@ -617,18 +619,18 @@
       <svg viewBox="0 0 24 24" fill="#FF4444" width="16" height="16"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
       YouTube
     </a>
-    <a href="#" onclick="showPage('episodes');closeMenu();return false;">🎙 Episodes</a>
+    <a href="#episodes" onclick="showPage('episodes');closeMenu();return false;">🎙 Episodes</a>
   </div>
 
   <button onclick="toggleMobileSub('sub-connect')">Connect ▾</button>
   <div class="mobile-sub" id="sub-connect" style="display:none;">
-    <a href="#" onclick="showPage('blog');closeMenu();return false;">✍️ Blog</a>
-    <a href="#" onclick="showPage('social');closeMenu();return false;">📱 Social Media</a>
-    <a href="#" onclick="showPage('sponsors');closeMenu();return false;">🤝 Affiliates</a>
-    <a href="#" onclick="showPage('contact');closeMenu();return false;">✉️ Contact Us</a>
+    <a href="#blog" onclick="showPage('blog');closeMenu();return false;">✍️ Blog</a>
+    <a href="#social" onclick="showPage('social');closeMenu();return false;">📱 Social Media</a>
+    <a href="#sponsors" onclick="showPage('sponsors');closeMenu();return false;">🤝 Affiliates</a>
+    <a href="#contact" onclick="showPage('contact');closeMenu();return false;">✉️ Contact Us</a>
   </div>
 
-  <a href="#" onclick="showPage('quote');closeMenu();return false;" style="color:var(--gold);font-weight:700;">✨ Free Quote</a>
+  <a href="#quote" onclick="showPage('quote');closeMenu();return false;" style="display:block;margin-top:0.5rem;padding:0.8rem 1.2rem;background:linear-gradient(135deg,var(--purple),var(--green));border-radius:10px;color:white!important;font-weight:700;text-align:center;">✨ Free Quote</a>
 </div>
 
 <!-- ═══════════ HOME ═══════════ -->
@@ -649,7 +651,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         Watch on YouTube
       </a>
-      <a href="#" onclick="showPage('about');return false;" class="btn btn-outline">Meet the Hosts</a>
+      <a href="#about" onclick="showPage('about');return false;" class="btn btn-outline">Meet the Hosts</a>
     </div>
   </section>
 
@@ -685,15 +687,15 @@
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home');return false;">Home</a>
-      <a href="#" onclick="showPage('about');return false;">About</a>
-      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      <a href="#home" onclick="showPage('home');return false;">Home</a>
+      <a href="#about" onclick="showPage('about');return false;">About</a>
+      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#social" onclick="showPage('social');return false;">Social</a>
+      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
     <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
@@ -780,15 +782,15 @@
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home');return false;">Home</a>
-      <a href="#" onclick="showPage('about');return false;">About</a>
-      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      <a href="#home" onclick="showPage('home');return false;">Home</a>
+      <a href="#about" onclick="showPage('about');return false;">About</a>
+      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#social" onclick="showPage('social');return false;">Social</a>
+      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
     <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
@@ -879,15 +881,15 @@
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home');return false;">Home</a>
-      <a href="#" onclick="showPage('about');return false;">About</a>
-      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      <a href="#home" onclick="showPage('home');return false;">Home</a>
+      <a href="#about" onclick="showPage('about');return false;">About</a>
+      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#social" onclick="showPage('social');return false;">Social</a>
+      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
     <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
@@ -956,15 +958,15 @@
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home');return false;">Home</a>
-      <a href="#" onclick="showPage('about');return false;">About</a>
-      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      <a href="#home" onclick="showPage('home');return false;">Home</a>
+      <a href="#about" onclick="showPage('about');return false;">About</a>
+      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#social" onclick="showPage('social');return false;">Social</a>
+      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
     <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
@@ -999,22 +1001,22 @@
 
     <div style="text-align:center;margin-top:3rem;padding:2rem;background:rgba(27,42,74,0.5);border:1px dashed rgba(107,45,139,0.3);border-radius:16px;">
       <p style="font-size:0.8rem;color:rgba(245,240,255,0.45);letter-spacing:0.08em;line-height:1.8;">Interested in partnering with Carousel of Conversations?<br/>
-      <a href="#" onclick="showPage('contact');return false;" style="color:var(--purple-light);text-decoration:none;font-weight:600;">Get in touch with us →</a></p>
+      <a href="#contact" onclick="showPage('contact');return false;" style="color:var(--purple-light);text-decoration:none;font-weight:600;">Get in touch with us →</a></p>
     </div>
   </div>
 
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home');return false;">Home</a>
-      <a href="#" onclick="showPage('about');return false;">About</a>
-      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      <a href="#home" onclick="showPage('home');return false;">Home</a>
+      <a href="#about" onclick="showPage('about');return false;">About</a>
+      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#social" onclick="showPage('social');return false;">Social</a>
+      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
     <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
@@ -1065,22 +1067,22 @@
       </div>
     </div>
     <div style="margin-top:1.5rem;text-align:center;">
-      <p style="font-size:0.78rem;color:rgba(245,240,255,0.4);line-height:1.7;">You can also reach us on <a href="#" onclick="showPage('social');return false;" style="color:var(--purple-light);">social media</a> for a quicker response!</p>
+      <p style="font-size:0.78rem;color:rgba(245,240,255,0.4);line-height:1.7;">You can also reach us on <a href="#social" onclick="showPage('social');return false;" style="color:var(--purple-light);">social media</a> for a quicker response!</p>
     </div>
   </div>
 
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home');return false;">Home</a>
-      <a href="#" onclick="showPage('about');return false;">About</a>
-      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      <a href="#home" onclick="showPage('home');return false;">Home</a>
+      <a href="#about" onclick="showPage('about');return false;">About</a>
+      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#social" onclick="showPage('social');return false;">Social</a>
+      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
     <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
@@ -1820,15 +1822,15 @@
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home');return false;">Home</a>
-      <a href="#" onclick="showPage('about');return false;">About</a>
-      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      <a href="#home" onclick="showPage('home');return false;">Home</a>
+      <a href="#about" onclick="showPage('about');return false;">About</a>
+      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#social" onclick="showPage('social');return false;">Social</a>
+      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
     <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
@@ -1866,15 +1868,15 @@
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home');return false;">Home</a>
-      <a href="#" onclick="showPage('about');return false;">About</a>
-      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      <a href="#home" onclick="showPage('home');return false;">Home</a>
+      <a href="#about" onclick="showPage('about');return false;">About</a>
+      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#social" onclick="showPage('social');return false;">Social</a>
+      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
     <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
@@ -1907,15 +1909,15 @@
   <footer>
     <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home');return false;">Home</a>
-      <a href="#" onclick="showPage('about');return false;">About</a>
-      <a href="#" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#" onclick="showPage('social');return false;">Social</a>
-      <a href="#" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      <a href="#home" onclick="showPage('home');return false;">Home</a>
+      <a href="#about" onclick="showPage('about');return false;">About</a>
+      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
+      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
+      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
+      <a href="#social" onclick="showPage('social');return false;">Social</a>
+      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
+      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
+      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
     </div>
     <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
     <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
@@ -1937,9 +1939,40 @@
 
   window.showPage = function(id) {
     document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-    document.getElementById('page-' + id).classList.add('active');
+    var el = document.getElementById('page-' + id);
+    if (!el) return;
+    el.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Update URL hash for deep linking (e.g. carouselpod.com/#quote)
+    history.pushState(null, '', '#' + id);
+    maybeLoadFeeds(id);
   };
+
+  // On load, check hash and navigate to correct page
+  window.addEventListener('DOMContentLoaded', function() {
+    var hash = window.location.hash.replace('#', '');
+    var validPages = ['home','about','guests','episodes','blog','social','sponsors','quote','contact'];
+    if (hash && validPages.indexOf(hash) !== -1) {
+      window.showPage(hash);
+    } else {
+      window.showPage('home');
+    }
+  });
+
+  // Handle browser back/forward
+  window.addEventListener('popstate', function() {
+    var hash = window.location.hash.replace('#', '');
+    var validPages = ['home','about','guests','episodes','blog','social','sponsors','quote','contact'];
+    if (hash && validPages.indexOf(hash) !== -1) {
+      var id = hash;
+      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+      var el = document.getElementById('page-' + id);
+      if (el) el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (id === 'episodes') loadEpisodes();
+      if (id === 'blog') loadBlog();
+    }
+  });
 
   window.toggleMenu = function() {
     document.getElementById('hamburger').classList.toggle('open');
@@ -2009,89 +2042,141 @@
     });
   }
 
-  // ── EPISODES RSS FEED (Podbean) ──
+  // ── EPISODES RSS FEED (Podbean) — direct XML parse via CORS proxy ──
+  var _episodesLoaded = false;
   function loadEpisodes() {
-    var feedUrl = 'https://feed.podbean.com/Carouselofconversations/feed.xml';
-    var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feedUrl) + '&api_key=public&count=50';
+    if (_episodesLoaded) return;
     var container = document.getElementById('episodes-feed');
     if (!container) return;
-
-    fetch(apiUrl)
-      .then(function(r){ return r.json(); })
-      .then(function(data) {
-        if (!data.items || !data.items.length) {
-          container.innerHTML = '<p style="text-align:center;color:rgba(245,240,255,0.5);">No episodes found. Check back soon!</p>';
-          return;
-        }
-        var html = '<div style="display:flex;flex-direction:column;gap:1.2rem;">';
-        data.items.forEach(function(ep, i) {
-          var date = ep.pubDate ? new Date(ep.pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
-          var desc = ep.description ? ep.description.replace(/<[^>]*>/g,'').substring(0,200) + '…' : '';
-          var img = ep.thumbnail || (data.feed && data.feed.image) || 'Carousel_Pod_Logo__Presentation_.png';
-          var link = ep.link || ep.guid || '#';
-          html += '<div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background=\'rgba(107,45,139,0.1)\'" onmouseout="this.style.background=\'rgba(255,255,255,0.03)\'">'
-            + '<img src="'+img+'" alt="Episode artwork" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src=\'Carousel_Pod_Logo__Presentation_.png\'">'
-            + '<div style="flex:1;min-width:0;">'
-            + '<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">'+date+'</p>'
-            + '<h3 style="font-family:\'Playfair Display\',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">'+ep.title+'</h3>'
-            + '<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">'+desc+'</p>'
-            + '<a href="'+link+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">▶ Listen Now</a>'
-            + '</div></div>';
+    var feedUrl = 'https://feed.podbean.com/Carouselofconversations/feed.xml';
+    var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(feedUrl);
+    fetch(proxyUrl)
+      .then(function(r) { return r.text(); })
+      .then(function(xml) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(xml, 'text/xml');
+        var items = doc.querySelectorAll('item');
+        if (!items.length) throw new Error('No items');
+        var feedImg = 'Carousel_Pod_Logo__Presentation_.png';
+        var chanImg = doc.querySelector('channel > image > url');
+        if (chanImg) feedImg = chanImg.textContent;
+        var itunesImgs = doc.getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd','image');
+        if (itunesImgs.length && itunesImgs[0].getAttribute('href')) feedImg = itunesImgs[0].getAttribute('href');
+        var cards = [];
+        items.forEach(function(item) {
+          var title = (item.querySelector('title') || {}).textContent || '(Untitled)';
+          var link = '';
+          var linkEl = item.querySelector('link');
+          if (linkEl) { link = (linkEl.nextSibling ? linkEl.nextSibling.textContent : linkEl.textContent).trim(); }
+          if (!link || !link.startsWith('http')) { var g = item.querySelector('guid'); if (g) link = g.textContent.trim(); }
+          if (!link || !link.startsWith('http')) { var e = item.querySelector('enclosure'); if (e) link = e.getAttribute('url') || ''; }
+          var pubDate = (item.querySelector('pubDate') || {}).textContent || '';
+          var date = pubDate ? new Date(pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
+          var desc = '';
+          var descEl = item.querySelector('description');
+          if (descEl) desc = descEl.textContent.replace(/<[^>]*>/g,'').substring(0,200).trim() + '...';
+          var img = feedImg;
+          var card = document.createElement('div');
+          card.style.cssText = 'display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;';
+          card.onmouseover = function() { this.style.background = 'rgba(107,45,139,0.1)'; };
+          card.onmouseout = function() { this.style.background = 'rgba(255,255,255,0.03)'; };
+          var imgEl = document.createElement('img');
+          imgEl.src = img; imgEl.alt = 'Episode art';
+          imgEl.style.cssText = 'width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;';
+          imgEl.onerror = function() { this.src = 'Carousel_Pod_Logo__Presentation_.png'; };
+          var info = document.createElement('div');
+          info.style.cssText = 'flex:1;min-width:0;';
+          info.innerHTML = '<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">' + date + '</p>'
+            + '<h3 style="font-family:Playfair Display,serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">' + title + '</h3>'
+            + '<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">' + desc + '</p>'
+            + '<a href="' + link + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>';
+          card.appendChild(imgEl);
+          card.appendChild(info);
+          cards.push(card);
         });
-        html += '</div>';
-        container.innerHTML = html;
+        var wrapper = document.createElement('div');
+        wrapper.style.cssText = 'display:flex;flex-direction:column;gap:1.2rem;';
+        cards.forEach(function(c) { wrapper.appendChild(c); });
+        container.innerHTML = '';
+        container.appendChild(wrapper);
+        _episodesLoaded = true;
       })
-      .catch(function() {
-        container.innerHTML = '<p style="text-align:center;color:rgba(245,240,255,0.5);">Couldn\'t load episodes right now. <a href="https://feed.podbean.com/Carouselofconversations/feed.xml" target="_blank" style="color:var(--purple-light);">Visit our Podbean page</a> to listen.</p>';
+      .catch(function(err) {
+        console.warn('Episodes feed error:', err);
+        container.innerHTML = '<p style="text-align:center;color:rgba(245,240,255,0.5);">Having trouble loading &mdash; <a href="https://carouselofconversations.podbean.com" target="_blank" style="color:var(--purple-light);">browse episodes on Podbean</a>.</p>';
       });
   }
 
-  // ── BLOG RSS FEED (Substack) ──
+  // ── BLOG RSS FEED (Substack) — direct XML parse via CORS proxy ──
+  var _blogLoaded = false;
   function loadBlog() {
-    var feedUrl = 'https://carousepod.substack.com/feed';
-    var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feedUrl) + '&api_key=public&count=20';
+    if (_blogLoaded) return;
     var container = document.getElementById('blog-feed');
     if (!container) return;
-
-    fetch(apiUrl)
-      .then(function(r){ return r.json(); })
-      .then(function(data) {
-        if (!data.items || !data.items.length) {
-          container.innerHTML = '<div style="text-align:center;padding:2rem;color:rgba(245,240,255,0.5);"><p>No posts yet — check back soon or <a href="https://carousepod.substack.com" target="_blank" style="color:var(--purple-light);">subscribe on Substack</a> to be the first to know!</p></div>';
-          return;
-        }
-        var html = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">';
-        data.items.forEach(function(post) {
-          var date = post.pubDate ? new Date(post.pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
-          var desc = post.description ? post.description.replace(/<[^>]*>/g,'').substring(0,160) + '…' : '';
-          var img = post.thumbnail || post.enclosure && post.enclosure.link || '';
-          var link = post.link || '#';
-          html += '<a href="'+link+'" target="_blank" rel="noopener" style="text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;overflow:hidden;transition:all 0.2s;" onmouseover="this.style.transform=\'translateY(-4px)\';this.style.borderColor=\'rgba(107,45,139,0.5)\'" onmouseout="this.style.transform=\'none\';this.style.borderColor=\'rgba(107,45,139,0.2)\'">';
-          if (img) html += '<img src="'+img+'" alt="'+post.title+'" style="width:100%;height:160px;object-fit:cover;" onerror="this.style.display=\'none\'">';
-          html += '<div style="padding:1.2rem;flex:1;display:flex;flex-direction:column;">'
-            + '<p style="font-size:0.68rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">'+date+'</p>'
-            + '<h3 style="font-family:\'Playfair Display\',serif;font-size:1rem;color:var(--white);line-height:1.4;margin-bottom:0.6rem;flex:1;">'+post.title+'</h3>'
-            + '<p style="font-size:0.8rem;color:rgba(245,240,255,0.55);line-height:1.6;margin-bottom:0.8rem;">'+desc+'</p>'
-            + '<span style="font-size:0.78rem;color:var(--purple-light);font-weight:600;">Read More →</span>'
-            + '</div></a>';
+    var feedUrl = 'https://carousepod.substack.com/feed';
+    var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(feedUrl);
+    fetch(proxyUrl)
+      .then(function(r) { return r.text(); })
+      .then(function(xml) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(xml, 'text/xml');
+        var items = doc.querySelectorAll('item');
+        if (!items.length) throw new Error('No items');
+        var cards = [];
+        items.forEach(function(item) {
+          var title = (item.querySelector('title') || {}).textContent || '(Untitled)';
+          var link = '';
+          var linkEl = item.querySelector('link');
+          if (linkEl) link = linkEl.textContent.trim();
+          if (!link || !link.startsWith('http')) { var g = item.querySelector('guid'); if (g) link = g.textContent.trim(); }
+          var pubDate = (item.querySelector('pubDate') || {}).textContent || '';
+          var date = pubDate ? new Date(pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
+          var desc = '';
+          var descEl = item.querySelector('description');
+          if (descEl) desc = descEl.textContent.replace(/<[^>]*>/g,'').substring(0,160).trim() + '...';
+          var img = '';
+          var contentNS = 'http://purl.org/rss/1.0/modules/content/';
+          var encoded = item.getElementsByTagNameNS(contentNS,'encoded')[0];
+          if (encoded) { var m = encoded.textContent.match(/src=["']([^"']+\.(jpg|jpeg|png|webp))/i); if (m) img = m[1]; }
+          var anchor = document.createElement('a');
+          anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener';
+          anchor.style.cssText = 'text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;overflow:hidden;transition:all 0.2s;';
+          anchor.onmouseover = function() { this.style.transform = 'translateY(-4px)'; this.style.borderColor = 'rgba(107,45,139,0.5)'; };
+          anchor.onmouseout = function() { this.style.transform = 'none'; this.style.borderColor = 'rgba(107,45,139,0.2)'; };
+          if (img) {
+            var imgEl = document.createElement('img');
+            imgEl.src = img; imgEl.alt = ''; imgEl.style.cssText = 'width:100%;height:160px;object-fit:cover;';
+            imgEl.onerror = function() { this.style.display = 'none'; };
+            anchor.appendChild(imgEl);
+          }
+          var body = document.createElement('div');
+          body.style.cssText = 'padding:1.2rem;flex:1;display:flex;flex-direction:column;';
+          body.innerHTML = '<p style="font-size:0.68rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">' + date + '</p>'
+            + '<h3 style="font-family:Playfair Display,serif;font-size:1rem;color:var(--white);line-height:1.4;margin-bottom:0.6rem;flex:1;">' + title + '</h3>'
+            + '<p style="font-size:0.8rem;color:rgba(245,240,255,0.55);line-height:1.6;margin-bottom:0.8rem;">' + desc + '</p>'
+            + '<span style="font-size:0.78rem;color:var(--purple-light);font-weight:600;">Read More &rarr;</span>';
+          anchor.appendChild(body);
+          cards.push(anchor);
         });
-        html += '</div>';
-        container.innerHTML = html;
+        var grid = document.createElement('div');
+        grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;';
+        cards.forEach(function(c) { grid.appendChild(c); });
+        container.innerHTML = '';
+        container.appendChild(grid);
+        _blogLoaded = true;
       })
-      .catch(function() {
-        container.innerHTML = '<div style="text-align:center;padding:2rem;color:rgba(245,240,255,0.5);"><p>Couldn\'t load posts right now. <a href="https://carousepod.substack.com" target="_blank" style="color:var(--purple-light);">Visit our Substack</a> to read all articles.</p></div>';
+      .catch(function(err) {
+        console.warn('Blog feed error:', err);
+        container.innerHTML = '<div style="text-align:center;padding:2rem;"><p style="color:rgba(245,240,255,0.5);">Could not load posts. <a href="https://carousepod.substack.com" target="_blank" style="color:var(--purple-light);">Visit our Substack</a>.</p></div>';
       });
   }
 
-  // Load feeds when those pages are visited
-  var _origShowPage = window.showPage;
-  window.showPage = function(id) {
-    _origShowPage(id);
+    function maybeLoadFeeds(id) {
     if (id === 'episodes') loadEpisodes();
     if (id === 'blog') loadBlog();
-  };
+  }
 
-  // Contact form
+    // Contact form
   var contactForm = document.getElementById('contact-form-el');
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
