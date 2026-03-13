@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B2A4A"/>
+      <stop offset="50%" style="stop-color:#2d1a40"/>
+      <stop offset="100%" style="stop-color:#1B2A4A"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6B2D8B"/>
+      <stop offset="100%" style="stop-color:#2D6A4F"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="200" fill="url(#bg)" rx="16"/>
+
+  <!-- Top accent bar -->
+  <rect width="800" height="4" fill="url(#accentGrad)" rx="2"/>
+  <rect y="196" width="800" height="4" fill="url(#accentGrad)" rx="2"/>
+
+  <!-- Decorative stars -->
+  <circle cx="30" cy="40" r="2" fill="#F5F0FF" opacity="0.4"/>
+  <circle cx="80" cy="80" r="1.5" fill="#F5F0FF" opacity="0.3"/>
+  <circle cx="50" cy="130" r="1" fill="#F5F0FF" opacity="0.5"/>
+  <circle cx="770" cy="50" r="2" fill="#F5F0FF" opacity="0.4"/>
+  <circle cx="730" cy="100" r="1.5" fill="#F5F0FF" opacity="0.3"/>
+  <circle cx="760" cy="150" r="1" fill="#F5F0FF" opacity="0.5"/>
+  <circle cx="400" cy="15" r="1.5" fill="#F5F0FF" opacity="0.25"/>
+  <circle cx="150" cy="170" r="1" fill="#F5F0FF" opacity="0.35"/>
+  <circle cx="650" cy="175" r="1.5" fill="#F5F0FF" opacity="0.3"/>
+
+  <!-- Diamond sparkles -->
+  <path d="M60 60 L63 55 L66 60 L63 65 Z" fill="#F5F0FF" opacity="0.5"/>
+  <path d="M740 140 L743 135 L746 140 L743 145 Z" fill="#F5F0FF" opacity="0.5"/>
+  <path d="M120 25 L122 21 L124 25 L122 29 Z" fill="#6B2D8B" opacity="0.8"/>
+  <path d="M680 25 L682 21 L684 25 L682 29 Z" fill="#2D6A4F" opacity="0.8"/>
+
+  <!-- Coffee cup icon -->
+  <g transform="translate(90, 60)">
+    <!-- Cup body -->
+    <rect x="0" y="20" width="50" height="40" rx="4" fill="#6B2D8B" opacity="0.9"/>
+    <!-- Cup handle -->
+    <path d="M50 30 Q70 30 70 45 Q70 60 50 60" stroke="#6B2D8B" stroke-width="5" fill="none" opacity="0.9"/>
+    <!-- Steam lines -->
+    <path d="M10 15 Q14 5 10 0" stroke="#F5F0FF" stroke-width="2" fill="none" opacity="0.6" stroke-linecap="round"/>
+    <path d="M22 12 Q26 2 22 -3" stroke="#F5F0FF" stroke-width="2" fill="none" opacity="0.6" stroke-linecap="round"/>
+    <path d="M34 15 Q38 5 34 0" stroke="#F5F0FF" stroke-width="2" fill="none" opacity="0.6" stroke-linecap="round"/>
+    <!-- Smile on cup -->
+    <path d="M12 45 Q25 55 38 45" stroke="#F5F0FF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Main text -->
+  <text x="400" y="85" font-family="Georgia, serif" font-size="36" font-weight="bold"
+        fill="#F5F0FF" text-anchor="middle" letter-spacing="1">Support the Show</text>
+
+  <!-- Gradient underline -->
+  <rect x="200" y="95" width="400" height="2" fill="url(#accentGrad)" rx="1"/>
+
+  <!-- Subtitle -->
+  <text x="400" y="128" font-family="Arial, sans-serif" font-size="15"
+        fill="rgba(245,240,255,0.65)" text-anchor="middle" letter-spacing="1">
+    Love the carousel? Buy us a coffee and keep the magic going!
+  </text>
+
+  <!-- Button -->
+  <rect x="270" y="148" width="260" height="38" rx="19" fill="url(#accentGrad)"/>
+  <text x="400" y="172" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+        fill="white" text-anchor="middle" letter-spacing="1">☕  BUY US A COFFEE</text>
+</svg>
