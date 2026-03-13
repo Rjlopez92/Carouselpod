@@ -2042,133 +2042,177 @@
     });
   }
 
-  // ── EPISODES RSS FEED (Podbean) — direct XML parse via CORS proxy ──
+  // ── EPISODES RSS FEED (Podbean) ──
   var _episodesLoaded = false;
   function loadEpisodes() {
     if (_episodesLoaded) return;
     var container = document.getElementById('episodes-feed');
     if (!container) return;
+
+    // Try multiple proxies in sequence until one works
     var feedUrl = 'https://feed.podbean.com/Carouselofconversations/feed.xml';
-    var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(feedUrl);
-    fetch(proxyUrl)
-      .then(function(r) { return r.text(); })
-      .then(function(xml) {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(xml, 'text/xml');
-        var items = doc.querySelectorAll('item');
-        if (!items.length) throw new Error('No items');
-        var feedImg = 'Carousel_Pod_Logo__Presentation_.png';
-        var chanImg = doc.querySelector('channel > image > url');
-        if (chanImg) feedImg = chanImg.textContent;
-        var itunesImgs = doc.getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd','image');
-        if (itunesImgs.length && itunesImgs[0].getAttribute('href')) feedImg = itunesImgs[0].getAttribute('href');
-        var cards = [];
-        items.forEach(function(item) {
-          var title = (item.querySelector('title') || {}).textContent || '(Untitled)';
-          var link = '';
-          var linkEl = item.querySelector('link');
-          if (linkEl) { link = (linkEl.nextSibling ? linkEl.nextSibling.textContent : linkEl.textContent).trim(); }
-          if (!link || !link.startsWith('http')) { var g = item.querySelector('guid'); if (g) link = g.textContent.trim(); }
-          if (!link || !link.startsWith('http')) { var e = item.querySelector('enclosure'); if (e) link = e.getAttribute('url') || ''; }
-          var pubDate = (item.querySelector('pubDate') || {}).textContent || '';
-          var date = pubDate ? new Date(pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
-          var desc = '';
-          var descEl = item.querySelector('description');
-          if (descEl) desc = descEl.textContent.replace(/<[^>]*>/g,'').substring(0,200).trim() + '...';
-          var img = feedImg;
-          var card = document.createElement('div');
-          card.style.cssText = 'display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;';
-          card.onmouseover = function() { this.style.background = 'rgba(107,45,139,0.1)'; };
-          card.onmouseout = function() { this.style.background = 'rgba(255,255,255,0.03)'; };
-          var imgEl = document.createElement('img');
-          imgEl.src = img; imgEl.alt = 'Episode art';
-          imgEl.style.cssText = 'width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;';
-          imgEl.onerror = function() { this.src = 'Carousel_Pod_Logo__Presentation_.png'; };
-          var info = document.createElement('div');
-          info.style.cssText = 'flex:1;min-width:0;';
-          info.innerHTML = '<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">' + date + '</p>'
-            + '<h3 style="font-family:Playfair Display,serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">' + title + '</h3>'
-            + '<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">' + desc + '</p>'
-            + '<a href="' + link + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>';
-          card.appendChild(imgEl);
-          card.appendChild(info);
-          cards.push(card);
-        });
-        var wrapper = document.createElement('div');
-        wrapper.style.cssText = 'display:flex;flex-direction:column;gap:1.2rem;';
-        cards.forEach(function(c) { wrapper.appendChild(c); });
-        container.innerHTML = '';
-        container.appendChild(wrapper);
-        _episodesLoaded = true;
-      })
-      .catch(function(err) {
-        console.warn('Episodes feed error:', err);
+    var proxies = [
+      'https://api.allorigins.win/get?url=' + encodeURIComponent(feedUrl),
+      'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(feedUrl),
+      'https://corsproxy.io/?' + encodeURIComponent(feedUrl)
+    ];
+
+    function tryProxy(index) {
+      if (index >= proxies.length) {
         container.innerHTML = '<p style="text-align:center;color:rgba(245,240,255,0.5);">Having trouble loading &mdash; <a href="https://carouselofconversations.podbean.com" target="_blank" style="color:var(--purple-light);">browse episodes on Podbean</a>.</p>';
-      });
+        return;
+      }
+      var url = proxies[index];
+      fetch(url)
+        .then(function(r) { return r.json().then ? r.json() : r.text(); })
+        .then(function(data) {
+          // allorigins wraps in {contents: "..."}
+          var xmlStr = typeof data === 'object' && data.contents ? data.contents : data;
+          if (typeof xmlStr !== 'string' || xmlStr.indexOf('<rss') === -1) throw new Error('Not XML');
+          parseAndRenderEpisodes(xmlStr, container);
+        })
+        .catch(function() { tryProxy(index + 1); });
+    }
+    tryProxy(0);
   }
 
-  // ── BLOG RSS FEED (Substack) — direct XML parse via CORS proxy ──
+  function parseAndRenderEpisodes(xml, container) {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(xml, 'text/xml');
+    var items = doc.querySelectorAll('item');
+    if (!items.length) {
+      container.innerHTML = '<p style="text-align:center;color:rgba(245,240,255,0.5);">No episodes found yet.</p>';
+      return;
+    }
+    var feedImg = 'Carousel_Pod_Logo__Presentation_.png';
+    var chanImg = doc.querySelector('channel > image > url');
+    if (chanImg) feedImg = chanImg.textContent.trim();
+    var itunesImgs = doc.getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd','image');
+    if (itunesImgs.length && itunesImgs[0].getAttribute('href')) feedImg = itunesImgs[0].getAttribute('href');
+
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'display:flex;flex-direction:column;gap:1.2rem;';
+    items.forEach(function(item) {
+      var title = (item.querySelector('title') || {}).textContent || '(Untitled)';
+      var link = '';
+      var linkEl = item.querySelector('link');
+      if (linkEl) link = (linkEl.nextSibling ? linkEl.nextSibling.textContent : linkEl.textContent).trim();
+      if (!link || !link.startsWith('http')) { var g = item.querySelector('guid'); if (g) link = g.textContent.trim(); }
+      if (!link || !link.startsWith('http')) { var e = item.querySelector('enclosure'); if (e) link = e.getAttribute('url') || ''; }
+      var pubDate = (item.querySelector('pubDate') || {}).textContent || '';
+      var date = pubDate ? new Date(pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
+      var desc = '';
+      var descEl = item.querySelector('description');
+      if (descEl) desc = descEl.textContent.replace(/<[^>]*>/g,'').substring(0,200).trim() + '...';
+
+      var card = document.createElement('div');
+      card.style.cssText = 'display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;cursor:pointer;';
+      card.onmouseover = function() { this.style.background = 'rgba(107,45,139,0.1)'; };
+      card.onmouseout = function() { this.style.background = 'rgba(255,255,255,0.03)'; };
+
+      var imgEl = document.createElement('img');
+      imgEl.src = feedImg; imgEl.alt = 'Episode art';
+      imgEl.style.cssText = 'width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;';
+      imgEl.onerror = function() { this.src = 'Carousel_Pod_Logo__Presentation_.png'; };
+
+      var info = document.createElement('div');
+      info.style.cssText = 'flex:1;min-width:0;';
+      info.innerHTML = '<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">' + date + '</p>'
+        + '<h3 style="font-family:Playfair Display,serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">' + title + '</h3>'
+        + '<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">' + desc + '</p>'
+        + '<a href="' + link + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>';
+
+      card.appendChild(imgEl);
+      card.appendChild(info);
+      wrapper.appendChild(card);
+    });
+    container.innerHTML = '';
+    container.appendChild(wrapper);
+    _episodesLoaded = true;
+  }
+
+  // ── BLOG RSS FEED (Substack) ──
   var _blogLoaded = false;
   function loadBlog() {
     if (_blogLoaded) return;
     var container = document.getElementById('blog-feed');
     if (!container) return;
+
     var feedUrl = 'https://carousepod.substack.com/feed';
-    var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(feedUrl);
-    fetch(proxyUrl)
-      .then(function(r) { return r.text(); })
-      .then(function(xml) {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(xml, 'text/xml');
-        var items = doc.querySelectorAll('item');
-        if (!items.length) throw new Error('No items');
-        var cards = [];
-        items.forEach(function(item) {
-          var title = (item.querySelector('title') || {}).textContent || '(Untitled)';
-          var link = '';
-          var linkEl = item.querySelector('link');
-          if (linkEl) link = linkEl.textContent.trim();
-          if (!link || !link.startsWith('http')) { var g = item.querySelector('guid'); if (g) link = g.textContent.trim(); }
-          var pubDate = (item.querySelector('pubDate') || {}).textContent || '';
-          var date = pubDate ? new Date(pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
-          var desc = '';
-          var descEl = item.querySelector('description');
-          if (descEl) desc = descEl.textContent.replace(/<[^>]*>/g,'').substring(0,160).trim() + '...';
-          var img = '';
-          var contentNS = 'http://purl.org/rss/1.0/modules/content/';
-          var encoded = item.getElementsByTagNameNS(contentNS,'encoded')[0];
-          if (encoded) { var m = encoded.textContent.match(/src=["']([^"']+\.(jpg|jpeg|png|webp))/i); if (m) img = m[1]; }
-          var anchor = document.createElement('a');
-          anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener';
-          anchor.style.cssText = 'text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;overflow:hidden;transition:all 0.2s;';
-          anchor.onmouseover = function() { this.style.transform = 'translateY(-4px)'; this.style.borderColor = 'rgba(107,45,139,0.5)'; };
-          anchor.onmouseout = function() { this.style.transform = 'none'; this.style.borderColor = 'rgba(107,45,139,0.2)'; };
-          if (img) {
-            var imgEl = document.createElement('img');
-            imgEl.src = img; imgEl.alt = ''; imgEl.style.cssText = 'width:100%;height:160px;object-fit:cover;';
-            imgEl.onerror = function() { this.style.display = 'none'; };
-            anchor.appendChild(imgEl);
-          }
-          var body = document.createElement('div');
-          body.style.cssText = 'padding:1.2rem;flex:1;display:flex;flex-direction:column;';
-          body.innerHTML = '<p style="font-size:0.68rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">' + date + '</p>'
-            + '<h3 style="font-family:Playfair Display,serif;font-size:1rem;color:var(--white);line-height:1.4;margin-bottom:0.6rem;flex:1;">' + title + '</h3>'
-            + '<p style="font-size:0.8rem;color:rgba(245,240,255,0.55);line-height:1.6;margin-bottom:0.8rem;">' + desc + '</p>'
-            + '<span style="font-size:0.78rem;color:var(--purple-light);font-weight:600;">Read More &rarr;</span>';
-          anchor.appendChild(body);
-          cards.push(anchor);
-        });
-        var grid = document.createElement('div');
-        grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;';
-        cards.forEach(function(c) { grid.appendChild(c); });
-        container.innerHTML = '';
-        container.appendChild(grid);
-        _blogLoaded = true;
-      })
-      .catch(function(err) {
-        console.warn('Blog feed error:', err);
+    var proxies = [
+      'https://api.allorigins.win/get?url=' + encodeURIComponent(feedUrl),
+      'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(feedUrl),
+      'https://corsproxy.io/?' + encodeURIComponent(feedUrl)
+    ];
+
+    function tryProxy(index) {
+      if (index >= proxies.length) {
         container.innerHTML = '<div style="text-align:center;padding:2rem;"><p style="color:rgba(245,240,255,0.5);">Could not load posts. <a href="https://carousepod.substack.com" target="_blank" style="color:var(--purple-light);">Visit our Substack</a>.</p></div>';
-      });
+        return;
+      }
+      fetch(proxies[index])
+        .then(function(r) { return r.json().then ? r.json() : r.text(); })
+        .then(function(data) {
+          var xmlStr = typeof data === 'object' && data.contents ? data.contents : data;
+          if (typeof xmlStr !== 'string' || xmlStr.indexOf('<rss') === -1) throw new Error('Not XML');
+          parseAndRenderBlog(xmlStr, container);
+        })
+        .catch(function() { tryProxy(index + 1); });
+    }
+    tryProxy(0);
+  }
+
+  function parseAndRenderBlog(xml, container) {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(xml, 'text/xml');
+    var items = doc.querySelectorAll('item');
+    if (!items.length) {
+      container.innerHTML = '<div style="text-align:center;padding:2rem;"><p style="color:rgba(245,240,255,0.5);">No posts yet. <a href="https://carousepod.substack.com" target="_blank" style="color:var(--purple-light);">Visit our Substack</a>.</p></div>';
+      return;
+    }
+    var grid = document.createElement('div');
+    grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;';
+    items.forEach(function(item) {
+      var title = (item.querySelector('title') || {}).textContent || '(Untitled)';
+      var link = '';
+      var linkEl = item.querySelector('link');
+      if (linkEl) link = linkEl.textContent.trim();
+      if (!link || !link.startsWith('http')) { var g = item.querySelector('guid'); if (g) link = g.textContent.trim(); }
+      var pubDate = (item.querySelector('pubDate') || {}).textContent || '';
+      var date = pubDate ? new Date(pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
+      var desc = '';
+      var descEl = item.querySelector('description');
+      if (descEl) desc = descEl.textContent.replace(/<[^>]*>/g,'').substring(0,160).trim() + '...';
+      var img = '';
+      var contentNS = 'http://purl.org/rss/1.0/modules/content/';
+      var encoded = item.getElementsByTagNameNS(contentNS,'encoded')[0];
+      if (encoded) { var m = encoded.textContent.match(/src=["']([^"']+\.(jpg|jpeg|png|webp))/i); if (m) img = m[1]; }
+
+      var anchor = document.createElement('a');
+      anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener';
+      anchor.style.cssText = 'text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;overflow:hidden;transition:all 0.2s;';
+      anchor.onmouseover = function() { this.style.transform = 'translateY(-4px)'; this.style.borderColor = 'rgba(107,45,139,0.5)'; };
+      anchor.onmouseout = function() { this.style.transform = 'none'; this.style.borderColor = 'rgba(107,45,139,0.2)'; };
+
+      if (img) {
+        var imgEl = document.createElement('img');
+        imgEl.src = img; imgEl.alt = '';
+        imgEl.style.cssText = 'width:100%;height:160px;object-fit:cover;';
+        imgEl.onerror = function() { this.style.display = 'none'; };
+        anchor.appendChild(imgEl);
+      }
+      var body = document.createElement('div');
+      body.style.cssText = 'padding:1.2rem;flex:1;display:flex;flex-direction:column;';
+      body.innerHTML = '<p style="font-size:0.68rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">' + date + '</p>'
+        + '<h3 style="font-family:Playfair Display,serif;font-size:1rem;color:var(--white);line-height:1.4;margin-bottom:0.6rem;flex:1;">' + title + '</h3>'
+        + '<p style="font-size:0.8rem;color:rgba(245,240,255,0.55);line-height:1.6;margin-bottom:0.8rem;">' + desc + '</p>'
+        + '<span style="font-size:0.78rem;color:var(--purple-light);font-weight:600;">Read More &rarr;</span>';
+      anchor.appendChild(body);
+      grid.appendChild(anchor);
+    });
+    container.innerHTML = '';
+    container.appendChild(grid);
+    _blogLoaded = true;
   }
 
     function maybeLoadFeeds(id) {
