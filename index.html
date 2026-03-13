@@ -173,8 +173,8 @@
     }
 
     /* ─── PAGES ─── */
-    .page { display: none; min-height: 100vh; padding-top: 70px; position: relative; z-index: 1; }
-    .page.active { display: block; }
+    .page { display: none; min-height: 100vh; padding-top: 70px; position: relative; z-index: 1; overflow: hidden; height: 0; }
+    .page.active { display: block; height: auto; overflow: visible; }
 
     /* ─── SHARED ─── */
     .section {
@@ -476,6 +476,30 @@
       color:var(--purple-light);
     }
     .radio-card input[type=radio] { accent-color:var(--purple-light); flex-shrink:0; }
+    .inline-radio-group { display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:0.4rem; align-items:center; }
+    .inline-radio-group label { display:flex; align-items:center; gap:0.4rem; font-size:0.9rem; cursor:pointer; font-weight:500; color:var(--white); line-height:1; }
+    /* Catch any stray native radio inputs in the form */
+    #page-quote input[type=radio] {
+      appearance:none; -webkit-appearance:none;
+      width:18px; height:18px; min-width:18px; max-width:18px;
+      border-radius:50%; border:2px solid rgba(107,45,139,0.6);
+      background:transparent; cursor:pointer; margin:0; flex-shrink:0;
+    }
+    #page-quote input[type=radio]:checked {
+      background:var(--purple-light); border-color:var(--purple-light);
+      box-shadow:0 0 0 3px rgba(107,45,139,0.3);
+    }
+    .inline-radio-group input[type=radio] {
+      appearance:none; -webkit-appearance:none;
+      width:18px; height:18px; min-width:18px; max-width:18px;
+      border-radius:50%; border:2px solid rgba(107,45,139,0.6);
+      background:transparent; cursor:pointer; margin:0; flex-shrink:0;
+      position:relative; top:0;
+    }
+    .inline-radio-group input[type=radio]:checked {
+      background:var(--purple-light); border-color:var(--purple-light);
+      box-shadow:0 0 0 3px rgba(107,45,139,0.3);
+    }
 
     /* ── QUOTE SECTIONS ── */
     .quote-section {
@@ -507,6 +531,13 @@
     .nav-cta { background:linear-gradient(135deg,var(--purple),var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:700 !important; }
     .nav-cta-btn { display:inline-block !important; padding:0.45rem 1.1rem !important; background:linear-gradient(135deg,var(--purple),var(--green)) !important; color:white !important; border-radius:25px !important; font-weight:700 !important; font-size:0.82rem !important; letter-spacing:0.03em; box-shadow:0 0 18px rgba(107,45,139,0.4); transition:all 0.2s !important; -webkit-text-fill-color:white !important; }
     .nav-cta-btn:hover { box-shadow:0 0 28px rgba(107,45,139,0.7); transform:translateY(-1px); }
+    .form-two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    @media (max-width:600px) {
+      .form-two-col { grid-template-columns:1fr; }
+      .radio-card { padding:0.7rem 0.8rem; }
+      .radio-card span { font-size:0.78rem; }
+      #page-quote .page-header h2 { font-size:1.6rem; }
+    }
 
     /* ── PLATFORM BADGES ── */
     .platform-badge {
@@ -683,23 +714,6 @@
       <div class="card"><div class="card-icon">✨</div><h3>Fan Conversations</h3><p>Real talk from real Disney fans. We bring the community together for honest, joyful conversations about the magic.</p></div>
     </div>
   </section>
-
-  <footer>
-    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
-    <div class="footer-links">
-      <a href="#home" onclick="showPage('home');return false;">Home</a>
-      <a href="#about" onclick="showPage('about');return false;">About</a>
-      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#social" onclick="showPage('social');return false;">Social</a>
-      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
-    </div>
-    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
-    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
-  </footer>
 </div>
 
 <!-- ═══════════ ABOUT ═══════════ -->
@@ -778,23 +792,6 @@
       </div>
     </div>
   </div>
-
-  <footer>
-    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
-    <div class="footer-links">
-      <a href="#home" onclick="showPage('home');return false;">Home</a>
-      <a href="#about" onclick="showPage('about');return false;">About</a>
-      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#social" onclick="showPage('social');return false;">Social</a>
-      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
-    </div>
-    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
-    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
-  </footer>
 </div>
 
 <!-- ═══════════ GUEST HOSTS ═══════════ -->
@@ -877,23 +874,6 @@
     </div>
     <p style="text-align:center;font-size:0.8rem;color:rgba(245,240,255,0.4);margin-top:2.5rem;letter-spacing:0.08em;">More guest host profiles and links will be added soon. Check back every Monday!</p>
   </div>
-
-  <footer>
-    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
-    <div class="footer-links">
-      <a href="#home" onclick="showPage('home');return false;">Home</a>
-      <a href="#about" onclick="showPage('about');return false;">About</a>
-      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#social" onclick="showPage('social');return false;">Social</a>
-      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
-    </div>
-    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
-    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
-  </footer>
 </div>
 
 <!-- ═══════════ SOCIAL MEDIA ═══════════ -->
@@ -954,23 +934,6 @@
       </div>
     </div>
   </div>
-
-  <footer>
-    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
-    <div class="footer-links">
-      <a href="#home" onclick="showPage('home');return false;">Home</a>
-      <a href="#about" onclick="showPage('about');return false;">About</a>
-      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#social" onclick="showPage('social');return false;">Social</a>
-      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
-    </div>
-    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
-    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
-  </footer>
 </div>
 
 <!-- ═══════════ SPONSORS ═══════════ -->
@@ -1004,23 +967,6 @@
       <a href="#contact" onclick="showPage('contact');return false;" style="color:var(--purple-light);text-decoration:none;font-weight:600;">Get in touch with us →</a></p>
     </div>
   </div>
-
-  <footer>
-    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
-    <div class="footer-links">
-      <a href="#home" onclick="showPage('home');return false;">Home</a>
-      <a href="#about" onclick="showPage('about');return false;">About</a>
-      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#social" onclick="showPage('social');return false;">Social</a>
-      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
-    </div>
-    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
-    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
-  </footer>
 </div>
 
 <!-- ═══════════ CONTACT ═══════════ -->
@@ -1070,23 +1016,6 @@
       <p style="font-size:0.78rem;color:rgba(245,240,255,0.4);line-height:1.7;">You can also reach us on <a href="#social" onclick="showPage('social');return false;" style="color:var(--purple-light);">social media</a> for a quicker response!</p>
     </div>
   </div>
-
-  <footer>
-    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
-    <div class="footer-links">
-      <a href="#home" onclick="showPage('home');return false;">Home</a>
-      <a href="#about" onclick="showPage('about');return false;">About</a>
-      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#social" onclick="showPage('social');return false;">Social</a>
-      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
-    </div>
-    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
-    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
-  </footer>
 </div>
 
 <!-- ═══════════ FREE QUOTE ═══════════ -->
@@ -1106,7 +1035,7 @@
         <!-- ── CONTACT INFO ── -->
         <div style="margin-bottom:2rem;">
           <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Your Contact Information</h3>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>First Name *</label>
               <input type="text" name="first_name" required placeholder="Mickey"/>
@@ -1116,7 +1045,7 @@
               <input type="text" name="last_name" required placeholder="Mouse"/>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>Email Address *</label>
               <input type="email" name="email" required placeholder="you@example.com"/>
@@ -1137,9 +1066,9 @@
             <label class="radio-card"><input type="radio" name="vacation_type" value="Disneyland Resort® California" onchange="showQuoteSection(this.value)"/> Disneyland Resort® California</label>
             <label class="radio-card"><input type="radio" name="vacation_type" value="Adventures by Disney" onchange="showQuoteSection(this.value)"/> Adventures by Disney</label>
             <label class="radio-card"><input type="radio" name="vacation_type" value="Universal Orlando Resort" onchange="showQuoteSection(this.value)"/> Universal Orlando Resort</label>
-            <label class="radio-card"><input type="radio" name="vacation_type" value="Aulani, a Disney Resort & Spa" onchange="showQuoteSection(this.value)"/> Aulani, a Disney Resort &amp; Spa</label>
-            <label class="radio-card"><input type="radio" name="vacation_type" value="Disney's Hilton Head Island Resort" onchange="showQuoteSection(this.value)"/> Disney's Hilton Head Island Resort</label>
-            <label class="radio-card"><input type="radio" name="vacation_type" value="Disney's Vero Beach Resort" onchange="showQuoteSection(this.value)"/> Disney's Vero Beach Resort</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Aulani, a Disney Resort &amp; Spa" onchange="showQuoteSection(this.value)"/> Aulani, a Disney Resort &amp; Spa</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Disney's Hilton Head Island Resort" onchange="showQuoteSection(this.value)"/> Disney&#39;s Hilton Head Island Resort</label>
+            <label class="radio-card"><input type="radio" name="vacation_type" value="Disney's Vero Beach Resort" onchange="showQuoteSection(this.value)"/> Disney&#39;s Vero Beach Resort</label>
             <label class="radio-card"><input type="radio" name="vacation_type" value="WDW Tickets Only" onchange="showQuoteSection(this.value)"/> WDW Tickets Only</label>
             <label class="radio-card"><input type="radio" name="vacation_type" value="Other Cruise Line" onchange="showQuoteSection(this.value)"/> Other Cruise Line (non-Disney)</label>
             <label class="radio-card"><input type="radio" name="vacation_type" value="Other Destination" onchange="showQuoteSection(this.value)"/> Other Destination</label>
@@ -1152,13 +1081,13 @@
 
           <div class="form-group">
             <label>Package Type</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_package_type" value="Package"/> Package</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_package_type" value="Room Only"/> Room Only</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="wdw_package_type" value="Package"/> Package</label>
+              <label><input type="radio" name="wdw_package_type" value="Room Only"/> Room Only</label>
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>Check-in Date *</label>
               <input type="date" name="wdw_checkin"/>
@@ -1171,9 +1100,9 @@
 
           <div class="form-group">
             <label>Are dates flexible?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_flexible" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_flexible" value="No"/> No</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="wdw_flexible" value="Yes"/> Yes</label>
+              <label><input type="radio" name="wdw_flexible" value="No"/> No</label>
             </div>
           </div>
 
@@ -1224,7 +1153,7 @@
             </select>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>Number of Adults</label>
               <select name="wdw_adults">
@@ -1248,74 +1177,66 @@
 
           <div class="form-group">
             <label>Include Park Tickets?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_tickets" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_tickets" value="No"/> No</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="wdw_tickets" value="Yes"/> Yes</label>
+              <label><input type="radio" name="wdw_tickets" value="No"/> No</label>
             </div>
           </div>
 
           <div class="form-group">
             <label>Include Dining Plan?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_dining" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_dining" value="No"/> No</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_dining" value="Not Sure"/> Not Sure</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="wdw_dining" value="Yes"/> Yes</label>
+              <label><input type="radio" name="wdw_dining" value="No"/> No</label>
+              <label><input type="radio" name="wdw_dining" value="Not Sure"/> Not Sure</label>
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Include Airfare?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_airfare" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_airfare" value="No"/> No</label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Departure City (if including airfare)</label>
-            <input type="text" name="wdw_departure_city" placeholder="e.g. Charlotte, NC"/>
-          </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>Annual Passholder?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_ap" value="Yes"/> Yes</label>
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_ap" value="No"/> No</label>
+              <div class="inline-radio-group">
+                <label><input type="radio" name="wdw_ap" value="Yes"/> Yes</label>
+                <label><input type="radio" name="wdw_ap" value="No"/> No</label>
               </div>
             </div>
             <div class="form-group">
               <label>DVC Member?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_dvc" value="Yes"/> Yes</label>
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_dvc" value="No"/> No</label>
+              <div class="inline-radio-group">
+                <label><input type="radio" name="wdw_dvc" value="Yes"/> Yes</label>
+                <label><input type="radio" name="wdw_dvc" value="No"/> No</label>
               </div>
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>Florida Resident?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_fl_resident" value="Yes"/> Yes</label>
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_fl_resident" value="No"/> No</label>
+              <div class="inline-radio-group">
+                <label><input type="radio" name="wdw_fl_resident" value="Yes"/> Yes</label>
+                <label><input type="radio" name="wdw_fl_resident" value="No"/> No</label>
               </div>
             </div>
             <div class="form-group">
               <label>Disney VISA Cardholder?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_visa" value="Yes"/> Yes</label>
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_visa" value="No"/> No</label>
+              <div class="inline-radio-group">
+                <label><input type="radio" name="wdw_visa" value="Yes"/> Yes</label>
+                <label><input type="radio" name="wdw_visa" value="No"/> No</label>
               </div>
             </div>
           </div>
 
           <div class="form-group">
             <label>Active Duty or Retired Military?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_military" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="wdw_military" value="No"/> No</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="wdw_military" value="Yes"/> Yes</label>
+              <label><input type="radio" name="wdw_military" value="No"/> No</label>
             </div>
+          </div>
+
+          <div class="form-group">
+            <label>Special Requests or Additional Notes</label>
+            <textarea name="wdw_notes" rows="3" placeholder="Celebrations, accessibility needs, preferences..."></textarea>
           </div>
         </div>
 
@@ -1327,73 +1248,64 @@
             <label>Cruise Destination</label>
             <select name="dcl_destination">
               <option value="">-- Select a Destination --</option>
-              <option>Alaska from Vancouver</option>
-              <option>Bahamas – 3-Night from Port Canaveral</option>
-              <option>Bahamas – 4-Night from Port Canaveral</option>
-              <option>Bahamas – 5-Night from Port Canaveral</option>
-              <option>Bahamas – 3-Night from Fort Lauderdale</option>
-              <option>Bahamas – 4-Night from Fort Lauderdale</option>
-              <option>Bahamas – 5-Night from Fort Lauderdale</option>
-              <option>Bahamas – 7-Night from Fort Lauderdale</option>
-              <option>Bahamas – 7-Night from Galveston, TX</option>
-              <option>Caribbean – 5-Night Western from Port Canaveral</option>
-              <option>Caribbean – 7-Night Eastern from Port Canaveral</option>
-              <option>Caribbean – 7-Night Western from Port Canaveral</option>
-              <option>Caribbean – 10-Night Southern from Port Canaveral</option>
-              <option>Caribbean – 4-Night Western from Fort Lauderdale</option>
-              <option>Caribbean – 5-Night Western from Fort Lauderdale</option>
-              <option>Caribbean – 7-Night Eastern from Fort Lauderdale</option>
-              <option>Caribbean – 7-Night Western from Fort Lauderdale</option>
-              <option>Caribbean – 4-Night Western from Galveston, TX</option>
-              <option>Caribbean – 5-Night Western from Galveston, TX</option>
-              <option>Caribbean – 7-Night Western from Galveston, TX</option>
-              <option>Caribbean – Eastern from San Juan</option>
-              <option>Caribbean – Southern from San Juan</option>
-              <option>European Cruises – Barcelona, Spain</option>
-              <option>European Cruises – Civitavecchia, Italy</option>
-              <option>European Cruises – Southampton, England</option>
-              <option>Hawaiian Cruises</option>
-              <option>Mexico / Pacific Coast from San Diego</option>
-              <option>Pacific Coast Cruises</option>
-              <option>Panama Canal Cruises</option>
-              <option>Singapore – 3-Night Cruises</option>
-              <option>Singapore – 4-Night Cruises</option>
-              <option>South Pacific Cruises</option>
-              <option>Transatlantic Cruises</option>
-              <option>I need assistance finding the right cruise</option>
+              <option>Alaska</option>
+              <option>Bahamas</option>
+              <option>Caribbean – Eastern</option>
+              <option>Caribbean – Western</option>
+              <option>Caribbean – Southern</option>
+              <option>Europe</option>
+              <option>Hawaii</option>
+              <option>Mexico</option>
+              <option>Pacific Coast</option>
+              <option>Not Sure – Help Me Choose</option>
             </select>
           </div>
 
+          <div class="form-two-col">
+            <div class="form-group">
+              <label>Sail Date (approximate)</label>
+              <input type="date" name="dcl_sail_date"/>
+            </div>
+            <div class="form-group">
+              <label>Cruise Length</label>
+              <select name="dcl_length">
+                <option value="">-- Select --</option>
+                <option>3 Nights</option>
+                <option>4 Nights</option>
+                <option>5 Nights</option>
+                <option>7 Nights</option>
+                <option>10+ Nights</option>
+                <option>Flexible</option>
+              </select>
+            </div>
+          </div>
+
           <div class="form-group">
-            <label>Approximate Sail Date / Preferred Timeframe</label>
-            <input type="text" name="dcl_sail_date" placeholder="e.g. July 2026, or specific date"/>
+            <label>Are dates flexible?</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="dcl_flexible" value="Yes"/> Yes</label>
+              <label><input type="radio" name="dcl_flexible" value="No"/> No</label>
+            </div>
           </div>
 
           <div class="form-group">
             <label>Preferred Stateroom Category</label>
             <select name="dcl_stateroom">
-              <option value="">-- Please Select --</option>
+              <option value="">-- Select --</option>
               <option>Inside Stateroom</option>
               <option>Oceanview Stateroom</option>
-              <option>Stateroom with Verandah</option>
+              <option>Verandah Stateroom</option>
               <option>Concierge</option>
+              <option>Not Sure – Help Me Choose</option>
             </select>
           </div>
 
-          <div class="form-group">
-            <label>Number of Staterooms Needed</label>
-            <select name="dcl_staterooms">
-              <option>1</option><option>2</option><option>3</option><option>4</option>
-              <option>5</option><option>6</option><option>7</option><option>8</option>
-            </select>
-          </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>Number of Adults</label>
               <select name="dcl_adults">
                 <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
               </select>
             </div>
             <div class="form-group">
@@ -1411,69 +1323,50 @@
           </div>
 
           <div class="form-group">
-            <label>Dining Preference</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_dining" value="Early Dining"/> Early Dining</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_dining" value="Late Dining"/> Late Dining</label>
+            <label>Preferred Dining Seating</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="dcl_dining" value="Early Dining"/> Early Dining</label>
+              <label><input type="radio" name="dcl_dining" value="Late Dining"/> Late Dining</label>
+              <label><input type="radio" name="dcl_dining" value="No Preference"/> No Preference</label>
             </div>
-          </div>
-
-          <div class="form-group">
-            <label>Include Airfare?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_airfare" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_airfare" value="No"/> No</label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Departure City (if including airfare)</label>
-            <input type="text" name="dcl_departure_city" placeholder="e.g. Charlotte, NC"/>
           </div>
 
           <div class="form-group">
             <label>Need ground transportation from airport to ship?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_transfer" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_transfer" value="No"/> No</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="dcl_transfer" value="Yes"/> Yes</label>
+              <label><input type="radio" name="dcl_transfer" value="No"/> No</label>
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Castaway Club Member Number (if applicable)</label>
-            <input type="text" name="dcl_castaway" placeholder="Leave blank if not a member"/>
-          </div>
-
-          <div class="form-group">
-            <label>Number of Past Disney Cruises</label>
-            <select name="dcl_past_sailings">
-              <option>0</option><option>1–5</option><option>6–10</option><option>11+</option>
-            </select>
-          </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
-              <label>Florida Resident?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_fl_resident" value="Yes"/> Yes</label>
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_fl_resident" value="No"/> No</label>
+              <label>Annual Passholder?</label>
+              <div class="inline-radio-group">
+                <label><input type="radio" name="dcl_ap" value="Yes"/> Yes</label>
+                <label><input type="radio" name="dcl_ap" value="No"/> No</label>
               </div>
             </div>
             <div class="form-group">
-              <label>Disney VISA Cardholder?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_visa" value="Yes"/> Yes</label>
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_visa" value="No"/> No</label>
+              <label>DVC Member?</label>
+              <div class="inline-radio-group">
+                <label><input type="radio" name="dcl_dvc" value="Yes"/> Yes</label>
+                <label><input type="radio" name="dcl_dvc" value="No"/> No</label>
               </div>
             </div>
           </div>
 
           <div class="form-group">
             <label>Active Duty or Retired Military?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_military" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dcl_military" value="No"/> No</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="dcl_military" value="Yes"/> Yes</label>
+              <label><input type="radio" name="dcl_military" value="No"/> No</label>
             </div>
+          </div>
+
+          <div class="form-group">
+            <label>Special Requests or Additional Notes</label>
+            <textarea name="dcl_notes" rows="3" placeholder="Celebrations, accessibility needs, preferences..."></textarea>
           </div>
         </div>
 
@@ -1481,42 +1374,52 @@
         <div id="qs-dl" class="quote-section" style="display:none;">
           <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Disneyland Resort Details</h3>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-group">
+            <label>Package Type</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="dl_package_type" value="Package"/> Package</label>
+              <label><input type="radio" name="dl_package_type" value="Room Only"/> Room Only</label>
+              <label><input type="radio" name="dl_package_type" value="Tickets Only"/> Tickets Only</label>
+            </div>
+          </div>
+
+          <div class="form-two-col">
             <div class="form-group">
-              <label>Check-in Date</label>
+              <label>Check-in Date *</label>
               <input type="date" name="dl_checkin"/>
             </div>
             <div class="form-group">
-              <label>Check-out Date</label>
+              <label>Check-out Date *</label>
               <input type="date" name="dl_checkout"/>
             </div>
           </div>
 
           <div class="form-group">
             <label>Are dates flexible?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_flexible" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_flexible" value="No"/> No</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="dl_flexible" value="Yes"/> Yes</label>
+              <label><input type="radio" name="dl_flexible" value="No"/> No</label>
             </div>
           </div>
 
           <div class="form-group">
             <label>Preferred Hotel</label>
             <select name="dl_hotel">
-              <option value="">-- Please Select --</option>
+              <option value="">-- Select --</option>
               <option>Disneyland Hotel</option>
               <option>Disney's Grand Californian Hotel &amp; Spa</option>
               <option>Disney's Paradise Pier Hotel</option>
-              <option>I need assistance choosing a hotel</option>
+              <option>Good Neighbor Hotel – Help Me Choose</option>
+              <option>No Hotel (local / own accommodation)</option>
             </select>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>Number of Adults</label>
               <select name="dl_adults">
                 <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
               </select>
             </div>
             <div class="form-group">
@@ -1535,40 +1438,32 @@
 
           <div class="form-group">
             <label>Include Park Tickets?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_tickets" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_tickets" value="No"/> No</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="dl_tickets" value="Yes"/> Yes</label>
+              <label><input type="radio" name="dl_tickets" value="No"/> No</label>
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Include Airfare?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_airfare" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_airfare" value="No"/> No</label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Departure City (if including airfare)</label>
-            <input type="text" name="dl_departure_city" placeholder="e.g. Charlotte, NC"/>
-          </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>Disney VISA Cardholder?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_visa" value="Yes"/> Yes</label>
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_visa" value="No"/> No</label>
+              <div class="inline-radio-group">
+                <label><input type="radio" name="dl_visa" value="Yes"/> Yes</label>
+                <label><input type="radio" name="dl_visa" value="No"/> No</label>
               </div>
             </div>
             <div class="form-group">
               <label>Active Duty or Retired Military?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_military" value="Yes"/> Yes</label>
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="dl_military" value="No"/> No</label>
+              <div class="inline-radio-group">
+                <label><input type="radio" name="dl_military" value="Yes"/> Yes</label>
+                <label><input type="radio" name="dl_military" value="No"/> No</label>
               </div>
             </div>
+          </div>
+
+          <div class="form-group">
+            <label>Special Requests or Additional Notes</label>
+            <textarea name="dl_notes" rows="3" placeholder="Celebrations, accessibility needs, preferences..."></textarea>
           </div>
         </div>
 
@@ -1577,37 +1472,25 @@
           <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Adventures by Disney Details</h3>
 
           <div class="form-group">
-            <label>Select a Destination</label>
-            <select name="abd_destination">
-              <option value="">-- Please Select --</option>
-              <option>Alaska</option><option>Arizona &amp; Utah</option><option>Australia</option>
-              <option>Barcelona Escape</option><option>British Isles</option><option>Canadian Rockies</option>
-              <option>Central Europe</option><option>China</option><option>Colombia</option>
-              <option>Costa Rica</option><option>Danube River Cruise</option>
-              <option>Disneyland Resort &amp; Southern California – Backstage Magic</option>
-              <option>Disneyland Resort &amp; Southern California Escape</option>
-              <option>Egypt</option><option>England &amp; France</option><option>Germany</option>
-              <option>Greece – Legends of Athens</option><option>Greece – Mythology of Athens</option>
-              <option>Holland &amp; Belgium River Cruise</option><option>Iceland</option>
-              <option>Ireland</option><option>Italy – 8 Days / 7 Nights</option>
-              <option>Italy – Amalfi Coast &amp; Tuscany</option><option>Italy &amp; Switzerland</option>
-              <option>Italy – Rome Short Escape</option><option>Japan</option>
-              <option>London Escape</option><option>Morocco</option><option>Munich Escape</option>
-              <option>New Zealand</option><option>Norway</option>
-              <option>Nova Scotia &amp; Prince Edward Island</option><option>Paris Short Escape</option>
-              <option>Peru</option><option>Portugal</option><option>Rhine River Cruise</option>
-              <option>Rhône River Cruise</option><option>Scotland – A BRAVE Adventure</option>
-              <option>Sicily</option><option>South Africa</option>
-              <option>Vietnam, Laos &amp; Cambodia</option><option>Wyoming &amp; Yellowstone</option>
-            </select>
+            <label>Destination / Adventure</label>
+            <input type="text" name="abd_destination" placeholder="e.g. Costa Rica, Italy, Japan..."/>
           </div>
 
-          <div class="form-group">
-            <label>Preferred Adventure Date / Timeframe</label>
-            <input type="text" name="abd_date" placeholder="e.g. June 2026, or specific date range"/>
+          <div class="form-two-col">
+            <div class="form-group">
+              <label>Approximate Travel Dates</label>
+              <input type="text" name="abd_dates" placeholder="e.g. June 2025"/>
+            </div>
+            <div class="form-group">
+              <label>Are dates flexible?</label>
+              <div class="inline-radio-group" style="margin-top:0.6rem;">
+                <label><input type="radio" name="abd_flexible" value="Yes"/> Yes</label>
+                <label><input type="radio" name="abd_flexible" value="No"/> No</label>
+              </div>
+            </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>Number of Adults</label>
               <select name="abd_adults">
@@ -1630,88 +1513,55 @@
           </div>
 
           <div class="form-group">
-            <label>Include Airfare?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_airfare" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_airfare" value="No"/> No</label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Departure City (if including airfare)</label>
-            <input type="text" name="abd_departure_city" placeholder="e.g. Charlotte, NC"/>
-          </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-            <div class="form-group">
-              <label>Traveled with ABD Before?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_past" value="Yes"/> Yes</label>
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_past" value="No"/> No</label>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>DVC Member?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.3rem;">
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_dvc" value="Yes"/> Yes</label>
-                <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="abd_dvc" value="No"/> No</label>
-              </div>
-            </div>
+            <label>Special Requests or Additional Notes</label>
+            <textarea name="abd_notes" rows="3" placeholder="Interests, accessibility needs, preferences..."></textarea>
           </div>
         </div>
 
-        <!-- ══ UNIVERSAL ORLANDO SECTION ══ -->
+        <!-- ══ UNIVERSAL SECTION ══ -->
         <div id="qs-uni" class="quote-section" style="display:none;">
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Universal Orlando Details</h3>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Universal Orlando Resort Details</h3>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-group">
+            <label>Package Type</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="uni_package_type" value="Package"/> Package</label>
+              <label><input type="radio" name="uni_package_type" value="Tickets Only"/> Tickets Only</label>
+            </div>
+          </div>
+
+          <div class="form-two-col">
             <div class="form-group">
-              <label>Check-in Date</label>
+              <label>Check-in Date *</label>
               <input type="date" name="uni_checkin"/>
             </div>
             <div class="form-group">
-              <label>Check-out Date</label>
+              <label>Check-out Date *</label>
               <input type="date" name="uni_checkout"/>
             </div>
           </div>
 
           <div class="form-group">
             <label>Are dates flexible?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_flexible" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_flexible" value="No"/> No</label>
+            <div class="inline-radio-group">
+              <label><input type="radio" name="uni_flexible" value="Yes"/> Yes</label>
+              <label><input type="radio" name="uni_flexible" value="No"/> No</label>
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Preferred Hotel</label>
-            <select name="uni_hotel">
-              <option value="">-- Please Select --</option>
-              <option>Universal's Cabana Bay Beach Resort</option>
-              <option>Universal's Endless Summer Resort – Surfside Inn</option>
-              <option>Universal's Endless Summer Resort – Dockside Inn</option>
-              <option>Loews Sapphire Falls Resort</option>
-              <option>Loews Royal Pacific Resort</option>
-              <option>Hard Rock Hotel at Universal Orlando</option>
-              <option>Loews Portofino Bay Hotel</option>
-              <option>Universal's Epic Universe Hotel</option>
-              <option>I need assistance choosing a hotel</option>
-            </select>
-          </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
               <label>Number of Adults</label>
               <select name="uni_adults">
                 <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
               </select>
             </div>
             <div class="form-group">
               <label>Number of Children</label>
               <select name="uni_children">
                 <option>0</option><option>1</option><option>2</option><option>3</option>
-                <option>4</option><option>5</option>
+                <option>4</option><option>5</option><option>6</option>
               </select>
             </div>
           </div>
@@ -1722,91 +1572,63 @@
           </div>
 
           <div class="form-group">
-            <label>Include Park Tickets?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_tickets" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_tickets" value="No"/> No</label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Include Airfare?</label>
-            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.3rem;">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_airfare" value="Yes"/> Yes</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;"><input type="radio" name="uni_airfare" value="No"/> No</label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Departure City (if including airfare)</label>
-            <input type="text" name="uni_departure_city" placeholder="e.g. Charlotte, NC"/>
+            <label>Special Requests or Additional Notes</label>
+            <textarea name="uni_notes" rows="3" placeholder="Celebrations, accessibility needs, preferences..."></textarea>
           </div>
         </div>
 
-        <!-- ══ OTHER / GENERIC SECTIONS ══ -->
+        <!-- ══ OTHER / GENERAL SECTION ══ -->
         <div id="qs-other" class="quote-section" style="display:none;">
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Vacation Details</h3>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Trip Details</h3>
 
           <div class="form-group">
-            <label>Destination / Property</label>
-            <input type="text" name="other_destination" placeholder="Please describe your destination"/>
+            <label>Destination / Resort</label>
+            <input type="text" name="other_destination" placeholder="e.g. Aulani, Vero Beach, other cruise..."/>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-two-col">
             <div class="form-group">
-              <label>Travel Date / Timeframe</label>
-              <input type="text" name="other_date" placeholder="e.g. Summer 2026"/>
+              <label>Approximate Travel Dates</label>
+              <input type="text" name="other_dates" placeholder="e.g. March 2026"/>
             </div>
             <div class="form-group">
-              <label>Number of Travelers</label>
-              <input type="text" name="other_travelers" placeholder="e.g. 2 adults, 2 children"/>
+              <label>Are dates flexible?</label>
+              <div class="inline-radio-group" style="margin-top:0.6rem;">
+                <label><input type="radio" name="other_flexible" value="Yes"/> Yes</label>
+                <label><input type="radio" name="other_flexible" value="No"/> No</label>
+              </div>
             </div>
+          </div>
+
+          <div class="form-two-col">
+            <div class="form-group">
+              <label>Number of Adults</label>
+              <select name="other_adults">
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Number of Children</label>
+              <select name="other_children">
+                <option>0</option><option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Children's Ages (if applicable)</label>
+            <input type="text" name="other_childrens_ages" placeholder="e.g. 4, 7, 10"/>
+          </div>
+
+          <div class="form-group">
+            <label>Special Requests or Additional Notes</label>
+            <textarea name="other_notes" rows="3" placeholder="Tell us anything else that would help us plan your trip..."></textarea>
           </div>
         </div>
 
-        <!-- ── ALWAYS-VISIBLE BOTTOM FIELDS ── -->
-        <div id="qs-bottom" style="display:none;margin-top:2rem;">
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--purple-light);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(107,45,139,0.3);">Additional Information</h3>
-
-          <div class="form-group">
-            <label>How did you hear about us?</label>
-            <select name="referral_source">
-              <option value="">-- Please Select --</option>
-              <option>Carousel of Conversations Podcast</option>
-              <option>Instagram</option>
-              <option>TikTok</option>
-              <option>Facebook</option>
-              <option>YouTube</option>
-              <option>Friend or Family Referral</option>
-              <option>Google Search</option>
-              <option>www.famvia.com</option>
-              <option>Other</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Budget Range (optional)</label>
-            <select name="budget">
-              <option value="">-- Prefer not to say --</option>
-              <option>Under $2,000</option>
-              <option>$2,000 – $5,000</option>
-              <option>$5,000 – $10,000</option>
-              <option>$10,000 – $15,000</option>
-              <option>$15,000+</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Any special occasions or celebrations?</label>
-            <input type="text" name="special_occasion" placeholder="e.g. anniversary, birthday, honeymoon"/>
-          </div>
-
-          <div class="form-group">
-            <label>Additional Comments or Questions</label>
-            <textarea name="additional_comments" placeholder="Anything else you'd like us to know about your dream vacation..."></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary form-submit" style="margin-top:0.5rem;">✨ Request My Free Quote</button>
+                  <button type="submit" class="btn btn-primary form-submit" style="margin-top:0.5rem;">✨ Request My Free Quote</button>
           <p class="form-note">Our services are completely free of charge. We'll be in touch within 1–2 business days!</p>
         </div>
 
@@ -1819,23 +1641,6 @@
     </div>
   </div>
 
-  <footer>
-    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
-    <div class="footer-links">
-      <a href="#home" onclick="showPage('home');return false;">Home</a>
-      <a href="#about" onclick="showPage('about');return false;">About</a>
-      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#social" onclick="showPage('social');return false;">Social</a>
-      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
-    </div>
-    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
-    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
-  </footer>
-</div>
 
 <!-- ═══════════ EPISODES ═══════════ -->
 <div id="page-episodes" class="page">
@@ -1858,35 +1663,162 @@
     </div>
 
     <div id="episodes-feed">
-      <div style="text-align:center;padding:3rem;color:rgba(245,240,255,0.5);">
-        <div style="font-size:2rem;margin-bottom:1rem;">🎙️</div>
-        <p>Loading episodes...</p>
-      </div>
+      <div style="display:flex;flex-direction:column;gap:1.2rem;"><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 09 Mar 2026</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 69 – Disneyland Tokyo with Juliette</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">Tokyo Disneyland just hit different. In Episode 69, RJ and Noah sit down with Juliette — a real-life Disneyland Tokyo veteran — to break down everything you need to know before you go. From nailing the planning and prep, to navigating the park like a pro, to the food you absolutely cannot skip, this episode is your ultimate guide.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-69-%e2%80%93-disneyland-tokyo-with-juliette/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 02 Mar 2026</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 68: Bibbidi Bobbidi Boutique at Walt Disney World – Bella's Magical Princess Makeover Experience</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">Jessalyn takes over the mic with special guest host Cyndi to share all the magic from Bella's unforgettable experience at the Bibbidi Bobbidi Boutique inside Walt Disney World! Is it worth it? How do you book? What should you expect? All covered here.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-68-bibbidi-bobbidi-boutique-at-walt-disney-world/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 16 Feb 2026</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 68: Our Keys to the Kingdom Tour Experience at Magic Kingdom</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">RJ and Noah welcome special guest Brian to talk all about their experience on the Keys to the Kingdom Tour at Magic Kingdom — parade floats, the famous utilidors, and the included lunch. Mostly spoiler-free with honest takeaways.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-68-our-keys-to-the-kingdom-tour-experience-at-magic-kingdom/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 09 Feb 2026</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 67: Snowstorms, Souvenirs &amp; Disney Magic – Our Disney World Trip Recap</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">All about the most recent trip to Disney World — magic, mayhem, a snowstorm back home, standout park experiences, special Disney moments, and the merch haul they couldn't resist.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-67-snowstorms-souvenirs-disney-magic/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 02 Feb 2026</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 66: Solo, Couple, or Family Travel — How Every Trip Changes the Way You Plan</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">How travel looks completely different depending on who you're going with — hotel choices, food plans, parks, packing strategies, budgets, and mindset all shift based on your travel party.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-66-solo-couple-or-family-travel/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Sun, 25 Jan 2026</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 65: Inside Club 33 at Disneyland — Dining, Souvenirs, &amp; More with Karisa</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">Episode 65 is all about one of Disneyland's most mysterious and exclusive experiences: Club 33! Karisa shares what it's really like inside — elevated dining, unique souvenirs, and the magic behind those iconic doors.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-65-inside-club-33-at-disneyland/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Sun, 18 Jan 2026</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 64: The Pre-Trip Game Plan</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">Noah, Jessalyn, and RJ dive into full trip-planning mode — rides, snacks, restaurants, shows, Lightning Lanes, outfits, packing hacks, and the strategy behind it all.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-64-the-pre-trip-game-plan/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Sun, 11 Jan 2026</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 63: Disney's 2025 Highlights &amp; A Look Ahead to 2026</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">The first episode of the new year — RJ, Jessalyn, and Noah look back at Disney's biggest highlights from 2025 and turn their focus to what's coming in 2026, including park news and upcoming films.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-63-disney-s-2025-highlights-a-look-ahead-to-2026/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 15 Dec 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 62: Hidden Gems of the My Disney Experience App</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">RJ, Jessalyn, and Noah explore the most useful — and often overlooked — features of the My Disney Experience app. Not a comprehensive guide, but packed with insights to make your park day smoother.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-62-hidden-gems-of-the-my-disney-experience-app/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 01 Dec 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 61: Reviewing the New Fantastic Four Movie with Spencer</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">Noah's on vacation and Jessalyn is sick, so Spencer — Noah's brother — joins RJ for a full review of the new Fantastic Four movie. Characters, villains, original vs reboot, and a few genuinely surprising moments.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-61-reviewing-the-new-fantastic-four-movie-with-spencer/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 24 Nov 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 60: Building the Perfect Disney Thanksgiving Plate at WDW</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">Crafting the ultimate Disney Thanksgiving feast — from a magical breakfast to a quick-service lunch to a cozy table-service dinner. Appetizers, mains, sides, drinks, and desserts all covered.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-60-building-the-perfect-disney-thanksgiving-plate-at-wdw/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 10 Nov 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 59: Aulani Adventures with Brian and Cyndi – Disney Magic in Hawaii</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">Jessalyn and RJ chat with Brian and Cyndi — Noah's parents — about their incredible trip to Disney's Aulani Resort in Hawaii, covering food, character meet-and-greets, amenities, and the best excursions beyond the hotel.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-59-aulani-adventures-with-brian-and-cyndi/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 03 Nov 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 58: Keeping the Magic Fresh — Disney for Frequent Visitors</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">How to keep the Disney World magic alive even after countless visits — new resorts, unique dining, behind-the-scenes tours, and diving into the Play Disney app.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-58-keeping-the-magic-fresh/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 27 Oct 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 57: Trick or Treat Showdown! 🎃</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">A spook-tacular Halloween game! A randomizer gives each host a Halloween-themed Disney topic and they decide: TRICK or TREAT? If all three agree, the original host scores a point. Laughter and lighthearted debate guaranteed.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-57-trick-or-treat-showdown/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 20 Oct 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 56: Disney On Ice: Jump In! – Our Magical Review</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">The hosts share their magical experience at Disney On Ice: Jump In! — jaw-dropping performances, nostalgia of beloved Disney stories, and plenty of pixie dust.</p>
+<a href="https://Carouselofconversations.podbean.com/e/disney-on-ice-jump-in/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Sun, 05 Oct 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 55: Our RunDisney Adventures with Special Guest Karisa Crews</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">Karisa Crews shares her experience running through Disneyland, Jessalyn and RJ recount Disney World races, and Noah breaks down the virtual race scene. Tips, stories, and laughs from start to finish.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-55-our-rundisney-adventures/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 29 Sep 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 54: Guess That Disney Character! – 20 Questions Showdown</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">The hosts put their Disney knowledge to the test in a chaotic game of 20 Questions. Wild guesses, hilarious logic, and some shockingly hard characters. Play along and see if you can guess before they do!</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-54-guess-that-disney-character/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 22 Sep 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 53: Back to Disney – Jared's Trip Report</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">Jared from Memories Made Easy Travel Agency — a fellow Famvia advisor — returned to Walt Disney World for the first time in years with his teenager and infant. He shares what it's like rediscovering the parks with kids of different ages.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-53-back-to-disney-jared-s-trip-report/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 15 Sep 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 52: What NOT to Bring to Disney – Rules, Mistakes, and Hilarious Fails</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">From the official banned items list to things that just make your day harder — funny stories, pro tips, and how to avoid rookie mistakes so you can focus on the magic.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-52-what-not-to-bring-to-disney/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 08 Sep 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 51: Thunderbolts Review &amp; Disney Parks News</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">The hosts announce their first-ever livestream attempt, cover the latest Disney parks news, and share their full review of Marvel's Thunderbolts movie.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-51-thunderbolts-review-disney-parks-news/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div><div style="display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(107,45,139,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+<img src="https://pbcdn1.podbean.com/imglogo/image-logo/19276653/Carousel_Pod_Logobm3v5.jpg" alt="Episode art" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;" onerror="this.src='Carousel_Pod_Logo__Presentation_.png'">
+<div style="flex:1;min-width:0;">
+<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Mon, 25 Aug 2025</p>
+<h3 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">Episode 50: Disney Trivia Battle</h3>
+<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">A huge milestone — 50 episodes and one full year! To celebrate, the hosts put their Disney knowledge on the line in a trivia showdown. The loser has to sing every Disney song-related answer on the next episode.</p>
+<a href="https://Carouselofconversations.podbean.com/e/episode-50-disney-trivia-battle/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>
+</div></div></div><p style="text-align:center;margin-top:2rem;font-size:0.85rem;color:rgba(245,240,255,0.4);">Showing recent episodes &mdash; <a href="https://carouselofconversations.podbean.com" target="_blank" style="color:var(--purple-light);">view full archive on Podbean</a></p>
     </div>
   </div>
-
-  <footer>
-    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
-    <div class="footer-links">
-      <a href="#home" onclick="showPage('home');return false;">Home</a>
-      <a href="#about" onclick="showPage('about');return false;">About</a>
-      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#social" onclick="showPage('social');return false;">Social</a>
-      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
-    </div>
-    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
-    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
-  </footer>
 </div>
 
 <!-- ═══════════ BLOG ═══════════ -->
 <div id="page-blog" class="page">
   <div class="page-header">
-    <p class="section-label">Articles & Updates</p>
+    <p class="section-label">Articles &amp; Updates</p>
     <h2 class="section-title">From the Carousel</h2>
     <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Disney tips, episode recaps, travel guides, and more — straight from the hosts to you.</p>
   </div>
@@ -1899,29 +1831,17 @@
     </div>
 
     <div id="blog-feed">
-      <div style="text-align:center;padding:3rem;color:rgba(245,240,255,0.5);">
-        <div style="font-size:2rem;margin-bottom:1rem;">✍️</div>
-        <p>Loading posts...</p>
+      <div style="text-align:center;padding:2rem 1rem 1rem;">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">✍️</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:0.8rem;">Read Our Latest Posts</h3>
+        <p style="color:rgba(245,240,255,0.6);margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto;">Disney tips, episode recaps, travel guides, and more — written by the hosts and delivered straight to your inbox.</p>
+        <a href="https://carousepod.substack.com" target="_blank" rel="noopener" class="btn btn-primary" style="margin-bottom:0.8rem;">✍️ Read on Substack</a>
+        <br/>
+        <a href="https://carousepod.substack.com/subscribe" target="_blank" rel="noopener" class="btn btn-secondary">📬 Subscribe for Free</a>
+        <p style="margin-top:2rem;font-size:0.78rem;color:rgba(245,240,255,0.3);">New posts go straight to your inbox — free, no spam.</p>
       </div>
     </div>
   </div>
-
-  <footer>
-    <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
-    <div class="footer-links">
-      <a href="#home" onclick="showPage('home');return false;">Home</a>
-      <a href="#about" onclick="showPage('about');return false;">About</a>
-      <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
-      <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
-      <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#social" onclick="showPage('social');return false;">Social</a>
-      <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
-      <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
-      <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
-    </div>
-    <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
-    <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
-  </footer>
 </div>
 
 <script>
@@ -1944,18 +1864,25 @@
     el.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     // Update URL hash for deep linking (e.g. carouselpod.com/#quote)
-    history.pushState(null, '', '#' + id);
+    try { history.pushState(null, '', '#' + id); } catch(e) {}
     maybeLoadFeeds(id);
   };
 
   // On load, check hash and navigate to correct page
   window.addEventListener('DOMContentLoaded', function() {
-    var hash = window.location.hash.replace('#', '');
-    var validPages = ['home','about','guests','episodes','blog','social','sponsors','quote','contact'];
-    if (hash && validPages.indexOf(hash) !== -1) {
-      window.showPage(hash);
-    } else {
-      window.showPage('home');
+    try {
+      var hash = window.location.hash.replace('#', '');
+      var validPages = ['home','about','guests','episodes','blog','social','sponsors','quote','contact'];
+      if (hash && validPages.indexOf(hash) !== -1) {
+        window.showPage(hash);
+      } else {
+        window.showPage('home');
+      }
+    } catch(e) {
+      // Fallback: directly activate home page without history API
+      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+      var home = document.getElementById('page-home');
+      if (home) home.classList.add('active');
     }
   });
 
@@ -2011,8 +1938,6 @@
     if (targetId) {
       document.getElementById(targetId).style.display = 'block';
     }
-    // Always show bottom fields once a type is selected
-    document.getElementById('qs-bottom').style.display = 'block';
     // Scroll to the section
     var el = targetId ? document.getElementById(targetId) : null;
     if (el) { setTimeout(function(){ el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }
@@ -2042,184 +1967,9 @@
     });
   }
 
-  // ── EPISODES RSS FEED (Podbean) ──
-  var _episodesLoaded = false;
-  function loadEpisodes() {
-    if (_episodesLoaded) return;
-    var container = document.getElementById('episodes-feed');
-    if (!container) return;
+  function maybeLoadFeeds(id) { /* episodes are statically embedded */ }
 
-    // Try multiple proxies in sequence until one works
-    var feedUrl = 'https://feed.podbean.com/Carouselofconversations/feed.xml';
-    var proxies = [
-      'https://api.allorigins.win/get?url=' + encodeURIComponent(feedUrl),
-      'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(feedUrl),
-      'https://corsproxy.io/?' + encodeURIComponent(feedUrl)
-    ];
-
-    function tryProxy(index) {
-      if (index >= proxies.length) {
-        container.innerHTML = '<p style="text-align:center;color:rgba(245,240,255,0.5);">Having trouble loading &mdash; <a href="https://carouselofconversations.podbean.com" target="_blank" style="color:var(--purple-light);">browse episodes on Podbean</a>.</p>';
-        return;
-      }
-      var url = proxies[index];
-      fetch(url)
-        .then(function(r) { return r.json().then ? r.json() : r.text(); })
-        .then(function(data) {
-          // allorigins wraps in {contents: "..."}
-          var xmlStr = typeof data === 'object' && data.contents ? data.contents : data;
-          if (typeof xmlStr !== 'string' || xmlStr.indexOf('<rss') === -1) throw new Error('Not XML');
-          parseAndRenderEpisodes(xmlStr, container);
-        })
-        .catch(function() { tryProxy(index + 1); });
-    }
-    tryProxy(0);
-  }
-
-  function parseAndRenderEpisodes(xml, container) {
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(xml, 'text/xml');
-    var items = doc.querySelectorAll('item');
-    if (!items.length) {
-      container.innerHTML = '<p style="text-align:center;color:rgba(245,240,255,0.5);">No episodes found yet.</p>';
-      return;
-    }
-    var feedImg = 'Carousel_Pod_Logo__Presentation_.png';
-    var chanImg = doc.querySelector('channel > image > url');
-    if (chanImg) feedImg = chanImg.textContent.trim();
-    var itunesImgs = doc.getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd','image');
-    if (itunesImgs.length && itunesImgs[0].getAttribute('href')) feedImg = itunesImgs[0].getAttribute('href');
-
-    var wrapper = document.createElement('div');
-    wrapper.style.cssText = 'display:flex;flex-direction:column;gap:1.2rem;';
-    items.forEach(function(item) {
-      var title = (item.querySelector('title') || {}).textContent || '(Untitled)';
-      var link = '';
-      var linkEl = item.querySelector('link');
-      if (linkEl) link = (linkEl.nextSibling ? linkEl.nextSibling.textContent : linkEl.textContent).trim();
-      if (!link || !link.startsWith('http')) { var g = item.querySelector('guid'); if (g) link = g.textContent.trim(); }
-      if (!link || !link.startsWith('http')) { var e = item.querySelector('enclosure'); if (e) link = e.getAttribute('url') || ''; }
-      var pubDate = (item.querySelector('pubDate') || {}).textContent || '';
-      var date = pubDate ? new Date(pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
-      var desc = '';
-      var descEl = item.querySelector('description');
-      if (descEl) desc = descEl.textContent.replace(/<[^>]*>/g,'').substring(0,200).trim() + '...';
-
-      var card = document.createElement('div');
-      card.style.cssText = 'display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;padding:1.2rem;transition:all 0.2s;cursor:pointer;';
-      card.onmouseover = function() { this.style.background = 'rgba(107,45,139,0.1)'; };
-      card.onmouseout = function() { this.style.background = 'rgba(255,255,255,0.03)'; };
-
-      var imgEl = document.createElement('img');
-      imgEl.src = feedImg; imgEl.alt = 'Episode art';
-      imgEl.style.cssText = 'width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;';
-      imgEl.onerror = function() { this.src = 'Carousel_Pod_Logo__Presentation_.png'; };
-
-      var info = document.createElement('div');
-      info.style.cssText = 'flex:1;min-width:0;';
-      info.innerHTML = '<p style="font-size:0.7rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">' + date + '</p>'
-        + '<h3 style="font-family:Playfair Display,serif;font-size:1rem;margin-bottom:0.4rem;color:var(--white);line-height:1.4;">' + title + '</h3>'
-        + '<p style="font-size:0.82rem;color:rgba(245,240,255,0.6);line-height:1.6;margin-bottom:0.8rem;">' + desc + '</p>'
-        + '<a href="' + link + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--purple-light);text-decoration:none;font-weight:600;">&#9654; Listen Now</a>';
-
-      card.appendChild(imgEl);
-      card.appendChild(info);
-      wrapper.appendChild(card);
-    });
-    container.innerHTML = '';
-    container.appendChild(wrapper);
-    _episodesLoaded = true;
-  }
-
-  // ── BLOG RSS FEED (Substack) ──
-  var _blogLoaded = false;
-  function loadBlog() {
-    if (_blogLoaded) return;
-    var container = document.getElementById('blog-feed');
-    if (!container) return;
-
-    var feedUrl = 'https://carousepod.substack.com/feed';
-    var proxies = [
-      'https://api.allorigins.win/get?url=' + encodeURIComponent(feedUrl),
-      'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(feedUrl),
-      'https://corsproxy.io/?' + encodeURIComponent(feedUrl)
-    ];
-
-    function tryProxy(index) {
-      if (index >= proxies.length) {
-        container.innerHTML = '<div style="text-align:center;padding:2rem;"><p style="color:rgba(245,240,255,0.5);">Could not load posts. <a href="https://carousepod.substack.com" target="_blank" style="color:var(--purple-light);">Visit our Substack</a>.</p></div>';
-        return;
-      }
-      fetch(proxies[index])
-        .then(function(r) { return r.json().then ? r.json() : r.text(); })
-        .then(function(data) {
-          var xmlStr = typeof data === 'object' && data.contents ? data.contents : data;
-          if (typeof xmlStr !== 'string' || xmlStr.indexOf('<rss') === -1) throw new Error('Not XML');
-          parseAndRenderBlog(xmlStr, container);
-        })
-        .catch(function() { tryProxy(index + 1); });
-    }
-    tryProxy(0);
-  }
-
-  function parseAndRenderBlog(xml, container) {
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(xml, 'text/xml');
-    var items = doc.querySelectorAll('item');
-    if (!items.length) {
-      container.innerHTML = '<div style="text-align:center;padding:2rem;"><p style="color:rgba(245,240,255,0.5);">No posts yet. <a href="https://carousepod.substack.com" target="_blank" style="color:var(--purple-light);">Visit our Substack</a>.</p></div>';
-      return;
-    }
-    var grid = document.createElement('div');
-    grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;';
-    items.forEach(function(item) {
-      var title = (item.querySelector('title') || {}).textContent || '(Untitled)';
-      var link = '';
-      var linkEl = item.querySelector('link');
-      if (linkEl) link = linkEl.textContent.trim();
-      if (!link || !link.startsWith('http')) { var g = item.querySelector('guid'); if (g) link = g.textContent.trim(); }
-      var pubDate = (item.querySelector('pubDate') || {}).textContent || '';
-      var date = pubDate ? new Date(pubDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '';
-      var desc = '';
-      var descEl = item.querySelector('description');
-      if (descEl) desc = descEl.textContent.replace(/<[^>]*>/g,'').substring(0,160).trim() + '...';
-      var img = '';
-      var contentNS = 'http://purl.org/rss/1.0/modules/content/';
-      var encoded = item.getElementsByTagNameNS(contentNS,'encoded')[0];
-      if (encoded) { var m = encoded.textContent.match(/src=["']([^"']+\.(jpg|jpeg|png|webp))/i); if (m) img = m[1]; }
-
-      var anchor = document.createElement('a');
-      anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener';
-      anchor.style.cssText = 'text-decoration:none;display:flex;flex-direction:column;background:rgba(255,255,255,0.03);border:1px solid rgba(107,45,139,0.2);border-radius:14px;overflow:hidden;transition:all 0.2s;';
-      anchor.onmouseover = function() { this.style.transform = 'translateY(-4px)'; this.style.borderColor = 'rgba(107,45,139,0.5)'; };
-      anchor.onmouseout = function() { this.style.transform = 'none'; this.style.borderColor = 'rgba(107,45,139,0.2)'; };
-
-      if (img) {
-        var imgEl = document.createElement('img');
-        imgEl.src = img; imgEl.alt = '';
-        imgEl.style.cssText = 'width:100%;height:160px;object-fit:cover;';
-        imgEl.onerror = function() { this.style.display = 'none'; };
-        anchor.appendChild(imgEl);
-      }
-      var body = document.createElement('div');
-      body.style.cssText = 'padding:1.2rem;flex:1;display:flex;flex-direction:column;';
-      body.innerHTML = '<p style="font-size:0.68rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">' + date + '</p>'
-        + '<h3 style="font-family:Playfair Display,serif;font-size:1rem;color:var(--white);line-height:1.4;margin-bottom:0.6rem;flex:1;">' + title + '</h3>'
-        + '<p style="font-size:0.8rem;color:rgba(245,240,255,0.55);line-height:1.6;margin-bottom:0.8rem;">' + desc + '</p>'
-        + '<span style="font-size:0.78rem;color:var(--purple-light);font-weight:600;">Read More &rarr;</span>';
-      anchor.appendChild(body);
-      grid.appendChild(anchor);
-    });
-    container.innerHTML = '';
-    container.appendChild(grid);
-    _blogLoaded = true;
-  }
-
-    function maybeLoadFeeds(id) {
-    if (id === 'episodes') loadEpisodes();
-    if (id === 'blog') loadBlog();
-  }
-
+  
     // Contact form
   var contactForm = document.getElementById('contact-form-el');
   if (contactForm) {
@@ -2245,5 +1995,24 @@
     });
   }
 </script>
+
+<!-- ═══ SHARED FOOTER ═══ -->
+<footer id="site-footer">
+  <img src="Carousel_Pod_Logo__Presentation_.png" alt="Logo"/>
+  <div class="footer-links">
+    <a href="#home" onclick="showPage('home');return false;">Home</a>
+    <a href="#about" onclick="showPage('about');return false;">About</a>
+    <a href="#guests" onclick="showPage('guests');return false;">Guest Hosts</a>
+    <a href="#episodes" onclick="showPage('episodes');return false;">Episodes</a>
+    <a href="#blog" onclick="showPage('blog');return false;">Blog</a>
+    <a href="#social" onclick="showPage('social');return false;">Social</a>
+    <a href="#sponsors" onclick="showPage('sponsors');return false;">Affiliates</a>
+    <a href="#quote" onclick="showPage('quote');return false;">Free Quote</a>
+    <a href="#contact" onclick="showPage('contact');return false;">Contact</a>
+  </div>
+  <p>© 2025 Carousel of Conversations · All Rights Reserved</p>
+  <p style="font-size:0.65rem;color:rgba(245,240,255,0.25);max-width:680px;margin:0.6rem auto 0;line-height:1.7;padding:0 1rem;">Carousel of Conversations is an independent fan podcast and is not affiliated with, endorsed by, or sponsored by The Walt Disney Company, its subsidiaries, or affiliates. Disney®, Walt Disney World®, Disneyland®, Disney Cruise Line®, and all related marks, characters, and properties are trademarks of The Walt Disney Company. All third-party trademarks referenced are the property of their respective owners.</p>
+</footer>
+
 </body>
 </html>
