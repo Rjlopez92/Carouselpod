@@ -341,7 +341,7 @@
     .host-bio { font-size:0.88rem; color:rgba(245,240,255,0.6); line-height:1.8; font-style:italic; }
 
     /* ─── GUEST HOSTS ─── */
-    .guest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.75rem; margin-top: 2.5rem; }
+    .guest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.75rem; margin-top: 2.5rem; }
     .guest-card {
       background: rgba(27,42,74,0.65);
       border: 1px solid rgba(107,45,139,0.2);
@@ -350,6 +350,17 @@
       text-align: center;
       transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
       position: relative; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .guest-card p {
+      text-align: left;
+      width: 100%;
+    }
+    .guest-links {
+      margin-top: auto;
+      padding-top: 1rem;
+      width: 100%;
+      justify-content: center;
     }
     .guest-card::after { content:''; position:absolute; bottom:0;right:0; width:100px;height:100px; background:radial-gradient(circle,rgba(107,45,139,0.12),transparent 70%); border-radius:50%; }
     .guest-card:hover { transform:translateY(-5px); border-color:rgba(107,45,139,0.45); box-shadow:0 16px 36px rgba(0,0,0,0.3); }
@@ -363,7 +374,7 @@
       font-size: 2.2rem;
     }
     .guest-card h3 { font-family:'Playfair Display',serif; font-size:1.1rem; margin-bottom:0.5rem; }
-    .guest-card p { font-size:0.82rem; color:rgba(245,240,255,0.55); line-height:1.7; font-style:italic; margin-bottom:1.25rem; }
+    .guest-card p { font-size:0.85rem; color:rgba(245,240,255,0.65); line-height:1.75; font-style:italic; margin-bottom:1.25rem; }
     .guest-links { display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; }
     .guest-link-btn {
       display:inline-flex; align-items:center; gap:0.35rem;
@@ -375,6 +386,11 @@
       transition:background 0.2s, transform 0.2s;
     }
     .guest-link-btn:hover { background:rgba(107,45,139,0.45); transform:translateY(-2px); }
+    @media (max-width:640px) {
+      .guest-grid { grid-template-columns: 1fr; }
+      .guest-card { text-align:center; }
+      .guest-card p { text-align:center; }
+    }
 
     /* ─── SOCIAL MEDIA ─── */
     .social-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem; margin-top:3rem; }
@@ -729,19 +745,24 @@
         <div class="host-avatar">🎙️</div>
         <h3>RJ Lopez</h3>
         <p class="host-role">Co-Host</p>
-        <p class="host-bio">Host bio coming soon — check back for RJ's full story and what Disney magic means to him!</p>
+        <p class="host-bio">RJ is the Carousel's resident Disney World planning expert and travel advisor with Famvia's Carousel of Destinations. Whether it's breaking down the budget, decoding the latest park news, or mapping out the perfect itinerary, RJ lives for the details. He follows Disney news religiously and can tell you exactly what's happening in the parks right now — and at the end of every episode, he'll remind you that what you're about to hear is definitely not the same pre-recorded message from last week.</p>
+        <div class="guest-links" style="margin-top:1rem;">
+          <a href="https://famvia.com/advisors/meet/carousel-of-destinations" target="_blank" rel="noopener" class="guest-link-btn">🌐 Travel Page</a>
+          <a href="https://www.instagram.com/carouselofdestinations?igsh=MWR6ejRoOWo2aXFxaA==" target="_blank" rel="noopener" class="guest-link-btn" style="display:inline-flex;align-items:center;gap:0.35rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> Instagram</a>
+          <a href="#quote" onclick="showPage('quote');return false;" class="guest-link-btn" style="background:linear-gradient(135deg,var(--purple),var(--green));color:white;">✨ Free Quote</a>
+        </div>
       </div>
       <div class="host-card">
         <div class="host-avatar">✨</div>
         <h3>Jessalyn Lopez</h3>
         <p class="host-role">Co-Host</p>
-        <p class="host-bio">Host bio coming soon — check back to learn more about Jessalyn and her love of all things Disney!</p>
+        <p class="host-bio">Jessalyn is the Carousel's merch expert, snack connoisseur, and the ultimate guide for moms navigating Disney with kids. From what to pack to how to prepare your little ones for the magic, if you're heading to Disney with family, Jessalyn has you covered.</p>
       </div>
       <div class="host-card">
         <div class="host-avatar">🎡</div>
         <h3>Noah Smith</h3>
         <p class="host-role">Co-Host</p>
-        <p class="host-bio">Host bio coming soon — check back to discover Noah's favorite Disney memories and more!</p>
+        <p class="host-bio">Noah is the Carousel's self-appointed fun facts authority — armed with a Disney fact for every occasion, though we can't always verify the accuracy. His true passion lies in the rich history of Disney and anything with wheels on a track, from the trains of Main Street to the iconic monorail system.</p>
       </div>
     </div>
   </div>
@@ -809,10 +830,10 @@
       <div class="guest-card">
         <div class="guest-avatar">🎡</div>
         <h3>Jared Blankenship</h3>
-        <p>Guest host bio and links coming soon. Stay tuned for more about Jared!</p>
+        <p>Jared is a seasoned Disney World travel advisor and the person who taught RJ and Jessalyn everything they know about planning the perfect Walt Disney World trip. If there's a strategy, a secret, or a smarter way to do Disney World, Jared knows it.</p>
         <div class="guest-links">
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+          <a href="https://famvia.com/advisors/meet/jared-blankenship" target="_blank" rel="noopener" class="guest-link-btn">🌐 Travel Page</a>
+          <a href="https://www.instagram.com/memsmadeez?igsh=MTM1Y3N5NzI3aXRsNQ==" target="_blank" rel="noopener" class="guest-link-btn" style="display:inline-flex;align-items:center;gap:0.35rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> Instagram</a>
         </div>
       </div>
 
@@ -820,10 +841,10 @@
       <div class="guest-card">
         <div class="guest-avatar">✈️</div>
         <h3>Karisa Crews</h3>
-        <p>Guest host bio and links coming soon. Stay tuned for more about Karisa!</p>
+        <p>Karisa is our Disneyland authority — a travel expert who knows the West Coast parks inside and out, and one of the rare few who has dined at the legendary, members-only Club 33. If it has anything to do with Disneyland, Karisa is your person.</p>
         <div class="guest-links">
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+          <a href="https://famvia.com/advisors/meet/crewsintovaca" target="_blank" rel="noopener" class="guest-link-btn">🌐 Travel Page</a>
+          <a href="https://www.instagram.com/crewsintovaca?igsh=MTFiZHBia3g5ZXJvcQ==" target="_blank" rel="noopener" class="guest-link-btn" style="display:inline-flex;align-items:center;gap:0.35rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> Instagram</a>
         </div>
       </div>
 
@@ -831,10 +852,10 @@
       <div class="guest-card">
         <div class="guest-avatar">💫</div>
         <h3>Carlos & Sonya Hernandez</h3>
-        <p>Guest host bios and links coming soon. Stay tuned for more about Carlos & Sonya!</p>
+        <p>Carlos — known to many as the Vacation Papi and Captain of the Wayfinders team at Famvia — and his wife Sonya are the Carousel's go-to experts on Disney Vacation Club. Whether you're a curious first-timer or a seasoned member looking to maximize your points, these two have the experience and the passion to guide you.</p>
         <div class="guest-links">
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+          <a href="https://famvia.com/advisors/meet/carlosthewayfinder" target="_blank" rel="noopener" class="guest-link-btn">🌐 Travel Page</a>
+          <a href="https://www.instagram.com/thevacationpapi?igsh=MTQ2d2t3YTdqeW9zNg==" target="_blank" rel="noopener" class="guest-link-btn" style="display:inline-flex;align-items:center;gap:0.35rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> Instagram</a>
         </div>
       </div>
 
@@ -842,33 +863,25 @@
       <div class="guest-card">
         <div class="guest-avatar">🌟</div>
         <h3>Juliette Montagu</h3>
-        <p>Guest host bio and links coming soon. Stay tuned for more about Juliette!</p>
+        <p>Juliette is our passport to the wider world of Disney — from the magic of international parks like Disneyland Paris and Tokyo Disney to the luxury of Disney Cruise Line and the paradise of Aulani. If Disney takes you there, Juliette has been there.</p>
         <div class="guest-links">
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
+          <a href="https://famvia.com/advisors/meet/corememorytrips" target="_blank" rel="noopener" class="guest-link-btn">🌐 Travel Page</a>
+          <a href="https://www.instagram.com/corememorytrips?igsh=MXY0bzRhd3NwZ2lrMg==" target="_blank" rel="noopener" class="guest-link-btn" style="display:inline-flex;align-items:center;gap:0.35rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> Instagram</a>
         </div>
       </div>
 
-      <!-- Smith, Brian -->
-      <div class="guest-card">
-        <div class="guest-avatar">🎙️</div>
-        <h3>Brian Smith</h3>
-        <p>Guest host bio and links coming soon. Stay tuned for more about Brian!</p>
-        <div class="guest-links">
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
-        </div>
-      </div>
-
-      <!-- Smith, Cyndi -->
+      <!-- Smith, Brian & Cyndi -->
       <div class="guest-card">
         <div class="guest-avatar">🏰</div>
-        <h3>Cyndi Smith</h3>
-        <p>Guest host bio and links coming soon. Stay tuned for more about Cyndi!</p>
-        <div class="guest-links">
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">🌐 Travel Page</span>
-          <span class="guest-link-btn" style="opacity:0.45;cursor:default;">📱 Social</span>
-        </div>
+        <h3>Brian &amp; Cyndi Smith</h3>
+        <p>Brian and Cyndi are more than just guests — they're Noah's parents and two of our closest friends. They bring a lifetime of Disney memories, a whole lot of heart, and the kind of energy that makes every episode they join an instant favorite.</p>
+      </div>
+
+      <!-- Smith, Spencer -->
+      <div class="guest-card">
+        <div class="guest-avatar">🎡</div>
+        <h3>Spencer Smith</h3>
+        <p>Spencer is the Carousel's resident expert on all things Marvel and Star Wars. From Galaxy's Edge to the latest MCU release, if it involves superheroes or a galaxy far, far away, Spencer is the one we call.</p>
       </div>
 
     </div>
