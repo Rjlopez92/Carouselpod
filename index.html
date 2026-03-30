@@ -2152,14 +2152,14 @@
   (function() {
     var workerSrc = [
       "var FEED_URL='https://feed.podbean.com/Carouselofconversations/feed.xml';",
-      "var PROXY='https://corsproxy.io/?'+encodeURIComponent(FEED_URL);",
+      "var PROXY='https://api.allorigins.win/get?url='+encodeURIComponent(FEED_URL);",
       "var REFRESH_MS=5*60*1000;",
       "async function fetchFeed(){",
       "  try{",
       "    var r=await fetch(PROXY);",
       "    if(!r.ok)throw new Error('HTTP '+r.status);",
-      "    var xml=await r.text();",
-      "    self.postMessage({type:'feed',xml:xml});",
+      "    var json=await r.json();",
+      "    self.postMessage({type:'feed',xml:json.contents});",
       "  }catch(e){",
       "    self.postMessage({type:'error',message:e.message});",
       "  }",
