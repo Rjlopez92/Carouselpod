@@ -2148,29 +2148,28 @@
     });
   }
 
-  // ── RSS Feed Agent (background worker, refreshes every 5 min) ──
+  // ── RSS Feed Agent (fetches on load + refreshes every 5 min) ──
   (function() {
-    var workerSrc = [
-      "var FEED_URL='https://feed.podbean.com/Carouselofconversations/feed.xml';",
-      "var PROXY='https://api.allorigins.win/get?url='+encodeURIComponent(FEED_URL);",
-      "var REFRESH_MS=5*60*1000;",
-      "async function fetchFeed(){",
-      "  try{",
-      "    var r=await fetch(PROXY);",
-      "    if(!r.ok)throw new Error('HTTP '+r.status);",
-      "    var json=await r.json();",
-      "    self.postMessage({type:'feed',xml:json.contents});",
-      "  }catch(e){",
-      "    self.postMessage({type:'error',message:e.message});",
-      "  }",
-      "}",
-      "fetchFeed();setInterval(fetchFeed,REFRESH_MS);"
-    ].join('\n');
-    var blob = new Blob([workerSrc], {type:'application/javascript'});
-    var rssWorker = new Worker(URL.createObjectURL(blob));
-    rssWorker.onmessage = function(e) {
-      if (e.data.type === 'feed') renderRssFeed(e.data.xml);
-    };
+    var FEED_URL = 'https://feed.podbean.com/Carouselofconversations/feed.xml';
+    var PROXY = 'https://api.allorigins.win/get?url=' + encodeURIComponent(FEED_URL);
+
+    function fetchRss() {
+      var loading = document.getElementById('rss-loading');
+      fetch(PROXY)
+        .then(function(r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function(json) {
+          renderRssFeed(json.contents);
+        })
+        .catch(function(err) {
+          if (loading) loading.innerHTML = '<p style="font-size:0.85rem;color:rgba(245,240,255,0.4);">Could not load episodes. <a href="https://feed.podbean.com/Carouselofconversations/feed.xml" target="_blank" style="color:var(--purple-light);">View feed directly</a></p>';
+        });
+    }
+
+    fetchRss();
+    setInterval(fetchRss, 5 * 60 * 1000);
   })();
 
   function renderRssFeed(xml) {
