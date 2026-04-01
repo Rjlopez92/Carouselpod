@@ -157,10 +157,10 @@
         <h4>Get new articles in your inbox</h4>
         <p>New Disney guides delivered whenever we publish. No spam, ever.</p>
       </div>
-      <form class="sub-form" action="javascript:void(0)" onsubmit="beehiivSubscribe(event,this)">
-        <input type="email" class="sub-email" placeholder="your@email.com" required/>
-        <button type="submit" class="btn btn-secondary" style="font-size:0.74rem;padding:0.62rem 1.35rem;">Subscribe</button>
-      </form>
+      <div class="sub-form">
+        <input type="email" class="sub-email" placeholder="your@email.com"/>
+        <button type="button" class="btn btn-secondary" style="font-size:0.74rem;padding:0.62rem 1.35rem;" onclick="beehiivSubscribe(this.parentElement)">Subscribe</button>
+      </div>
     </div>
 
         <div class="cta-box">
@@ -182,10 +182,11 @@
 </footer>
 
 <script>
-async function beehiivSubscribe(e, form) {
-  e.preventDefault();
-  const email = form.querySelector('input[type="email"]').value;
-  const btn = form.querySelector('button');
+async function beehiivSubscribe(container) {
+  var emailInput = container.querySelector('input[type="email"]');
+  var email = emailInput ? emailInput.value.trim() : '';
+  if (!email || email.indexOf('@') === -1) { if (emailInput) emailInput.focus(); return; }
+  const btn = container.querySelector('button');
   btn.textContent = 'Subscribing…';
   btn.disabled = true;
   try {
@@ -195,11 +196,11 @@ async function beehiivSubscribe(e, form) {
       body: JSON.stringify({ email, reactivate_existing: false, send_welcome_email: true, utm_source: 'carouselpod.com', utm_medium: 'blog' })
     });
     if (res.ok || res.status === 201) {
-      form.innerHTML = '<span style="color:var(--green-light);font-size:0.85rem;font-weight:600;">You\'re in! Check your inbox.</span>';
+      container.innerHTML = '<span style="color:var(--green-light);font-size:0.85rem;font-weight:600;">You\'re in! Check your inbox.</span>';
     } else { throw new Error('api'); }
   } catch(err) {
     window.open('https://www.beehiiv.com/subscribe/pub_9b0fc48f-7647-450e-96a6-c75420a1c5f2?email=' + encodeURIComponent(email), '_blank');
-    form.innerHTML = '<span style="color:var(--green-light);font-size:0.85rem;font-weight:600;">Thanks! Check your inbox.</span>';
+    container.innerHTML = '<span style="color:var(--green-light);font-size:0.85rem;font-weight:600;">Thanks! Check your inbox.</span>';
   }
 }
 </script>
