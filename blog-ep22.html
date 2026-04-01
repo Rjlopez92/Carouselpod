@@ -64,8 +64,15 @@
     .btn-secondary{background:linear-gradient(135deg,var(--green),var(--green-light));color:var(--white);box-shadow:0 6px 20px rgba(45,106,79,0.4);}
     .btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(245,240,255,0.3);}
     .btn-wrap{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;}
+    .subscribe-strip{background:rgba(45,106,79,0.1);border:1px solid rgba(45,106,79,0.3);border-radius:14px;padding:1.4rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;flex-wrap:wrap;margin-top:3rem;}
+    .subscribe-strip h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.2rem;color:var(--white);}
+    .subscribe-strip p{font-size:0.76rem;color:rgba(245,240,255,0.45);margin:0;}
+    .sub-form{display:flex;gap:0.5rem;flex-wrap:wrap;}
+    .sub-email{background:rgba(27,42,74,0.8);border:1px solid rgba(107,45,139,0.4);border-radius:50px;padding:0.55rem 1.1rem;font-family:'Montserrat',sans-serif;font-size:0.78rem;color:var(--white);outline:none;min-width:220px;}
+    .sub-email::placeholder{color:rgba(245,240,255,0.35);}
+    .sub-email:focus{border-color:rgba(107,45,139,0.7);}
     footer{text-align:center;padding:2rem;font-size:0.75rem;color:rgba(245,240,255,0.3);border-top:1px solid rgba(107,45,139,0.2);}
-    @media(max-width:600px){.hero-band{padding:2.5rem 1.25rem 2rem;}.article-wrap{padding:2rem 1.25rem 4rem;}.btn-wrap{flex-direction:column;align-items:center;}}
+    @media(max-width:600px){.hero-band{padding:2.5rem 1.25rem 2rem;}.article-wrap{padding:2rem 1.25rem 4rem;}.btn-wrap{flex-direction:column;align-items:center;}.subscribe-strip{flex-direction:column;align-items:flex-start;}.sub-email{min-width:0;width:100%;}.sub-form{width:100%;flex-direction:column;}}
   </style>
 </head>
 <body>
@@ -102,18 +109,13 @@
     </div>
 
     <div class="timeline-block">
-      <div class="timeline-label">180 Days Out</div>
-      <p>Dining reservations open at <strong>6:00 AM Eastern</strong> for Disney resort guests. This is when you book Be Our Guest, Cinderella's Royal Table, Space 220, and any signature restaurant that matters to your group. Set an alarm the night before.</p>
-    </div>
-
-    <div class="timeline-block">
       <div class="timeline-label">60 Days Out</div>
-      <p>Non-resort guests get dining access here. If you're staying off-property, this is your first shot at coveted reservations — act quickly.</p>
+      <p>Dining reservations open at approximately <strong>6:00 AM Eastern</strong> for everyone — resort guests and off-property guests alike. Resort guests get a key perk: they can book for their entire stay (up to 10 nights) starting 60 days before check-in. This is when you book Be Our Guest, Cinderella's Royal Table, Space 220, and any signature restaurant that matters to your group. Set an alarm the night before.</p>
     </div>
 
     <div class="timeline-block">
-      <div class="timeline-label">30 Days Out</div>
-      <p>Lightning Lane Multi Pass windows open. Plan your daily Lightning Lane strategy — know which rides you're prioritizing and which parks you're hitting on which days.</p>
+      <div class="timeline-label">7 Days Out (Resort Guests) / 3 Days Out (Off-Property Guests)</div>
+      <p>Lightning Lane Multi Pass booking windows open at <strong>7:00 AM Eastern</strong>. Resort guests (and select partner hotels) can book for their entire stay up to 7 days before check-in. Off-site guests can book up to 3 days before each park day. Plan your daily Lightning Lane strategy — know which rides you're prioritizing and which parks you're hitting on which days.</p>
     </div>
 
     <div class="timeline-block">
@@ -127,7 +129,7 @@
     </div>
 
     <h2>The Dining Reservation Strategy</h2>
-    <p>Most first-timers don't realize that Disney's best restaurants require advance reservations — and the top ones book on the first day the window opens.</p>
+    <p>Most first-timers don't realize that Disney's best restaurants require advance reservations — and the top ones book quickly on the first day the 60-day window opens.</p>
     <p><strong>Restaurants that require the fastest action:</strong></p>
     <ul>
       <li>Be Our Guest (Magic Kingdom)</li>
@@ -156,6 +158,18 @@
     <hr/>
 
     <p>Episode 22 goes deeper on all of this — including RJ's perspective as a Disney travel advisor and Jessalyn's first-hand family trip stories. Worth the listen before your next trip.</p>
+
+    <!-- BEEHIIV: Replace this div with your Beehiiv embed code when ready -->
+    <div class="subscribe-strip">
+      <div>
+        <h4>Get new articles in your inbox</h4>
+        <p>New Disney guides delivered whenever we publish. No spam, ever.</p>
+      </div>
+      <form class="sub-form" onsubmit="event.preventDefault();this.innerHTML='<span style=\'color:var(--green-light);font-size:0.82rem;\'>Thanks! You\'re in.</span>'">
+        <input type="email" class="sub-email" placeholder="your@email.com" required/>
+        <button type="submit" class="btn btn-secondary" style="font-size:0.74rem;padding:0.62rem 1.35rem;">Subscribe</button>
+      </form>
+    </div>
 
     <div class="cta-box">
       <h3>Listen to Episode 22</h3>
