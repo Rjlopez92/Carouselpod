@@ -2578,88 +2578,183 @@ In ...</p>
 
 <!-- ═══════════ BLOG ═══════════ -->
 <div id="page-blog" class="page">
+  <style>
+    .blog-filter-wrap{display:flex;gap:0.55rem;flex-wrap:wrap;margin:1.75rem 0 1.5rem;}
+    .blog-filter{font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;padding:0.45rem 1.1rem;border-radius:50px;border:1px solid rgba(107,45,139,0.4);background:transparent;color:rgba(245,240,255,0.55);transition:all 0.2s;}
+    .blog-filter:hover{background:rgba(107,45,139,0.15);color:var(--white);border-color:rgba(107,45,139,0.6);}
+    .blog-filter.active{background:var(--purple);border-color:var(--purple);color:var(--white);}
+    .blog-hero{background:linear-gradient(135deg,rgba(107,45,139,0.18),rgba(45,106,79,0.13));border:1px solid rgba(107,45,139,0.35);border-radius:20px;padding:2.5rem 3rem;position:relative;overflow:hidden;margin-bottom:1.75rem;transition:border-color 0.3s,box-shadow 0.3s;}
+    .blog-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--green));}
+    .blog-hero:hover{border-color:rgba(107,45,139,0.55);box-shadow:0 20px 40px rgba(0,0,0,0.25);}
+    .blog-hero-meta{display:flex;align-items:center;gap:0.55rem;flex-wrap:wrap;margin-bottom:1rem;}
+    .blog-featured-badge{font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;background:linear-gradient(135deg,#b8860b,var(--gold));color:#1a0a00;padding:0.22rem 0.65rem;border-radius:50px;}
+    .blog-hero h2{font-family:'Playfair Display',serif;font-size:clamp(1.35rem,3vw,2rem);font-weight:700;line-height:1.3;margin-bottom:0.9rem;color:var(--white);}
+    .blog-hero p{font-size:0.92rem;color:rgba(245,240,255,0.68);line-height:1.85;max-width:680px;margin-bottom:1.5rem;}
+    .blog-subscribe-strip{background:rgba(45,106,79,0.1);border:1px solid rgba(45,106,79,0.3);border-radius:14px;padding:1.4rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;flex-wrap:wrap;margin-bottom:2rem;}
+    .blog-subscribe-strip h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.2rem;color:var(--white);}
+    .blog-subscribe-strip p{font-size:0.76rem;color:rgba(245,240,255,0.45);margin:0;}
+    .blog-sub-form{display:flex;gap:0.5rem;flex-wrap:wrap;}
+    .blog-email-input{padding:0.6rem 1rem;border-radius:50px;border:1px solid rgba(107,45,139,0.4);background:rgba(255,255,255,0.05);color:var(--white);font-family:'Montserrat',sans-serif;font-size:0.82rem;outline:none;min-width:210px;transition:border-color 0.2s;}
+    .blog-email-input:focus{border-color:var(--purple-light);background:rgba(107,45,139,0.08);}
+    .blog-email-input::placeholder{color:rgba(245,240,255,0.3);}
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;}
+    .blog-card{display:flex;flex-direction:column;background:rgba(27,42,74,0.7);border:1px solid rgba(107,45,139,0.25);border-radius:16px;padding:1.75rem;transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;position:relative;overflow:hidden;}
+    .blog-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--green));}
+    .blog-card:hover{transform:translateY(-5px);border-color:rgba(107,45,139,0.5);box-shadow:0 16px 36px rgba(0,0,0,0.3);}
+    .blog-card-meta{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.9rem;}
+    .blog-cat-tag{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:50px;}
+    .blog-cat-tag.planning{background:rgba(45,106,79,0.25);border:1px solid rgba(45,106,79,0.5);color:#6fcf97;}
+    .blog-cat-tag.parks{background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.4);color:var(--gold);}
+    .blog-cat-tag.resorts{background:rgba(107,45,139,0.25);border:1px solid rgba(107,45,139,0.5);color:var(--purple-light);}
+    .blog-cat-tag.cruise{background:rgba(30,90,180,0.2);border:1px solid rgba(30,90,180,0.5);color:#60a5fa;}
+    .blog-cat-tag.general{background:rgba(245,240,255,0.08);border:1px solid rgba(245,240,255,0.2);color:rgba(245,240,255,0.6);}
+    .blog-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;line-height:1.4;margin-bottom:0.65rem;color:var(--white);}
+    .blog-card > p{font-size:0.84rem;color:rgba(245,240,255,0.6);line-height:1.75;flex:1;margin-bottom:1.2rem;}
+    .blog-card-btns{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:auto;}
+    .blog-ep-badge{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:rgba(107,45,139,0.25);border:1px solid rgba(107,45,139,0.4);color:var(--purple-light);padding:0.2rem 0.55rem;border-radius:50px;}
+    .blog-date{font-size:0.62rem;color:rgba(245,240,255,0.33);letter-spacing:0.06em;text-transform:uppercase;}
+    @media(max-width:640px){.blog-hero{padding:1.75rem 1.5rem;}.blog-subscribe-strip{flex-direction:column;align-items:flex-start;}.blog-email-input{min-width:0;width:100%;}.blog-sub-form{width:100%;flex-direction:column;}.blog-filter-wrap{gap:0.4rem;}}
+  </style>
+
   <div class="page-header">
     <p class="section-label">Disney Tips &amp; Stories</p>
     <h2 class="section-title">From the Carousel Blog</h2>
-    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Deep dives into Disney travel, park tips, and the stories behind your favorite episodes — all in one place.</p>
+    <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Disney travel guides, park tips, and stories from the hosts of Carousel of Conversations.</p>
   </div>
 
   <div style="max-width:1100px;margin:0 auto;padding:0 2rem 5rem;position:relative;z-index:1;">
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.75rem;margin-top:2rem;">
 
-      <!-- Article 1 — Ep 73 -->
-      <div class="card" style="display:flex;flex-direction:column;">
-        <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem;">
-          <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(107,45,139,0.25);border:1px solid rgba(107,45,139,0.4);color:var(--purple-light);padding:0.25rem 0.65rem;border-radius:50px;">Ep 73</span>
-          <span style="font-size:0.65rem;color:rgba(245,240,255,0.4);letter-spacing:0.08em;text-transform:uppercase;">Mar 30, 2026</span>
-        </div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;line-height:1.4;margin-bottom:0.75rem;">15 Things to Do at Disney World WITHOUT a Park Ticket (2026 Guide)</h3>
-        <p style="font-size:0.86rem;color:rgba(245,240,255,0.6);line-height:1.75;margin-bottom:1.5rem;flex:1;">"The parks are only half the vacation." Noah, Jessalyn, and RJ reveal 15 hidden resort experiences you can enjoy with zero park admission.</p>
-        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:auto;">
-          <a href="blog-ep73.html" class="btn btn-primary" style="font-size:0.72rem;padding:0.6rem 1.25rem;">Read Article</a>
-          <a href="https://Carouselofconversations.podbean.com/e/episode-73-disney-without-a-park-ticket-15-hidden-resort-secrets-2026-guide/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.72rem;padding:0.6rem 1.25rem;">&#9654; Listen</a>
-        </div>
+    <!-- ── Subscribe Strip ──────────────────────────────────── -->
+    <!-- BEEHIIV: Replace this div with your Beehiiv embed code when ready -->
+    <div class="blog-subscribe-strip">
+      <div>
+        <h4>Get new articles in your inbox</h4>
+        <p>New Disney guides delivered whenever we publish. No spam, ever.</p>
       </div>
-
-      <!-- Article 2 — Ep 71 -->
-      <div class="card" style="display:flex;flex-direction:column;">
-        <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem;">
-          <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(107,45,139,0.25);border:1px solid rgba(107,45,139,0.4);color:var(--purple-light);padding:0.25rem 0.65rem;border-radius:50px;">Ep 71</span>
-          <span style="font-size:0.65rem;color:rgba(245,240,255,0.4);letter-spacing:0.08em;text-transform:uppercase;">Mar 16, 2026</span>
-        </div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;line-height:1.4;margin-bottom:0.75rem;">Disney Vacation Club (DVC) Explained: Is It Actually Worth It?</h3>
-        <p style="font-size:0.86rem;color:rgba(245,240,255,0.6);line-height:1.75;margin-bottom:1.5rem;flex:1;">DVC members Carlos and Sonya break down the point system, the real upfront costs, and whether the math actually works in your favor.</p>
-        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:auto;">
-          <a href="blog-ep71.html" class="btn btn-primary" style="font-size:0.72rem;padding:0.6rem 1.25rem;">Read Article</a>
-          <a href="https://Carouselofconversations.podbean.com/e/episode-71-disney-vacation-club-dvc-explained-%e2%80%93-is-it-worth-it-with-carlos-sonya/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.72rem;padding:0.6rem 1.25rem;">&#9654; Listen</a>
-        </div>
-      </div>
-
-      <!-- Article 3 — Ep 38 -->
-      <div class="card" style="display:flex;flex-direction:column;">
-        <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem;">
-          <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(107,45,139,0.25);border:1px solid rgba(107,45,139,0.4);color:var(--purple-light);padding:0.25rem 0.65rem;border-radius:50px;">Ep 38</span>
-          <span style="font-size:0.65rem;color:rgba(245,240,255,0.4);letter-spacing:0.08em;text-transform:uppercase;">Jun 1, 2025</span>
-        </div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;line-height:1.4;margin-bottom:0.75rem;">Why Disney Cruise Line Is Worth It — Insider Tips from a Former Cast Member</h3>
-        <p style="font-size:0.86rem;color:rgba(245,240,255,0.6);line-height:1.75;margin-bottom:1.5rem;flex:1;">Former DCL cast member Juliette pulls back the curtain on rotational dining, Castaway Cay, and the booking moves most guests don't know about.</p>
-        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:auto;">
-          <a href="blog-ep38.html" class="btn btn-primary" style="font-size:0.72rem;padding:0.6rem 1.25rem;">Read Article</a>
-          <a href="https://Carouselofconversations.podbean.com/e/episode-38-why-disney-cruise-line-is-worth-it-%e2%80%93-insider-tips-from-a-former-cast-member/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.72rem;padding:0.6rem 1.25rem;">&#9654; Listen</a>
-        </div>
-      </div>
-
-      <!-- Article 4 — Ep 22 -->
-      <div class="card" style="display:flex;flex-direction:column;">
-        <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem;">
-          <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(107,45,139,0.25);border:1px solid rgba(107,45,139,0.4);color:var(--purple-light);padding:0.25rem 0.65rem;border-radius:50px;">Ep 22</span>
-          <span style="font-size:0.65rem;color:rgba(245,240,255,0.4);letter-spacing:0.08em;text-transform:uppercase;">Feb 2, 2025</span>
-        </div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;line-height:1.4;margin-bottom:0.75rem;">The Ultimate Disney World Trip Planning Guide (From People Who've Done It Wrong)</h3>
-        <p style="font-size:0.86rem;color:rgba(245,240,255,0.6);line-height:1.75;margin-bottom:1.5rem;flex:1;">From the 180-day dining reservation window to rope drop strategy — the full planning timeline so you don't spend your vacation eating quick service every meal.</p>
-        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:auto;">
-          <a href="blog-ep22.html" class="btn btn-primary" style="font-size:0.72rem;padding:0.6rem 1.25rem;">Read Article</a>
-          <a href="https://Carouselofconversations.podbean.com/e/episode-22-the-ultimate-disney-trip-planning-guide/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.72rem;padding:0.6rem 1.25rem;">&#9654; Listen</a>
-        </div>
-      </div>
-
-      <!-- Article 5 — Ep 12 -->
-      <div class="card" style="display:flex;flex-direction:column;">
-        <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem;">
-          <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(107,45,139,0.25);border:1px solid rgba(107,45,139,0.4);color:var(--purple-light);padding:0.25rem 0.65rem;border-radius:50px;">Ep 12</span>
-          <span style="font-size:0.65rem;color:rgba(245,240,255,0.4);letter-spacing:0.08em;text-transform:uppercase;">Nov 11, 2024</span>
-        </div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;line-height:1.4;margin-bottom:0.75rem;">Disney World Line Hacks 101: Lightning Lane, DAS, and Rider Swap Explained</h3>
-        <p style="font-size:0.86rem;color:rgba(245,240,255,0.6);line-height:1.75;margin-bottom:1.5rem;flex:1;">Stop waiting in 90-minute lines. RJ, Jessalyn, and Noah break down every tool Disney gives you to skip the queue — and how to stack them for maximum efficiency.</p>
-        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:auto;">
-          <a href="blog-ep12.html" class="btn btn-primary" style="font-size:0.72rem;padding:0.6rem 1.25rem;">Read Article</a>
-          <a href="https://Carouselofconversations.podbean.com/e/episode-12-line-hacks-101-how-to-maximize-your-disney-day/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.72rem;padding:0.6rem 1.25rem;">&#9654; Listen</a>
-        </div>
-      </div>
-
+      <form class="blog-sub-form" id="blog-sub-form" onsubmit="blogSubscribe(event)">
+        <input type="email" class="blog-email-input" id="blog-sub-email" placeholder="your@email.com" required/>
+        <button type="submit" class="btn btn-secondary" style="font-size:0.74rem;padding:0.62rem 1.35rem;">Subscribe</button>
+      </form>
     </div>
 
-    <!-- Bottom CTA -->
+    <!-- ── Featured Hero ─────────────────────────────────────── -->
+    <div class="blog-hero" id="blog-hero" data-category="resorts">
+      <div class="blog-hero-meta">
+        <span class="blog-featured-badge">Featured</span>
+        <span class="blog-ep-badge">Ep 73</span>
+        <span class="blog-date">Mar 30, 2026</span>
+        <span class="blog-cat-tag resorts">Resorts &amp; Hotels</span>
+      </div>
+      <h2>15 Things to Do at Disney World WITHOUT a Park Ticket (2026 Guide)</h2>
+      <p>"The parks are only half the vacation." Noah, Jessalyn, and RJ reveal 15 hidden resort experiences at Walt Disney World you can enjoy with zero park admission — from monorail hopping to wildlife viewing at Animal Kingdom Lodge.</p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="blog-ep73.html" class="btn btn-primary" style="font-size:0.75rem;">Read Article</a>
+        <a href="https://Carouselofconversations.podbean.com/e/episode-73-disney-without-a-park-ticket-15-hidden-resort-secrets-2026-guide/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.75rem;">&#9654; Listen to Ep 73</a>
+      </div>
+    </div>
+
+    <!-- ── Category Filters ──────────────────────────────────── -->
+    <div class="blog-filter-wrap" role="group" aria-label="Filter by category">
+      <button class="blog-filter active" data-filter="all"      onclick="filterBlog('all')">All Articles</button>
+      <button class="blog-filter"        data-filter="planning" onclick="filterBlog('planning')">Trip Planning</button>
+      <button class="blog-filter"        data-filter="parks"    onclick="filterBlog('parks')">Parks &amp; Rides</button>
+      <button class="blog-filter"        data-filter="resorts"  onclick="filterBlog('resorts')">Resorts &amp; Hotels</button>
+      <button class="blog-filter"        data-filter="cruise"   onclick="filterBlog('cruise')">Disney Cruise</button>
+    </div>
+
+    <!-- ── Article Grid ──────────────────────────────────────── -->
+    <!-- To add a new article: copy a .blog-card block, update data-category and data-idx (next number), update content -->
+    <div class="blog-grid" id="blog-grid">
+
+      <!-- Ep 72 — 4 Parks Challenge -->
+      <div class="blog-card" data-category="parks" data-idx="0">
+        <div class="blog-card-meta">
+          <span class="blog-cat-tag parks">Parks &amp; Rides</span>
+          <span class="blog-ep-badge">Ep 72</span>
+          <span class="blog-date">Mar 23, 2026</span>
+        </div>
+        <h3>The Disney 4 Parks Challenge: Can You Do All 4 Walt Disney World Parks in One Day?</h3>
+        <p>Noah and his dad Brian Smith tackled Disney's ultimate one-day challenge. Here's their full strategy, what they'd do differently, and whether it's actually worth it.</p>
+        <div class="blog-card-btns">
+          <a href="blog-ep72.html" class="btn btn-primary" style="font-size:0.7rem;padding:0.55rem 1.1rem;">Read Article</a>
+          <a href="https://Carouselofconversations.podbean.com/e/episode-72-conquering-disney-s-4-parks-challenge-with-brian-smith/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.7rem;padding:0.55rem 1.1rem;">&#9654; Listen</a>
+        </div>
+      </div>
+
+      <!-- Ep 71 — DVC -->
+      <div class="blog-card" data-category="resorts" data-idx="1">
+        <div class="blog-card-meta">
+          <span class="blog-cat-tag resorts">Resorts &amp; Hotels</span>
+          <span class="blog-ep-badge">Ep 71</span>
+          <span class="blog-date">Mar 16, 2026</span>
+        </div>
+        <h3>Disney Vacation Club (DVC) Explained: Is It Actually Worth It?</h3>
+        <p>Real DVC members Carlos and Sonya break down the point system, upfront costs, and whether the math works in your favor.</p>
+        <div class="blog-card-btns">
+          <a href="blog-ep71.html" class="btn btn-primary" style="font-size:0.7rem;padding:0.55rem 1.1rem;">Read Article</a>
+          <a href="https://Carouselofconversations.podbean.com/e/episode-71-disney-vacation-club-dvc-explained-%e2%80%93-is-it-worth-it-with-carlos-sonya/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.7rem;padding:0.55rem 1.1rem;">&#9654; Listen</a>
+        </div>
+      </div>
+
+      <!-- Ep 38 — Disney Cruise -->
+      <div class="blog-card" data-category="cruise" data-idx="2">
+        <div class="blog-card-meta">
+          <span class="blog-cat-tag cruise">Disney Cruise</span>
+          <span class="blog-ep-badge">Ep 38</span>
+          <span class="blog-date">Jun 1, 2025</span>
+        </div>
+        <h3>Why Disney Cruise Line Is Worth It — Insider Tips from a Former Cast Member</h3>
+        <p>Former DCL cast member Juliette shares what most guests never discover — from rotational dining to Castaway Cay secrets.</p>
+        <div class="blog-card-btns">
+          <a href="blog-ep38.html" class="btn btn-primary" style="font-size:0.7rem;padding:0.55rem 1.1rem;">Read Article</a>
+          <a href="https://Carouselofconversations.podbean.com/e/episode-38-why-disney-cruise-line-is-worth-it-%e2%80%93-insider-tips-from-a-former-cast-member/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.7rem;padding:0.55rem 1.1rem;">&#9654; Listen</a>
+        </div>
+      </div>
+
+      <!-- Ep 22 — Trip Planning -->
+      <div class="blog-card" data-category="planning" data-idx="3">
+        <div class="blog-card-meta">
+          <span class="blog-cat-tag planning">Trip Planning</span>
+          <span class="blog-ep-badge">Ep 22</span>
+          <span class="blog-date">Feb 2, 2025</span>
+        </div>
+        <h3>The Ultimate Disney World Trip Planning Guide (From People Who've Done It Wrong)</h3>
+        <p>The complete timeline: 180-day dining windows, rope drop strategy, Lightning Lane, and every rookie mistake to avoid.</p>
+        <div class="blog-card-btns">
+          <a href="blog-ep22.html" class="btn btn-primary" style="font-size:0.7rem;padding:0.55rem 1.1rem;">Read Article</a>
+          <a href="https://Carouselofconversations.podbean.com/e/episode-22-the-ultimate-disney-trip-planning-guide/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.7rem;padding:0.55rem 1.1rem;">&#9654; Listen</a>
+        </div>
+      </div>
+
+      <!-- Ep 12 — Line Hacks -->
+      <div class="blog-card" data-category="parks" data-idx="4">
+        <div class="blog-card-meta">
+          <span class="blog-cat-tag parks">Parks &amp; Rides</span>
+          <span class="blog-ep-badge">Ep 12</span>
+          <span class="blog-date">Nov 11, 2024</span>
+        </div>
+        <h3>Disney World Line Hacks 101: Lightning Lane, DAS, and Rider Swap Explained</h3>
+        <p>Stop waiting in 90-minute lines. Every tool Disney gives you to beat the queue — and how to stack them for maximum efficiency.</p>
+        <div class="blog-card-btns">
+          <a href="blog-ep12.html" class="btn btn-primary" style="font-size:0.7rem;padding:0.55rem 1.1rem;">Read Article</a>
+          <a href="https://Carouselofconversations.podbean.com/e/episode-12-line-hacks-101-how-to-maximize-your-disney-day/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.7rem;padding:0.55rem 1.1rem;">&#9654; Listen</a>
+        </div>
+      </div>
+
+    </div><!-- end #blog-grid -->
+
+    <!-- ── No Results ─────────────────────────────────────────── -->
+    <div id="blog-no-results" style="display:none;text-align:center;padding:3.5rem 2rem;">
+      <p style="font-size:1rem;color:rgba(245,240,255,0.4);margin-bottom:1rem;">No articles in this category yet — more coming soon!</p>
+      <button class="blog-filter active" onclick="filterBlog('all')">View all articles</button>
+    </div>
+
+    <!-- ── Load More ──────────────────────────────────────────── -->
+    <div id="blog-load-more-wrap" style="text-align:center;margin-top:2.5rem;display:none;">
+      <button class="btn btn-outline" onclick="blogLoadMore()" style="padding:0.85rem 2.5rem;font-size:0.8rem;">Load More Articles</button>
+    </div>
+
+    <!-- ── Bottom CTA ─────────────────────────────────────────── -->
     <div style="text-align:center;margin-top:4rem;padding:3rem;background:linear-gradient(135deg,rgba(107,45,139,0.12),rgba(45,106,79,0.12));border:1px solid rgba(107,45,139,0.25);border-radius:20px;">
       <p class="section-label" style="margin-bottom:0.75rem;">New Episodes Every Monday</p>
       <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:1rem;">Want more Disney magic in your feed?</h3>
@@ -2669,7 +2764,78 @@ In ...</p>
         <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" class="btn btn-secondary">Apple Podcasts</a>
       </div>
     </div>
+
   </div>
+
+  <script>
+  (function(){
+    var PER_PAGE = 6;
+
+    window.filterBlog = function(cat) {
+      // Update filter buttons
+      document.querySelectorAll('.blog-filter').forEach(function(b){ b.classList.toggle('active', b.dataset.filter === cat); });
+
+      // Hero visibility
+      var hero = document.getElementById('blog-hero');
+      var heroVisible = false;
+      if (hero) {
+        heroVisible = (cat === 'all' || hero.dataset.category === cat);
+        hero.style.display = heroVisible ? '' : 'none';
+      }
+
+      // Grid cards: show first PER_PAGE matched, hide rest
+      var cards = document.querySelectorAll('#blog-grid .blog-card');
+      var matched = 0;
+      cards.forEach(function(card){
+        var hit = (cat === 'all' || card.dataset.category === cat);
+        if (hit) { matched++; card.style.display = matched <= PER_PAGE ? '' : 'none'; }
+        else { card.style.display = 'none'; }
+      });
+
+      // No results
+      var nr = document.getElementById('blog-no-results');
+      if (nr) nr.style.display = (!heroVisible && matched === 0) ? 'block' : 'none';
+
+      // Load more
+      var lm = document.getElementById('blog-load-more-wrap');
+      if (lm) lm.style.display = matched > PER_PAGE ? 'block' : 'none';
+    };
+
+    window.blogLoadMore = function() {
+      var activeBtn = document.querySelector('.blog-filter.active');
+      var cat = activeBtn ? activeBtn.dataset.filter : 'all';
+      var cards = document.querySelectorAll('#blog-grid .blog-card');
+      var revealed = 0;
+      cards.forEach(function(card){
+        var match = (cat === 'all' || card.dataset.category === cat);
+        if (match && card.style.display === 'none' && revealed < PER_PAGE) {
+          card.style.display = ''; revealed++;
+        }
+      });
+      // Hide Load More if nothing left hidden
+      var anyHidden = false;
+      cards.forEach(function(card){
+        if ((cat === 'all' || card.dataset.category === cat) && card.style.display === 'none') anyHidden = true;
+      });
+      var lm = document.getElementById('blog-load-more-wrap');
+      if (lm) lm.style.display = anyHidden ? 'block' : 'none';
+    };
+
+    // BEEHIIV: Replace this function with Beehiiv's form submission when ready
+    window.blogSubscribe = function(e) {
+      e.preventDefault();
+      var form = document.getElementById('blog-sub-form');
+      if (form) form.innerHTML = '<p style="font-size:0.85rem;color:#6fcf97;font-weight:600;line-height:1.6;">&#10003; You\'re on the list! We\'ll let you know when new articles drop.</p>';
+    };
+
+    // Init: hide cards beyond PER_PAGE on load
+    var cards = document.querySelectorAll('#blog-grid .blog-card');
+    cards.forEach(function(card){ if (parseInt(card.dataset.idx) >= PER_PAGE) card.style.display = 'none'; });
+    var lm = document.getElementById('blog-load-more-wrap');
+    if (lm) lm.style.display = cards.length > PER_PAGE ? 'block' : 'none';
+  })();
+  </script>
+
 </div>
 
 <script>
