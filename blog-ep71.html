@@ -159,7 +159,7 @@
         <h4>Get new articles in your inbox</h4>
         <p>New Disney guides delivered whenever we publish. No spam, ever.</p>
       </div>
-      <form class="sub-form" onsubmit="event.preventDefault();this.innerHTML='<span style=\'color:var(--green-light);font-size:0.82rem;\'>Thanks! You\'re in.</span>'">
+      <form class="sub-form" onsubmit="beehiivSubscribe(event,this)">
         <input type="email" class="sub-email" placeholder="your@email.com" required/>
         <button type="submit" class="btn btn-secondary" style="font-size:0.74rem;padding:0.62rem 1.35rem;">Subscribe</button>
       </form>
@@ -183,5 +183,27 @@
   <p>© 2025 Carousel of Conversations · <a href="https://carouselpod.com">carouselpod.com</a> · Independent Disney fan podcast, not affiliated with The Walt Disney Company.</p>
 </footer>
 
+<script>
+async function beehiivSubscribe(e, form) {
+  e.preventDefault();
+  const email = form.querySelector('input[type="email"]').value;
+  const btn = form.querySelector('button');
+  btn.textContent = 'Subscribing\u2026';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://api.beehiiv.com/v2/publications/pub_9b0fc48f-7647-450e-96a6-c75420a1c5f2/subscriptions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, reactivate_existing: false, send_welcome_email: true, utm_source: 'carouselpod.com', utm_medium: 'blog' })
+    });
+    if (res.ok || res.status === 201) {
+      form.innerHTML = '<span style="color:var(--green-light);font-size:0.85rem;font-weight:600;">You\'re in! Check your inbox.</span>';
+    } else { throw new Error('api'); }
+  } catch(err) {
+    window.open('https://www.beehiiv.com/subscribe/pub_9b0fc48f-7647-450e-96a6-c75420a1c5f2?email=' + encodeURIComponent(email), '_blank');
+    form.innerHTML = '<span style="color:var(--green-light);font-size:0.85rem;font-weight:600;">Thanks! Check your inbox.</span>';
+  }
+}
+</script>
 </body>
 </html>
