@@ -152,8 +152,15 @@
 
     <p>Episode 72 has the full play-by-play from Noah and Brian — including the moments where everything almost fell apart and the one experience that made the whole day worth it.</p>
 
-    <div class="subscribe-strip" style="padding:1.25rem 1.5rem;">
-      <iframe src="https://subscribe-forms.beehiiv.com/2676ea04-b01d-42db-ac30-457867f91b2c" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%;height:52px;margin:0;border-radius:0px!important;background-color:transparent;"></iframe>
+    <div class="subscribe-strip">
+      <div>
+        <h4>Get new articles in your inbox</h4>
+        <p>New Disney guides delivered whenever we publish. No spam, ever.</p>
+      </div>
+      <form class="sub-form" onsubmit="beehiivSubscribe(event,this)">
+        <input type="email" class="sub-email" placeholder="your@email.com" required/>
+        <button type="submit" class="btn btn-secondary" style="font-size:0.74rem;padding:0.62rem 1.35rem;">Subscribe</button>
+      </form>
     </div>
 
         <div class="cta-box">
