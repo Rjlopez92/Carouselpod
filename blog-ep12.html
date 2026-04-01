@@ -75,7 +75,6 @@
     footer{text-align:center;padding:2rem;font-size:0.75rem;color:rgba(245,240,255,0.3);border-top:1px solid rgba(107,45,139,0.2);}
     @media(max-width:600px){.hero-band{padding:2.5rem 1.25rem 2rem;}.article-wrap{padding:2rem 1.25rem 4rem;}.btn-wrap{flex-direction:column;align-items:center;}.subscribe-strip{flex-direction:column;align-items:flex-start;}.sub-email{min-width:0;width:100%;}.sub-form{width:100%;flex-direction:column;}}
   </style>
-<script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
 </head>
 <body>
 
@@ -178,5 +177,27 @@
   <p>© 2025 Carousel of Conversations · <a href="https://carouselpod.com">carouselpod.com</a> · Independent Disney fan podcast, not affiliated with The Walt Disney Company.</p>
 </footer>
 
+<script>
+async function beehiivSubscribe(e, form) {
+  e.preventDefault();
+  const email = form.querySelector('input[type="email"]').value;
+  const btn = form.querySelector('button');
+  btn.textContent = 'Subscribing…';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://api.beehiiv.com/v2/publications/pub_9b0fc48f-7647-450e-96a6-c75420a1c5f2/subscriptions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer tlCjoFhNHIbQQD9LfBZ9vErndjJIDOm6xEVE6gGBhV5XGqq24xoICN8tf4271JdD' },
+      body: JSON.stringify({ email, reactivate_existing: false, send_welcome_email: true, utm_source: 'carouselpod.com', utm_medium: 'blog' })
+    });
+    if (res.ok || res.status === 201) {
+      form.innerHTML = '<span style="color:var(--green-light);font-size:0.85rem;font-weight:600;">You're in! Check your inbox.</span>';
+    } else { throw new Error('api'); }
+  } catch(err) {
+    window.open('https://www.beehiiv.com/subscribe/pub_9b0fc48f-7647-450e-96a6-c75420a1c5f2?email=' + encodeURIComponent(email), '_blank');
+    form.innerHTML = '<span style="color:var(--green-light);font-size:0.85rem;font-weight:600;">Thanks! Check your inbox.</span>';
+  }
+}
+</script>
 </body>
 </html>
