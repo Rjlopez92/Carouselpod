@@ -2625,16 +2625,9 @@ In ...</p>
   <div style="max-width:1100px;margin:0 auto;padding:0 2rem 5rem;position:relative;z-index:1;">
 
     <!-- ── Subscribe Strip ──────────────────────────────────── -->
-    <!-- BEEHIIV: Replace this div with your Beehiiv embed code when ready -->
     <div class="blog-subscribe-strip">
-      <div>
-        <h4>Get new articles in your inbox</h4>
-        <p>New Disney guides delivered whenever we publish. No spam, ever.</p>
-      </div>
-      <form class="blog-sub-form" id="blog-sub-form" onsubmit="blogSubscribe(event)">
-        <input type="email" class="blog-email-input" id="blog-sub-email" placeholder="your@email.com" required/>
-        <button type="submit" class="btn btn-secondary" style="font-size:0.74rem;padding:0.62rem 1.35rem;">Subscribe</button>
-      </form>
+      <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+      <iframe src="https://subscribe-forms.beehiiv.com/2676ea04-b01d-42db-ac30-457867f91b2c" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%;height:52px;margin:0;border-radius:0px!important;background-color:transparent;"></iframe>
     </div>
 
     <!-- ── Featured Hero ─────────────────────────────────────── -->
@@ -2822,12 +2815,6 @@ In ...</p>
     };
 
     // BEEHIIV: Replace this function with Beehiiv's form submission when ready
-    window.blogSubscribe = function(e) {
-      e.preventDefault();
-      var form = document.getElementById('blog-sub-form');
-      if (form) form.innerHTML = '<p style="font-size:0.85rem;color:#6fcf97;font-weight:600;line-height:1.6;">&#10003; You\'re on the list! We\'ll let you know when new articles drop.</p>';
-    };
-
     // Init: hide cards beyond PER_PAGE on load
     var cards = document.querySelectorAll('#blog-grid .blog-card');
     cards.forEach(function(card){ if (parseInt(card.dataset.idx) >= PER_PAGE) card.style.display = 'none'; });
