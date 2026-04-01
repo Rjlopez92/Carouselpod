@@ -2626,8 +2626,14 @@ In ...</p>
 
     <!-- ── Subscribe Strip ──────────────────────────────────── -->
     <div class="blog-subscribe-strip">
-      <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-      <iframe src="https://subscribe-forms.beehiiv.com/2676ea04-b01d-42db-ac30-457867f91b2c" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%;height:52px;margin:0;border-radius:0px!important;background-color:transparent;"></iframe>
+      <div>
+        <h4>Get new articles in your inbox</h4>
+        <p>New Disney guides delivered whenever we publish. No spam, ever.</p>
+      </div>
+      <form class="blog-sub-form" id="blog-sub-form" onsubmit="blogSubscribe(event)">
+        <input type="email" class="blog-email-input" id="blog-sub-email" placeholder="your@email.com" required/>
+        <button type="submit" class="btn btn-secondary" style="font-size:0.74rem;padding:0.62rem 1.35rem;">Subscribe</button>
+      </form>
     </div>
 
     <!-- ── Featured Hero ─────────────────────────────────────── -->
@@ -2814,7 +2820,28 @@ In ...</p>
       if (lm) lm.style.display = anyHidden ? 'block' : 'none';
     };
 
-    // BEEHIIV: Replace this function with Beehiiv's form submission when ready
+    window.blogSubscribe = async function(e) {
+      e.preventDefault();
+      var email = document.getElementById('blog-sub-email').value;
+      var btn = document.querySelector('#blog-sub-form button');
+      var form = document.getElementById('blog-sub-form');
+      btn.textContent = 'Subscribing\u2026';
+      btn.disabled = true;
+      try {
+        var res = await fetch('https://api.beehiiv.com/v2/publications/pub_9b0fc48f-7647-450e-96a6-c75420a1c5f2/subscriptions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer tlCjoFhNHIbQQD9LfBZ9vErndjJIDOm6xEVE6gGBhV5XGqq24xoICN8tf4271JdD' },
+          body: JSON.stringify({ email: email, reactivate_existing: false, send_welcome_email: true, utm_source: 'carouselpod.com', utm_medium: 'blog-index' })
+        });
+        if (res.ok || res.status === 201) {
+          form.innerHTML = '<p style="font-size:0.85rem;color:#6fcf97;font-weight:600;line-height:1.6;">&#10003; You\'re in! Check your inbox.</p>';
+        } else { throw new Error('api'); }
+      } catch(err) {
+        window.open('https://www.beehiiv.com/subscribe/pub_9b0fc48f-7647-450e-96a6-c75420a1c5f2?email=' + encodeURIComponent(email), '_blank');
+        form.innerHTML = '<p style="font-size:0.85rem;color:#6fcf97;font-weight:600;line-height:1.6;">&#10003; Thanks! Check your inbox.</p>';
+      }
+    };
+
     // Init: hide cards beyond PER_PAGE on load
     var cards = document.querySelectorAll('#blog-grid .blog-card');
     cards.forEach(function(card){ if (parseInt(card.dataset.idx) >= PER_PAGE) card.style.display = 'none'; });
