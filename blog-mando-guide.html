@@ -149,7 +149,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    animation: spin-slow 12s linear infinite;
+    animation: none;
   }
   @keyframes spin-slow { to { transform: rotate(360deg); } }
 
@@ -342,6 +342,78 @@
   .footer-fine { font-size: 0.68rem; color: rgba(245,240,255,0.2); }
   .footer-disclaimer { font-size: 0.65rem; color: rgba(245,240,255,0.15); margin-top: 0.5rem; }
 
+  /* ─── SUBSCRIBE STRIP ─── */
+  .subscribe-strip {
+    background: rgba(45,106,79,0.1);
+    border: 1px solid rgba(45,106,79,0.3);
+    border-radius: 14px;
+    padding: 1.4rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  .subscribe-strip h4 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.2rem; color: var(--white); }
+  .subscribe-strip p { font-size: 0.76rem; color: rgba(245,240,255,0.45); margin: 0; }
+  .sub-form { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .sub-email {
+    background: rgba(27,42,74,0.8);
+    border: 1px solid rgba(107,45,139,0.4);
+    border-radius: 50px;
+    padding: 0.55rem 1.1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    color: var(--white);
+    outline: none;
+    min-width: 220px;
+  }
+  .sub-email::placeholder { color: rgba(245,240,255,0.35); }
+  .sub-email:focus { border-color: rgba(107,45,139,0.7); }
+
+  /* ─── CTA BOX ─── */
+  .cta-box {
+    background: linear-gradient(135deg, rgba(107,45,139,0.15), rgba(45,106,79,0.12));
+    border: 1px solid rgba(107,45,139,0.35);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  .cta-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.75rem; color: var(--white); }
+  .cta-box p { font-size: 0.88rem; color: rgba(245,240,255,0.65); margin-bottom: 1.75rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); text-decoration: none; }
+  .btn-primary { background: linear-gradient(135deg, var(--purple), var(--purple-deep)); color: var(--white); box-shadow: 0 6px 20px rgba(107,45,139,0.4); }
+  .btn-secondary { background: linear-gradient(135deg, var(--green), var(--green-light)); color: var(--white); box-shadow: 0 6px 20px rgba(45,106,79,0.4); }
+  .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(245,240,255,0.3); }
+  .btn-wrap { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 600px) {
+    .subscribe-strip { flex-direction: column; align-items: flex-start; }
+    .sub-email { min-width: 0; width: 100%; }
+    .sub-form { width: 100%; flex-direction: column; }
+    .btn-wrap { flex-direction: column; align-items: center; }
+    .cta-box { padding: 1.75rem 1.25rem; }
+  }
+
   @media (max-width: 560px) {
     nav { padding: 0 1.25rem; }
     .hero { padding: 3rem 1.25rem 2.5rem; }
@@ -360,13 +432,12 @@
   <nav>
     <a href="https://carouselpod.com" class="nav-logo">
       <img src="CP_Logo_v2.png" alt="Carousel of Conversations"/>
-      Carousel of Conversations
     </a>
-    <a href="https://carouselpod.com" class="nav-back">← Back to Home</a>
+    <a href="https://carouselpod.com/#blog" class="nav-back">← Back to Blog</a>
   </nav>
 
   <div class="hero">
-    <img src="CP_Logo_v2.png" alt="Carousel of Conversations" class="hero-carousel-icon">
+    <img src="https://www.carouselpod.com/CP_Logo_v2.png" alt="Carousel of Conversations" class="hero-carousel-icon">
     <div class="hero-tag">✨ Special Viewing Guide — From Carousel of Conversations</div>
     <h1 class="hero-title">The Mandalorian <span>&</span> Grogu<br>Prep Timeline</h1>
     <div class="hero-sub">May 1 – May 22, 2026</div>
@@ -704,22 +775,60 @@
       </div>
     </div>
 
+    <!-- Subscribe Strip -->
+    <div class="subscribe-strip">
+      <div>
+        <h4>Get new articles in your inbox</h4>
+        <p>Disney guides and Star Wars prep delivered whenever we publish. No spam, ever.</p>
+      </div>
+      <div class="sub-form" id="mando-sub-form">
+        <input type="email" class="sub-email" id="mando-sub-email" placeholder="your@email.com"/>
+        <button type="button" class="btn btn-secondary" style="font-size:0.74rem;padding:0.62rem 1.35rem;" onclick="beehiivSubscribe(document.getElementById('mando-sub-form'))">Subscribe</button>
+      </div>
+    </div>
+
+    <!-- Podcast CTA -->
+    <div class="cta-box">
+      <h3>Listen to Carousel of Conversations</h3>
+      <p>We talk Disney, Star Wars, and everything in between — new episodes every Monday. Find us on your favorite podcast platform.</p>
+      <div class="btn-wrap">
+        <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT" target="_blank" rel="noopener" class="btn btn-primary">&#9654; Listen on Spotify</a>
+        <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" target="_blank" rel="noopener" class="btn btn-secondary">Apple Podcasts</a>
+        <a href="https://carouselpod.com/#blog" class="btn btn-outline">← More Articles</a>
+      </div>
+      <p style="margin-top:1.5rem;margin-bottom:0;font-size:0.78rem;">Planning a Disney trip? RJ is a Disney travel specialist — <a href="https://carouselpod.com/#quote" style="color:var(--purple-light);">get a free vacation quote</a> at carouselpod.com.</p>
+    </div>
+
   </div>
 
   <footer>
-    <div class="footer-logo"><img src="CP_Logo_v2.png" alt="Carousel of Conversations" style="height:36px;width:auto;vertical-align:middle;margin-right:8px;">Carousel of Conversations</div>
-    <div class="footer-tagline">"Where the magic of Disney revolves around you."</div>
-    <div class="footer-links">
-      <a href="https://open.spotify.com/show/2X3JkqzomNYpZm0wjrVbwT" class="footer-link" target="_blank">🎵 Spotify</a>
-      <a href="https://podcasts.apple.com/us/podcast/carousel-of-conversations/id1764866932" class="footer-link" target="_blank">🎙 Apple Podcasts</a>
-      <a href="https://www.youtube.com/@CarouselofConversations" class="footer-link" target="_blank">▶ YouTube</a>
-      <a href="https://www.instagram.com/carouselofconversations/" class="footer-link" target="_blank">📱 Instagram</a>
-      <a href="https://buymeacoffee.com/carouselpod" class="footer-link" target="_blank">☕ Support Us</a>
-    </div>
-    <div class="footer-fine">New episodes every Monday · carouselpod.com</div>
-    <div class="footer-disclaimer">Independent Disney fan podcast, not affiliated with The Walt Disney Company.</div>
+    <p>© 2026 Carousel of Conversations · <a href="https://carouselpod.com" style="color:rgba(245,240,255,0.4);">carouselpod.com</a> · Independent Disney fan podcast, not affiliated with The Walt Disney Company.</p>
   </footer>
 
 </div>
+
+<script>
+async function beehiivSubscribe(container) {
+  var emailInput = container.querySelector('input[type="email"]');
+  var email = emailInput ? emailInput.value.trim() : '';
+  if (!email || email.indexOf('@') === -1) { if (emailInput) emailInput.focus(); return; }
+  const btn = container.querySelector('button');
+  btn.textContent = 'Subscribing…';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://api.beehiiv.com/v2/publications/pub_9b0fc48f-7647-450e-96a6-c75420a1c5f2/subscriptions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer tlCjoFhNHIbQQD9LfBZ9vErndjJIDOm6xEVE6gGBhV5XGqq24xoICN8tf4271JdD' },
+      body: JSON.stringify({ email, reactivate_existing: false, send_welcome_email: true, utm_source: 'carouselpod.com', utm_medium: 'blog' })
+    });
+    if (res.ok || res.status === 201) {
+      container.innerHTML = '<span style="color:var(--green-light);font-size:0.85rem;font-weight:600;">You\'re in! Check your inbox.</span>';
+    } else { throw new Error('api'); }
+  } catch(err) {
+    window.open('https://www.beehiiv.com/subscribe/pub_9b0fc48f-7647-450e-96a6-c75420a1c5f2?email=' + encodeURIComponent(email), '_blank');
+    container.innerHTML = '<span style="color:var(--green-light);font-size:0.85rem;font-weight:600;">Thanks! Check your inbox.</span>';
+  }
+}
+</script>
 </body>
 </html>
